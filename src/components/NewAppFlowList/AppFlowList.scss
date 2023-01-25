@@ -1,0 +1,17 @@
+.app-flow-list {
+    &-ul {
+        list-style-type: none;
+        margin-top: 1rem;
+
+        &:first-child {
+            padding-top: 1.6rem;
+        }
+    }
+
+    &-container {
+        width: 9.375rem;
+        height: 36.5rem;
+        background-color: #F7F7F8;
+        border-radius: 14px;
+    }
+}
