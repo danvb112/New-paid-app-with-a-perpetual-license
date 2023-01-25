@@ -1,0 +1,31 @@
+.app-flow-list-item-container {
+    display: flex;
+    margin-bottom: 2.5rem;
+
+}
+
+.app-flow-list-item{
+    &-icon  {
+        filter: invert(75%) sepia(1%) saturate(3107%) hue-rotate(199deg) brightness(82%) contrast(87%);
+        width: 1rem;
+        height: 1rem;
+        margin-right: 0.625rem;
+
+        &-checked {
+            filter: invert(26%) sepia(83%) saturate(5507%) hue-rotate(220deg) brightness(104%) contrast(97%);
+        } 
+    }
+
+    &-text {
+        color: #999AA3;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 1rem;
+
+        &-checked {
+            color: #0B5FFF;
+        } 
+    }
+
+}
