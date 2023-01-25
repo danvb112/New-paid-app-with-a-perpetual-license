@@ -13,6 +13,7 @@
     "@clayui/css": "^3.85.0",
     "@clayui/form": "^3.85.0",
     "@clayui/icon": "^3.56.0",
+    "@clayui/tooltip": "^3.85.0",
     "node-sass": "^8.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
