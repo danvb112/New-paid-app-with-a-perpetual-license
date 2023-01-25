@@ -367,6 +367,16 @@
   dependencies:
     classnames "^2.2.6"
 
+"@clayui/tooltip@^3.85.0":
+  version "3.85.0"
+  resolved "https://registry.yarnpkg.com/@clayui/tooltip/-/tooltip-3.85.0.tgz#0229e41620b177fff5b2bdf91374508519403dd0"
+  integrity sha512-59f7E5Sb34NBTOTaPniTvJMakyaWqWrWwJ/VzTBK1XJ4ukTM9IVQJOwPff/yBHGf4aBahz4GgjhIun5Kwk/aEQ==
+  dependencies:
+    "@clayui/shared" "^3.85.0"
+    classnames "^2.2.6"
+    dom-align "^1.12.2"
+    warning "^4.0.3"
+
 "@esbuild/android-arm64@0.16.17":
   version "0.16.17"
   resolved "https://registry.yarnpkg.com/@esbuild/android-arm64/-/android-arm64-0.16.17.tgz#cf91e86df127aa3d141744edafcba0abdc577d23"
