@@ -48,6 +48,7 @@ interface FieldBaseProps {
 	label?: string;
 	required?: boolean;
 	tooltip?: string;
+	tooltipText?: string;
 	warningMessage?: string;
 }
 
@@ -60,6 +61,7 @@ export function FieldBase({
 	label,
 	required,
 	tooltip,
+	tooltipText,
 	warningMessage,
 }: FieldBaseProps) {
 	return (
@@ -69,24 +71,29 @@ export function FieldBase({
 				'has-warning': warningMessage && !errorMessage,
 			})}
 		>
-			{label && (
-				<label className={classNames({disabled})} htmlFor={id}>
-					{label}
+			<div className='field-base-container'>
+				{label && (
+					<label className={classNames({disabled})} htmlFor={id}>
+						{label}
 
-					{required && <RequiredMask />}
-				</label>
-			)}
+						{required && <RequiredMask />}
+					</label>
+				)}
 
-			{tooltip && (
-				<>
-					&nbsp;
-					<ClayTooltipProvider>
-						<span className='field-base-tooltip-span' data-tooltip-align="top" title={tooltip}>
-							<img className='field-base-tooltip-icon'src={helpFillIcon} />
-						</span>
-					</ClayTooltipProvider>
-				</>
-			)}
+				{tooltip && (
+					<>
+						&nbsp;
+						<ClayTooltipProvider>
+							<div className='field-base-tooltip-base-container'>
+								<div className='field-base-tooltip-container' data-tooltip-align="top" title={tooltip}>
+									<span className='field-base-tooltip-optional-text'>{tooltipText}</span> 
+									<img className='field-base-tooltip-icon'src={helpFillIcon} />
+								</div>
+							</div>
+						</ClayTooltipProvider>
+					</>
+				)}
+			</div>
 
 			{children}
 		</ClayForm.Group>
