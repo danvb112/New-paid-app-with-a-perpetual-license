@@ -34,7 +34,6 @@ export function CheckboxDataCard({
                 </div>
 
                 <Tooltip 
-                    helpFillIcon={helpFillIcon}
                     tooltip={tooltip}
                     tooltipText={tooltipText}
                 />
