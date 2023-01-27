@@ -17,7 +17,6 @@ import {ClayTooltipProvider} from '@clayui/tooltip';
 import classNames from 'classnames';
 import {ReactNode} from 'react';
 
-import helpFillIcon from '../assets/icons/help_fill.svg';
 import asteriskIcon from '../assets/icons/asterisk.svg';
 
 import './FieldBase.scss';
@@ -85,7 +84,6 @@ export function FieldBase({
 					<>
 						&nbsp;
 						<Tooltip 
-							helpFillIcon={helpFillIcon}
 							tooltip={tooltip}
 							tooltipText={tooltipText}
 						/>
