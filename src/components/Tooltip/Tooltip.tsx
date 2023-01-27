@@ -1,15 +1,15 @@
 import {ClayTooltipProvider} from '@clayui/tooltip';
 
+import helpFillIcon from '../../assets/icons/help_fill.svg';
+
 import './Tooltip.scss';
 
 interface TooltipProps {
     tooltip?: string;
     tooltipText?: string;
-    helpFillIcon?: string;
 }
 
 export function Tooltip({
-    helpFillIcon,
     tooltip,
     tooltipText
 }: TooltipProps) {
