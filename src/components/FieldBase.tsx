@@ -21,6 +21,7 @@ import helpFillIcon from '../assets/icons/help_fill.svg';
 import asteriskIcon from '../assets/icons/asterisk.svg';
 
 import './FieldBase.scss';
+import { Tooltip } from './Tooltip/Tooltip';
 
 function RequiredMask() {
 	return (
@@ -83,14 +84,11 @@ export function FieldBase({
 				{tooltip && (
 					<>
 						&nbsp;
-						<ClayTooltipProvider>
-							<div className='field-base-tooltip-base-container'>
-								<div className='field-base-tooltip-container' data-tooltip-align="top" title={tooltip}>
-									<span className='field-base-tooltip-optional-text'>{tooltipText}</span> 
-									<img className='field-base-tooltip-icon'src={helpFillIcon} />
-								</div>
-							</div>
-						</ClayTooltipProvider>
+						<Tooltip 
+							helpFillIcon={helpFillIcon}
+							tooltip={tooltip}
+							tooltipText={tooltipText}
+						/>
 					</>
 				)}
 			</div>

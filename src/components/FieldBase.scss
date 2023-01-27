@@ -1,16 +1,7 @@
-
 .field-base-container {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-}
-
-.field-base-tooltip {
-    &-icon {
-        width: 12px;
-        height: 12px;
-        filter: invert(34%) sepia(14%) saturate(4340%) hue-rotate(190deg) brightness(88%) contrast(91%);
-    }
 }
 
 .field-base-required-asterisk-icon  {
@@ -18,25 +9,4 @@
     width: 9px;
     height: 9px;
     filter: invert(10%) sepia(92%) saturate(5864%) hue-rotate(358deg) brightness(101%) contrast(97%);
-}
-
-.field-base-tooltip-base-container {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.field-base-tooltip-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #E6EBF5;
-    border-radius: 0.25rem;
-    margin-left: 0.625rem;
-}
-
-.field-base-tooltip-optional-text {
-    font-size: 0.688rem;
-    color: #2E5AAC;
-    margin-right: 0.125rem;
 }
