@@ -1,16 +1,18 @@
 .tooltip {
     &-base-container {
         display: flex;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
+        width: 28px;
+        height: 28px;
+        background-color: #E6EBF5;
+        border-radius: 0.25rem;
     }
 
     &-container {
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: #E6EBF5;
-        border-radius: 0.25rem;
     }
 
     &-optional-text {
