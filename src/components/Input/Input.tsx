@@ -2,10 +2,11 @@ import {ClayInput} from '@clayui/form';
 import { FieldBase } from "../FieldBase";
 
 import './Input.scss';
+import classNames from 'classnames';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
-    component: 'input' | 'textarea';
-    label: string;
+    component?: 'input' | 'textarea';
+    label?: string;
     required?: boolean;
     tooltip?: string;
     value?: string;
@@ -13,7 +14,8 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement | HTMLTe
 }
 
 export function Input({
-    component,
+    className,
+    component = 'input',
     label,
     placeholder,
     required,
@@ -25,7 +27,7 @@ export function Input({
 }: InputProps) {
     return (
         <FieldBase 
-            className='input-form-base' 
+            className={className}
             label={label}
             required={required}
             tooltip={tooltip}
