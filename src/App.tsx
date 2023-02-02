@@ -2,15 +2,12 @@
 import "@clayui/css/lib/css/atlas.css";
 
 import './App.scss'
-import { Section } from "./components/Section/Section";
-import { Input } from "./components/Input/Input";
+import { DashboardPage } from "./pages/DashboardPage";
 
 function App() {
   return (
     <div className="app-test">
-      <Section>
-        <Input component="input" label="Test" required tooltip="Text"/>
-      </Section>
+      <DashboardPage />
     </div>
   )
 }
