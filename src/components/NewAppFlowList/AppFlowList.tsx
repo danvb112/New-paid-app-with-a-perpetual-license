@@ -1,21 +1,23 @@
 import { AppFlowListItem } from './AppFlowListItem';
 import './AppFlowList.scss'
+import { AppFlowListItemProps } from '../../pages/AppCreationFlow/AppCreationFlowUtil';
 
+interface AppFlowListProps {
+    appFlowListItems: AppFlowListItemProps[];
+}
 
-export function AppFlowList() {
+export function AppFlowList({ appFlowListItems }: AppFlowListProps) {
     return (
         <div className='app-flow-list-container'>
             <ul className='app-flow-list-ul'>
-                <AppFlowListItem text='Create' />
-                <AppFlowListItem text='Profile' />
-                <AppFlowListItem text='Build' />
-                <AppFlowListItem text='Storefront' />
-                <AppFlowListItem text='Version' />
-                <AppFlowListItem text='Pricing' />
-                <AppFlowListItem text='Licensing' />
-                <AppFlowListItem text='Support' />
-                <AppFlowListItem text='Privacy' />
-                <AppFlowListItem text='Submit' />
+                {appFlowListItems.map(appItem => (
+                    <AppFlowListItem
+                        text={appItem.label}
+                        checked={appItem.checked}
+                        key={appItem.name}
+                        selected={appItem.selected}
+                    />
+                ))}
             </ul>
         </div>
     );

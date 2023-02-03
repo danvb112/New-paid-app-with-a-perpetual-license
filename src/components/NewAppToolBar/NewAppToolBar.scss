@@ -1,77 +1,76 @@
-
 .new-app-tool-bar {
     &-container {
+        align-items: center;
         display: flex;
         justify-content: center;
-        align-items: center;
-        width: 100vw;
         padding: 1.5rem;
+        width: 100vw;
     }
 
     &-arrow-right {
-        width: 1rem;
-        height: 1rem;
         align-self: center;
+        height: 1rem;
+        width: 1rem;
     }
 
     &-main-account-logo {
-        display: flex;
         align-items: center;
-        justify-content: center;
+        display: flex;
         gap: 1rem;
+        justify-content: center;
         margin-right: 1.438rem;
 
         &-img {
-            width: 48px;
-            height: 48px;
+            height: 3rem;
+            width: 3rem;
         }
 
         &-text {
             font-family: 'Source Sans Pro', sans-serif;
+            font-size: 1.125rem;
             font-weight: 600;
             line-height: 1.25rem;
-            font-size: 1.125rem;
         }
     }
 
     &-new-app-logo {
-        display: flex;
         align-items: center;
-        justify-content: center;
+        display: flex;
         gap: 1rem;
+        justify-content: center;
         margin-left: 1.438rem;
 
         &-img {
-            width: 48px;
-            height: 48px;
+            height: 3rem;
+            width: 3rem;
         }
 
         &-text {
             font-family: 'Source Sans Pro', sans-serif;
+            font-size: 1.125rem;
             font-weight: 600;
             line-height: 1.25rem;
-            font-size: 1.125rem;
         }
     }
 
     &-status {
         &-container {
-            display: flex;
-            justify-content: center;
             align-items: center;
+            display: flex;
             gap: 0.375rem;
+            justify-content: center;
         }
 
         &-icon {
-            width: 0.5rem;
-            height: 0.5rem;
             filter: invert(54%) sepia(5%) saturate(427%) hue-rotate(201deg) brightness(94%) contrast(98%);
+            height: 0.5rem;
+            width: 0.5rem;
         }
 
         &-text {
+            color: #6C6C75;
             font-family: 'Source Sans Pro', sans-serif;
             font-weight: 600;
-            color: #6C6C75; 
         }
     }
 
@@ -85,22 +84,54 @@
         &-text {
             font-family: 'Source Sans Pro', sans-serif;
             font-size: 0.875rem;
-            line-height: 1rem;
             font-weight: 600;
+            line-height: 1rem;
         }
 
         &-exit {
             color: #2B3A4B;
+
+            &:hover {
+                background: #E2E2E4;
+            }
         }
 
         &-save-draft {
+            border: 0.125rem solid #2B3A4B;
+            background: none;
+            border-radius: 6px;
             color: #2B3A4B;
-            border: 0.125rem solid;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 0.813rem;
+            font-weight: 600;
+            line-height: 1rem;
+
+            &:hover {
+                color: #FFFF;
+                background: #2B3A4B;
+            }
+
+            transition: color 0.3s;
+            transition: background 0.3s;
         }
 
         &-preview-storefront {
             color: #0B5FFF;
             border: 0.125rem solid #0B5FFF;
+            background: none;
+            border-radius: 6px;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 0.813rem;
+            font-weight: 600;
+            line-height: 1rem;
+
+            &:hover {
+                color: #FFFF;
+                background: #0B5FFF;
+            }
+
+            transition: color 0.3s;
+            transition: background 0.3s;
         }
     }
 }
