@@ -1,0 +1,51 @@
+.new-app-page-footer-button {
+    &-container {
+        align-items: center;
+        border-top: 1px solid #E2E2E4;
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-end;
+        margin-top: 2.5rem;
+        padding-top: 1.5rem;
+        width: 37.5rem;
+    }
+
+    &-back {
+        background: none;
+        border: 1.5px solid #2B3A4B;
+        border-radius: 0.5rem;
+        color: #2B3A4B;
+        height: 2.5rem;
+        width: 4.125rem;
+
+        &:hover {
+            background: #2B3A4B;
+            color: #FFFFFF;
+        }
+    }
+
+    &-continue {
+        background: #0053F0;
+        border: none;
+        border-radius: 0.5rem;
+        color: #FFFFFF;
+        height: 2.5rem;
+        width: 5.938rem;
+
+        &:hover {
+            background: #FFFFFF;
+            border: 1.5px solid #0053F0;
+            color: #0053F0;
+        }
+    }
+}
+
+button {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+
+    transition: background 0.3s;
+    transition: color 0.3s;
+}
