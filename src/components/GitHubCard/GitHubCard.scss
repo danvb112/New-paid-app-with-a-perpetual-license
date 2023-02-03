@@ -1,0 +1,69 @@
+.custom-select__content{
+    width: 16.5rem;
+}
+.github-card {
+    &-container {
+        border: 1px solid #E2E2E4;
+        border-radius: 0.5rem;
+        flex-direction: column;
+        height: 13.5rem;
+        padding: 1.5rem;
+        width: 37.5rem;
+
+        &-selected {
+            border: 1px solid #004AD7;
+            background-color: #E6EDFB;
+        }
+        
+        &-disabled {
+            opacity: 0.5;
+        }
+    }
+    &-content{
+        display: flex;
+        justify-content: space-between;
+    }
+    &-line{
+        margin-bottom: 1.5rem;
+        margin-top: 1.5rem;
+    }
+    &-text{
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 16px;
+    }
+    &-title{
+        align-items: center;
+        display: flex;
+        &-button{
+            margin-left: 7rem;
+        }
+        &-icon {
+            transition: filter 0.5s;
+            &-circle{
+                align-items: center;
+                background-color: #E2E2E4;
+                border-radius: 2rem;
+                display: flex;
+                height: 2.5rem;
+                justify-content: center;
+                margin-right: 1rem;
+                width: 2.5rem;
+            }
+            &-github{
+                filter: invert(20%) sepia(18%) saturate(443%) hue-rotate(196deg) brightness(98%) contrast(82%);
+                height: 1rem;
+                width: 1rem;
+            }
+            &-link{
+                filter: invert(69%) sepia(5%) saturate(380%) hue-rotate(196deg) brightness(90%) contrast(85%);
+                margin-right: 1rem;
+                height: 1rem;
+                transform: rotate(120deg);
+                width: 1rem;
+            }
+            &-selected {
+                filter: invert(20%) sepia(92%) saturate(5175%) hue-rotate(214deg) brightness(86%) contrast(110%);
+            }
+        }
+    }
+}
