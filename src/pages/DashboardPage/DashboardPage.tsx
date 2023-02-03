@@ -1,19 +1,21 @@
-import { DashboardListItems, DashboardNavigation } from "../components/DashboardNavigation/DashboardNavigation";
-import { DashboardToolbar } from "../components/DashboardToolbar/DashboardToolbar";
+import { useNavigate } from 'react-router-dom';
 
-import accountLogo from '../assets/icons/mainAppLogo.svg';
-import salesIcon from '../assets/icons/sales-icon.svg';
-import membersIcon from '../assets/icons/person-fill.svg';
-import accountIcon from '../assets/icons/account-icon.svg';
-import appsIcon from '../assets/icons/apps-fill.svg';
-import appIconTransport from '../assets/icons/app-icon-transport.svg';
-import appIconSales from '../assets/icons/app-icon-sales.svg';
-import appIconPayments from '../assets/icons/app-icon-payments.svg';
-import { AppProps, DashboardTable } from "../components/DashboardTable/DashboardTable";
-import { Header } from "../components/Header/Header";
+import accountLogo from '../../assets/icons/mainAppLogo.svg';
+import salesIcon from '../../assets/icons/sales-icon.svg';
+import membersIcon from '../../assets/icons/person-fill.svg';
+import accountIcon from '../../assets/icons/account-icon.svg';
+import appsIcon from '../../assets/icons/apps-fill.svg';
+import appIconTransport from '../../assets/icons/app-icon-transport.svg';
+import appIconSales from '../../assets/icons/app-icon-sales.svg';
+import appIconPayments from '../../assets/icons/app-icon-payments.svg';
+import { AppProps, DashboardTable } from "../../components/DashboardTable/DashboardTable";
+import { Header } from "../../components/Header/Header";
+
+import { DashboardListItems, DashboardNavigation } from "../../components/DashboardNavigation/DashboardNavigation";
+import { DashboardToolbar } from "../../components/DashboardToolbar/DashboardToolbar";
+import { Footer } from "../../components/Footer/Footer";
 
 import './DashboardPage.scss';
-import { Footer } from "../components/Footer/Footer";
 
 const appList: AppProps[] = [
     {
@@ -81,6 +83,8 @@ const dashboardNavigationItems: DashboardListItems[] = [
 
 
 export function DashboardPage() {
+    const navigate = useNavigate();
+
     return (
         <div className="dashboard-page-container">
             <div>
@@ -102,7 +106,10 @@ export function DashboardPage() {
                                 description="Manage and publish apps on the Marketplace"
                             />
 
-                            <button className="dashboard-page-body-header-button">
+                            <button
+                                className="dashboard-page-body-header-button"
+                                onClick={() => navigate("/create-new-app")}
+                            >
                                 + New App
                             </button>
                         </div>
