@@ -1,12 +1,28 @@
-.field-base-container {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
+.field-base {
+    &-container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
 
-.field-base-required-asterisk-icon  {
-    margin-bottom: 6px;
-    width: 9px;
-    height: 9px;
-    filter: invert(10%) sepia(92%) saturate(5864%) hue-rotate(358deg) brightness(101%) contrast(97%);
+
+    &-required-asterisk-icon {
+        margin-bottom: 6px;
+        width: 9px;
+        height: 9px;
+        filter: invert(10%) sepia(92%) saturate(5864%) hue-rotate(358deg) brightness(101%) contrast(97%);
+    }
+
+    &-tooltip {
+        margin-left: 22px;
+    }
+
+    &-description {
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 0.813rem;
+        line-height: 1rem;
+        font-weight: 400;
+        color: #54555F;
+        word-break: break-word;
+    }
 }

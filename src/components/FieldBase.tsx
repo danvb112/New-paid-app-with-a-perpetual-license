@@ -13,9 +13,9 @@
  */
 
 import ClayForm from '@clayui/form';
-import {ClayTooltipProvider} from '@clayui/tooltip';
+import { ClayTooltipProvider } from '@clayui/tooltip';
 import classNames from 'classnames';
-import {ReactNode} from 'react';
+import { ReactNode } from 'react';
 
 import asteriskIcon from '../assets/icons/asterisk.svg';
 
@@ -26,10 +26,10 @@ function RequiredMask() {
 	return (
 		<>
 			<span className="field-base-required-asterisk">
-				<img 
-                    className="field-base-required-asterisk-icon" 
-                    src={asteriskIcon} 
-                />
+				<img
+					className="field-base-required-asterisk-icon"
+					src={asteriskIcon}
+				/>
 			</span>
 
 			<span className="hide-accessible sr-only">
@@ -42,6 +42,7 @@ function RequiredMask() {
 interface FieldBaseProps {
 	children: ReactNode;
 	className?: string;
+	description?: string;
 	disabled?: boolean;
 	errorMessage?: string;
 	id?: string;
@@ -55,6 +56,7 @@ interface FieldBaseProps {
 export function FieldBase({
 	children,
 	className,
+	description,
 	disabled,
 	errorMessage,
 	id,
@@ -73,7 +75,7 @@ export function FieldBase({
 		>
 			<div className='field-base-container'>
 				{label && (
-					<label className={classNames({disabled})} htmlFor={id}>
+					<label className={classNames({ disabled })} htmlFor={id}>
 						{label}
 
 						{required && <RequiredMask />}
@@ -81,15 +83,19 @@ export function FieldBase({
 				)}
 
 				{tooltip && (
-					<>
-						&nbsp;
-						<Tooltip 
+					<div className='field-base-tooltip'>
+						<Tooltip
 							tooltip={tooltip}
 							tooltipText={tooltipText}
 						/>
-					</>
+					</div>
 				)}
 			</div>
+
+			{description && (
+				<span className='field-base-description'>{description}</span>
+			)}
+
 
 			{children}
 		</ClayForm.Group>

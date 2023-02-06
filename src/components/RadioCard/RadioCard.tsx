@@ -35,34 +35,37 @@ export function RadioCard({
             <div className='radio-card-main-info'>
                 <div className='radio-card-title'>
                     <button
-                        className='radio-card-button'
-                        onClick={() => setSelected(value)}
+                        className={classNames('radio-card-button', {
+                            'radio-card-button-disabled': disabled === true
+                        })}
+                        onClick={() => disabled === false && setSelected(value)}
                     >
-                        <img 
+                        <img
                             className='radio-card-button-icon'
-                            src={selected === value ? radioChecked : radioUnchecked}  
-                            alt={selected === value ? "Radio Checked" : "Radio unchecked"} 
+                            src={selected === value ? radioChecked : radioUnchecked}
+                            alt={selected === value ? "Radio Checked" : "Radio unchecked"}
                         />
                     </button>
 
-                    <span 
+                    <span
                         className={classNames('radio-card-title-text', {
                             "radio-card-title-text-selected": selected === value
                         })}
                     >
                         {title}
                     </span>
-                    <img 
+
+                    <img
                         className={classNames('radio-card-title-icon', {
                             'radio-card-title-icon-selected': selected === value
-                        })} 
-                        src={icon} 
-                        alt="Upload fill" 
+                        })}
+                        src={icon}
+                        alt="Icon"
                     />
                 </div>
 
                 <div className='radio-card-title-tooltip'>
-                    <Tooltip 
+                    <Tooltip
                         tooltip={tooltip}
                     />
                 </div>

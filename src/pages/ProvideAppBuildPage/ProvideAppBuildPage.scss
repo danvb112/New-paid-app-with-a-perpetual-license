@@ -1,0 +1,23 @@
+.provide-app-build-page {
+    &-container {
+        width: 600px;
+    }
+
+    &-app-build {
+        &-container {
+            margin-bottom: 24px;
+        }
+
+        &-radio-container {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+    }
+
+    &-saas-compatible-container {
+        align-items: center;
+        display: flex;
+        gap: 16px;
+    }
+}
