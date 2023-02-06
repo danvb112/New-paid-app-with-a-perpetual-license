@@ -10,6 +10,7 @@ import { ProvideAppBuildPage } from '../ProvideAppBuildPage/ProvideAppBuildPage'
 import { CustomizeAppStorefrontPage } from '../StorefrontPage/CustomizeAppStorefrontPage';
 import { ChoosePricingModelPage } from '../ChoosePricingModelPage/ChoosePricingModelPage';
 import { InformLicensingTermsPage } from '../InformLicensingTermsPage/InformLicensingTermsPage';
+import { ProvideVersionDetailsPage } from '../ProvideVersionDetailsPage/ProvideVersionDetailsPage';
 
 type SetAppFlowListStateProps = {
     checkedItem?: string;
@@ -114,6 +115,27 @@ export function AppCreationFlow() {
                     />
                 )}
 
+                {currentFlow === 'version' && (
+                    <ProvideVersionDetailsPage
+                        onClickBack={() => {
+                            setAppFlowListState({
+                                checkedItem: "version",
+                                selectedItem: "storefront"
+                            });
+
+                            setCurrentFlow('storefront');
+                        }}
+                        onClickContinue={() => {
+                            setAppFlowListState({
+                                checkedItem: "version",
+                                selectedItem: "pricing"
+                            });
+
+                            setCurrentFlow('pricing');
+                        }}
+                    />
+                )}
+
                 {currentFlow === 'pricing' && (
                     <ChoosePricingModelPage
                         onClickBack={() => {
@@ -135,7 +157,7 @@ export function AppCreationFlow() {
                 )}
 
                 {currentFlow === 'licensing' && (
-                    <InformLicensingTermsPage 
+                    <InformLicensingTermsPage
                         onClickBack={() => {
                             setAppFlowListState({
                                 selectedItem: "pricing"
