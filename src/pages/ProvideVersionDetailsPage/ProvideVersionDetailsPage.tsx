@@ -42,7 +42,6 @@ export function ProvideVersionDetailsPage({
       </Section>
 
       <NewAppPageFooterButtons
-        showBackButton={true}
         onClickBack={() => onClickBack()}
         onClickContinue={() => onClickContinue()}
       />

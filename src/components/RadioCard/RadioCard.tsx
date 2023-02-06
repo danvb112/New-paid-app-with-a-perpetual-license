@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import {ClayToggle} from '@clayui/form';
 
 import radioChecked from '../../assets/icons/radio-button-checked.svg'
 import radioUnchecked from '../../assets/icons/radio-button-unchecked.svg'
@@ -12,14 +13,16 @@ interface RadioCardProps {
     tooltip: string;
     description: string;
     selected: string;
-    setSelected: (value: string) => void
+    setSelected: (value: string | boolean) => void
     disabled?: boolean;
+    toggle?: boolean
     value: string;
 }
 
 export function RadioCard({
     description,
     title,
+    toggle = false,
     tooltip,
     icon,
     selected,
@@ -34,18 +37,25 @@ export function RadioCard({
         })}>
             <div className='radio-card-main-info'>
                 <div className='radio-card-title'>
-                    <button
-                        className={classNames('radio-card-button', {
-                            'radio-card-button-disabled': disabled === true
-                        })}
-                        onClick={() => disabled === false && setSelected(value)}
-                    >
-                        <img
-                            className='radio-card-button-icon'
-                            src={selected === value ? radioChecked : radioUnchecked}
-                            alt={selected === value ? "Radio Checked" : "Radio unchecked"}
+                    {toggle ? (
+                        <ClayToggle 
+                            onToggle={(toggleValue) => setSelected(toggleValue)}
                         />
-                    </button>
+                    ) : (
+                        <button
+                            className={classNames('radio-card-button', {
+                                'radio-card-button-disabled': disabled === true
+                            })}
+                            onClick={() => disabled === false && setSelected(value)}
+                        >
+                            <img
+                                className='radio-card-button-icon'
+                                src={selected === value ? radioChecked : radioUnchecked}
+                                alt={selected === value ? "Radio Checked" : "Radio unchecked"}
+                            />
+                        </button>
+                    )}
+
 
                     <span
                         className={classNames('radio-card-title-text', {

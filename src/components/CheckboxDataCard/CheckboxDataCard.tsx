@@ -1,29 +1,35 @@
 import './CheckboxDataCard.scss';
 
-import helpFillIcon from '../../assets/icons/help_fill.svg';
 import { Tooltip } from '../Tooltip/Tooltip';
 import { Checkbox } from '../Checkbox/Checkbox';
 
 interface CheckboxItem {
     checked: boolean;
-    label?: string;
     description?: string;
+    label?: string;
+    name: string;
 }
 
-interface CheckboxDataCardProps {
-    title: string;
+export interface BaseCheckboxDataCard {
+    checkboxItems: CheckboxItem[];
     icon: string;
+    name: string;
+    title: string;
     tooltip: string;
     tooltipText: string;
-    checkboxItems: CheckboxItem[];
+}
+interface CheckboxDataCardProps extends BaseCheckboxDataCard {
+    onChange: (cardName: string, selectedCheckboxName: string) => void;
 }
 
 export function CheckboxDataCard({
     checkboxItems,
     icon,
+    name,
     title,
     tooltip,
-    tooltipText
+    tooltipText,
+    onChange,
 }: CheckboxDataCardProps) {
     return (
         <div className='checkbox-data-card-container'>
@@ -41,11 +47,12 @@ export function CheckboxDataCard({
 
             <div className='checkbox-data-card-checkbox-list-container'>
                 {checkboxItems.map(checkboxItem => (
-                    <Checkbox 
+                    <Checkbox
                         checked={checkboxItem.checked}
-                        onChange={() => {}}
-                        label={checkboxItem.label}
                         description={checkboxItem.description}
+                        label={checkboxItem.label}
+                        key={checkboxItem.name}
+                        onChange={() => onChange(name, checkboxItem.name)}
                     />
                 ))}
             </div>

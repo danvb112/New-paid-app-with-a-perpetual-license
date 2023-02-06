@@ -1,17 +1,20 @@
 import { useState } from 'react';
+
 import { Footer } from '../../components/Footer/Footer';
 import { AppFlowList } from '../../components/NewAppFlowList/AppFlowList';
 import { NewAppToolBar } from '../../components/NewAppToolBar/NewAppToolBar';
 import { CreateNewAppPage } from '../CreateNewAppPage/CreateNewAppPage';
 import { initialFLowListItems } from './AppCreationFlowUtil';
 
-import './AppCreationFlow.scss';
 import { ProvideAppBuildPage } from '../ProvideAppBuildPage/ProvideAppBuildPage';
 import { CustomizeAppStorefrontPage } from '../StorefrontPage/CustomizeAppStorefrontPage';
 import { ChoosePricingModelPage } from '../ChoosePricingModelPage/ChoosePricingModelPage';
 import { InformLicensingTermsPage } from '../InformLicensingTermsPage/InformLicensingTermsPage';
 import { ProvideVersionDetailsPage } from '../ProvideVersionDetailsPage/ProvideVersionDetailsPage';
 import {ProvideAppSupportAndHelpPage} from '../ProvideAppSupportAndHelpPage/ProvideAppSupportAndHelpPage';
+
+import './AppCreationFlow.scss';
+import { SetAppPrivacyPage } from '../SetAppPrivacyPage/SetAppPrivacyPage';
 
 type SetAppFlowListStateProps = {
     checkedItem?: string;
@@ -196,8 +199,29 @@ export function AppCreationFlow() {
                         }}
                     />
                 )}
+
+                {currentFlow === 'privacy' && (
+                    <SetAppPrivacyPage 
+                        onClickBack={() => {
+                            setAppFlowListState({
+                                selectedItem: "support"
+                            });
+
+                            setCurrentFlow('support');
+                        }}
+                        onClickContinue={() => {
+                            setAppFlowListState({
+                                checkedItem: "privacy",
+                                selectedItem: "submit"
+                            });
+
+                            setCurrentFlow('submit ');
+                        }}
+                    />
+                )}
             </div>
 
+            
             <Footer />
         </div>
     )

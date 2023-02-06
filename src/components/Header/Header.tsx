@@ -7,7 +7,7 @@ interface HeaderProps {
 
 export function Header({title, description}: HeaderProps) {
     return (
-        <div>
+        <div className='header-container'>
             <span className="header-title">{title}</span>
             <p className="header-description">{description}</p>
         </div>
