@@ -7,10 +7,10 @@ export type UploadedFile = {
     id: string;
     fileName: string;
     readableSize: string | number | any[] | {
-      value: any;
-      symbol: any;
-      exponent: number;
-      unit: string;
+        value: any;
+        symbol: any;
+        exponent: number;
+        unit: string;
     };
     preview?: string;
     progress: number;
@@ -25,16 +25,16 @@ interface FileListProps {
 }
 
 export function FileList({
-        uploadedFiles, 
-        onDelete,
-        type
+    uploadedFiles,
+    onDelete,
+    type
 }: FileListProps) {
     return (
         <div className='file-list-container'>
             {uploadedFiles.map((uploadedFile) => {
-                if(type === 'document') {
+                if (type === 'document') {
                     return (
-                        <DocumentFileItem 
+                        <DocumentFileItem
                             key={uploadedFile.id}
                             onDelete={onDelete}
                             uploadedFile={uploadedFile}
@@ -42,12 +42,13 @@ export function FileList({
                     );
                 }
 
-                if(type === 'image') {
+                if (type === 'image') {
                     return (
-                        <ImageFileItem 
+                        <ImageFileItem
                             key={uploadedFile.id}
                             onDelete={onDelete}
                             uploadedFile={uploadedFile}
+                            tooltip='More Info'
                         />
                     );
                 }

@@ -193,7 +193,7 @@ export function ProvideAppBuildPage({
             <NewAppPageFooterButtons
                 showBackButton
                 onClickContinue={() => onClickContinue()}
-                onCLickBack={() => onClickBack()}
+                onClickBack={() => onClickBack()}
             />
         </div>
     );
