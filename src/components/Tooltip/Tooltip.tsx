@@ -1,4 +1,5 @@
 import {ClayTooltipProvider} from '@clayui/tooltip';
+import classNames from 'classnames';
 
 import helpFillIcon from '../../assets/icons/help_fill.svg';
 
@@ -15,7 +16,10 @@ export function Tooltip({
 }: TooltipProps) {
     return (
         <ClayTooltipProvider>
-            <div className='tooltip-base-container'>
+            <div className = {'tooltip-base ' +  classNames({
+                'tooltip-base-container': !tooltipText,
+                'tooltip-base-auto': tooltipText,
+              })}>
                 <div className='tooltip-container' data-tooltip-align="top" title={tooltip}>
                     <span className='tooltip-optional-text'>{tooltipText}</span> 
                     <img className='tooltip-icon'src={helpFillIcon} />

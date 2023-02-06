@@ -11,6 +11,7 @@ import { CustomizeAppStorefrontPage } from '../StorefrontPage/CustomizeAppStoref
 import { ChoosePricingModelPage } from '../ChoosePricingModelPage/ChoosePricingModelPage';
 import { InformLicensingTermsPage } from '../InformLicensingTermsPage/InformLicensingTermsPage';
 import { ProvideVersionDetailsPage } from '../ProvideVersionDetailsPage/ProvideVersionDetailsPage';
+import {ProvideAppSupportAndHelpPage} from '../ProvideAppSupportAndHelpPage/ProvideAppSupportAndHelpPage';
 
 type SetAppFlowListStateProps = {
     checkedItem?: string;
@@ -172,6 +173,26 @@ export function AppCreationFlow() {
                             });
 
                             setCurrentFlow('support');
+                        }}
+                    />
+                )}
+
+                {currentFlow === 'support' && (
+                    <ProvideAppSupportAndHelpPage 
+                        onClickBack={() => {
+                            setAppFlowListState({
+                                selectedItem: "licensing"
+                            });
+
+                            setCurrentFlow('licensing');
+                        }}
+                        onClickContinue={() => {
+                            setAppFlowListState({
+                                checkedItem: "support",
+                                selectedItem: "privacy"
+                            });
+
+                            setCurrentFlow('privacy');
                         }}
                     />
                 )}
