@@ -6,6 +6,7 @@ import { CreateNewAppPage } from '../CreateNewAppPage/CreateNewAppPage';
 import { initialFLowListItems } from './AppCreationFlowUtil';
 
 import './AppCreationFlow.scss';
+import { ProvideAppBuildPage } from '../ProvideAppBuildPage/ProvideAppBuildPage';
 
 type SetAppFlowListStateProps = {
     checkedItem?: string;
@@ -66,6 +67,26 @@ export function AppCreationFlow() {
                             });
 
                             setCurrentFlow('profile');
+                        }}
+                    />
+                )}
+
+                {currentFlow === 'build' && (
+                    <ProvideAppBuildPage
+                        onClickBack={() => {
+                            setAppFlowListState({
+                                selectedItem: "profile"
+                            });
+
+                            setCurrentFlow('profile');
+                        }}
+                        onClickContinue={() => {
+                            setAppFlowListState({
+                                checkedItem: "build",
+                                selectedItem: "storefront"
+                            });
+
+                            setCurrentFlow('storeFront');
                         }}
                     />
                 )}

@@ -3,14 +3,7 @@ import ClayButton from '@clayui/button';
 import emptyImage from '../../assets/icons/emptyImage.svg';
 
 import './UploadLogo.scss';
-
-export type UploadedFile = {
-    file: File,
-    name: string;
-    preview: string;
-    uploaded: boolean;
-    error: boolean;
-  }
+import { UploadedFile } from '../FileList/FileList';
 
 interface UploadLogoProps {
     uploadedFile?: UploadedFile;
@@ -27,28 +20,28 @@ export function UploadLogo({
         <div className='upload-logo-container'>
             <div
                 style={{
-                  backgroundImage: `url(${uploadedFile?.preview ?? emptyImage})`,
-                  backgroundRepeat: 'no-repeat',
-                  backgroundSize: 'cover',
-                  backgroundPosition: "50% 50%",
+                    backgroundImage: `url(${uploadedFile?.preview ?? emptyImage})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
+                    backgroundPosition: "50% 50%",
                 }}
-                className='upload-logo-icon' 
+                className='upload-logo-icon'
             />
 
-            <input 
+            <input
                 type="file"
-                name="file" 
-                id="file" 
-                onChange={({target: {files}}) => onUpload(files)} />
+                name="file"
+                id="file"
+                onChange={({ target: { files } }) => onUpload(files)} />
             <label
-                className='upload-logo-upload-label' 
+                className='upload-logo-upload-label'
                 htmlFor="file"
             >
                 Upload Image
             </label>
 
             <button className='upload-logo-delete-button' onClick={() => onUploadedFileChange()}>
-              <span className='upload-logo-delete-button-text'>Delete</span>  
+                <span className='upload-logo-delete-button-text'>Delete</span>
             </button>
         </div>
     );

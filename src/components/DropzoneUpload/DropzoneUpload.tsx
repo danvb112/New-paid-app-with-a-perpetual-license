@@ -12,29 +12,32 @@ interface DropzoneUploadProps {
     buttonText: string;
     description: string;
     maxFiles: number;
+    maxSize?: number;
     multiple: boolean;
     onHandleUpload: (files: File[]) => void;
     title: string;
-} 
+}
 
 export function DropzoneUpload({
     acceptFileTypes,
     buttonText,
     description,
     maxFiles,
+    maxSize,
     multiple,
     onHandleUpload,
     title
 }: DropzoneUploadProps) {
     return (
-        <Dropzone 
+        <Dropzone
             accept={acceptFileTypes}
             maxFiles={maxFiles}
+            maxSize={maxSize}
             multiple={multiple}
             onDropAccepted={onHandleUpload}
         >
-            {({getRootProps, getInputProps, isDragActive, isDragReject}) => (
-                <div 
+            {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
+                <div
                     className={classnames('dropzone-upload-container', {
                         'dropzone-upload-container-active': isDragActive,
                         'dropzone-upload-container-reject': isDragReject
@@ -44,8 +47,8 @@ export function DropzoneUpload({
                     <div className='dropzone-upload-document-container'>
                         <img
                             className='dropzone-upload-document-icon'
-                            src={documentIcon} 
-                            alt="Document icon" 
+                            src={documentIcon}
+                            alt="Document icon"
                         />
                     </div>
 
