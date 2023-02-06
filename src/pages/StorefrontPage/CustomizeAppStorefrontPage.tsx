@@ -13,7 +13,7 @@ const acceptFileTypes = {
     "image/*": ['.png', '.svg', '.jpg']
 }
 
-interface StorefrontPageProps {
+interface CustomizeAppStorefrontPageProps {
     onClickBack: () => void;
     onClickContinue: () => void;
 }
@@ -21,7 +21,7 @@ interface StorefrontPageProps {
 export function CustomizeAppStorefrontPage({
     onClickBack,
     onClickContinue,
-}: StorefrontPageProps) {
+}: CustomizeAppStorefrontPageProps) {
     const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
 
     const updateFile = (id: string, data: UploadedFile) => {

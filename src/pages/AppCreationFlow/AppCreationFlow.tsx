@@ -8,6 +8,7 @@ import { initialFLowListItems } from './AppCreationFlowUtil';
 import './AppCreationFlow.scss';
 import { ProvideAppBuildPage } from '../ProvideAppBuildPage/ProvideAppBuildPage';
 import { CustomizeAppStorefrontPage } from '../StorefrontPage/CustomizeAppStorefrontPage';
+import { ChoosePricingModelPage } from '../ChoosePricingModelPage/ChoosePricingModelPage';
 
 type SetAppFlowListStateProps = {
     checkedItem?: string;
@@ -108,6 +109,26 @@ export function AppCreationFlow() {
                             });
 
                             setCurrentFlow('version');
+                        }}
+                    />
+                )}
+
+                {currentFlow === 'pricing' && (
+                    <ChoosePricingModelPage
+                        onClickBack={() => {
+                            setAppFlowListState({
+                                selectedItem: "version"
+                            });
+
+                            setCurrentFlow('version');
+                        }}
+                        onClickContinue={() => {
+                            setAppFlowListState({
+                                checkedItem: "pricing",
+                                selectedItem: "licensing"
+                            });
+
+                            setCurrentFlow('licensing');
                         }}
                     />
                 )}
