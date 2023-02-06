@@ -1,5 +1,6 @@
 import ClayManagementToolbar from '@clayui/management-toolbar';
 import ClayButton from '@clayui/button';
+import { useNavigate } from 'react-router-dom';
 
 import mainAccountLogo from '../../assets/icons/mainAppLogo.svg';
 import emptyImage from '../../assets/icons/emptyImage.svg';
@@ -21,38 +22,42 @@ export function NewAppToolBar({
     appImage,
     accountImage,
 }: NewAppToolBarProps) {
+    const navigate = useNavigate();
+
     return (
         <div className='new-app-tool-bar-container'>
             <ClayManagementToolbar.ItemList expand>
                 <div className='new-app-tool-bar-main-account-logo'>
-                    <img 
-                        className='new-app-tool-bar-main-account-logo-img' 
-                        src={accountImage ?? mainAccountLogo}  
+                    <img
+                        className='new-app-tool-bar-main-account-logo-img'
+                        src={accountImage ?? mainAccountLogo}
                         alt='Main account logo'
                     />
-                    <span 
+
+                    <span
                         className='new-app-tool-bar-main-account-logo-text'
                     >
                         {accountName}
                     </span>
                 </div>
 
-                <img 
-                    className='new-app-tool-bar-arrow-right' 
-                    src={chevronRight} 
-                    alt="Arrow right" 
+                <img
+                    className='new-app-tool-bar-arrow-right'
+                    src={chevronRight}
+                    alt="Arrow right"
                 />
 
                 <div className='new-app-tool-bar-new-app-logo'>
-                    <img 
-                        className='new-app-tool-bar-new-app-logo-img' 
-                        src={appImage ?? emptyImage} 
-                        alt="New App logo" 
+                    <img
+                        className='new-app-tool-bar-new-app-logo-img'
+                        src={appImage ?? emptyImage}
+                        alt="New App logo"
                     />
-                    <span 
+
+                    <span
                         className='new-app-tool-bar-new-app-logo-text'
                     >
-                       {appName ?? 'New App'}
+                        {appName ?? 'New App'}
                     </span>
                 </div>
 
@@ -62,8 +67,8 @@ export function NewAppToolBar({
                 <div className='new-app-tool-bar-status-container'>
                     <img
                         className='new-app-tool-bar-status-icon'
-                        src={circleFill} 
-                        alt="Status" 
+                        src={circleFill}
+                        alt="Status"
                     />
                     <span
                         className='new-app-tool-bar-status-text'
@@ -73,11 +78,12 @@ export function NewAppToolBar({
                 </div>
             </ClayManagementToolbar.ItemList>
 
-            <ClayManagementToolbar.ItemList> 
+            <ClayManagementToolbar.ItemList>
                 <ClayButton.Group className='new-app-tool-bar-button-container'>
-                    <ClayButton 
+                    <ClayButton
                         className='new-app-tool-bar-button-exit'
                         displayType={null}
+                        onClick={() => navigate('/')}
                     >
                         <span
                             className='new-app-tool-bar-button-text'
@@ -85,28 +91,18 @@ export function NewAppToolBar({
                             Exit
                         </span>
                     </ClayButton>
-                    <ClayButton
-                        rounded
+
+                    <button
                         className='new-app-tool-bar-button-save-draft'
-                        displayType='secondary'
                     >
-                        <span
-                            className='new-app-tool-bar-button-text'
-                        >
-                            Save as draft
-                        </span> 
-                    </ClayButton>
-                    <ClayButton 
+                        Save as draft
+                    </button>
+
+                    <button
                         className='new-app-tool-bar-button-preview-storefront'
-                        rounded
-                        displayType='secondary'
                     >
-                       <span
-                            className='new-app-tool-bar-button-text'
-                       >
-                            Preview Storefront
-                        </span>
-                    </ClayButton>
+                        Preview Storefront
+                    </button>
                 </ClayButton.Group>
             </ClayManagementToolbar.ItemList>
         </div>
