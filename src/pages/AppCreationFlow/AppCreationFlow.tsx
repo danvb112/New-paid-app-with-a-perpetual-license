@@ -7,6 +7,7 @@ import { initialFLowListItems } from './AppCreationFlowUtil';
 
 import './AppCreationFlow.scss';
 import { ProvideAppBuildPage } from '../ProvideAppBuildPage/ProvideAppBuildPage';
+import { CustomizeAppStorefrontPage } from '../StorefrontPage/CustomizeAppStorefrontPage';
 
 type SetAppFlowListStateProps = {
     checkedItem?: string;
@@ -66,7 +67,7 @@ export function AppCreationFlow() {
                                 selectedItem: "profile"
                             });
 
-                            setCurrentFlow('profile');
+                            setCurrentFlow('build');
                         }}
                     />
                 )}
@@ -86,7 +87,27 @@ export function AppCreationFlow() {
                                 selectedItem: "storefront"
                             });
 
-                            setCurrentFlow('storeFront');
+                            setCurrentFlow('storefront');
+                        }}
+                    />
+                )}
+
+                {currentFlow === 'storefront' && (
+                    <CustomizeAppStorefrontPage
+                        onClickBack={() => {
+                            setAppFlowListState({
+                                selectedItem: "build"
+                            });
+
+                            setCurrentFlow('build');
+                        }}
+                        onClickContinue={() => {
+                            setAppFlowListState({
+                                checkedItem: "storefront",
+                                selectedItem: "version"
+                            });
+
+                            setCurrentFlow('version');
                         }}
                     />
                 )}
