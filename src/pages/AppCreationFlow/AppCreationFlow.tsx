@@ -9,6 +9,7 @@ import './AppCreationFlow.scss';
 import { ProvideAppBuildPage } from '../ProvideAppBuildPage/ProvideAppBuildPage';
 import { CustomizeAppStorefrontPage } from '../StorefrontPage/CustomizeAppStorefrontPage';
 import { ChoosePricingModelPage } from '../ChoosePricingModelPage/ChoosePricingModelPage';
+import { InformLicensingTermsPage } from '../InformLicensingTermsPage/InformLicensingTermsPage';
 
 type SetAppFlowListStateProps = {
     checkedItem?: string;
@@ -129,6 +130,26 @@ export function AppCreationFlow() {
                             });
 
                             setCurrentFlow('licensing');
+                        }}
+                    />
+                )}
+
+                {currentFlow === 'licensing' && (
+                    <InformLicensingTermsPage 
+                        onClickBack={() => {
+                            setAppFlowListState({
+                                selectedItem: "pricing"
+                            });
+
+                            setCurrentFlow('pricing');
+                        }}
+                        onClickContinue={() => {
+                            setAppFlowListState({
+                                checkedItem: "licensing",
+                                selectedItem: "support"
+                            });
+
+                            setCurrentFlow('support');
                         }}
                     />
                 )}

@@ -18,6 +18,7 @@
     &-saas-compatible-container {
         align-items: center;
         display: flex;
-        gap: 1px;
+        gap: 1.5rem;
+        justify-content: flex-start;
     }
 }
