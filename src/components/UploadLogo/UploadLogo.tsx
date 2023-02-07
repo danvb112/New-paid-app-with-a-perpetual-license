@@ -7,14 +7,14 @@ import { UploadedFile } from '../FileList/FileList';
 
 interface UploadLogoProps {
     uploadedFile?: UploadedFile;
-    onUpload: (files: FileList | null) => void
-    onUploadedFileChange: () => void;
+    onUpload: (files: FileList) => void
+    onDeleteFile: (id: string) => void;
 }
 
 export function UploadLogo({
     uploadedFile,
-    onUploadedFileChange,
-    onUpload
+    onDeleteFile,
+    onUpload,
 }: UploadLogoProps) {
     return (
         <div className='upload-logo-container'>
@@ -32,17 +32,23 @@ export function UploadLogo({
                 type="file"
                 name="file"
                 id="file"
-                onChange={({ target: { files } }) => onUpload(files)} />
+                onChange={({ target: { files } }) => {
+                    if (files !== null) {
+                        onUpload(files)
+                    }
+                }} />
             <label
                 className='upload-logo-upload-label'
                 htmlFor="file"
             >
                 Upload Image
             </label>
+            {(uploadedFile?.uploaded &&
+                <button className='upload-logo-delete-button' onClick={() => onDeleteFile(uploadedFile.id)}>
+                    <span className='upload-logo-delete-button-text'>Delete</span>
+                </button>
+            )}
 
-            <button className='upload-logo-delete-button' onClick={() => onUploadedFileChange()}>
-                <span className='upload-logo-delete-button-text'>Delete</span>
-            </button>
         </div>
     );
 }
