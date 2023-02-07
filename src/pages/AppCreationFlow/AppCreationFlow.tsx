@@ -84,7 +84,7 @@ export function AppCreationFlow() {
                     <DefineAppProfilePage
                         onClickBack={() => {
                             setAppFlowListState({
-                                selectedItem: "created"
+                                selectedItem: "create"
                             })
                             setCurrentFlow("create");
                         }}
@@ -103,6 +103,7 @@ export function AppCreationFlow() {
                     <ProvideAppBuildPage
                         onClickBack={() => {
                             setAppFlowListState({
+                                checkedItems: ["create"],
                                 selectedItem: "profile"
                             });
 
@@ -123,6 +124,7 @@ export function AppCreationFlow() {
                     <CustomizeAppStorefrontPage
                         onClickBack={() => {
                             setAppFlowListState({
+                                checkedItems: ["create", "profile"],
                                 selectedItem: "build"
                             });
 
@@ -143,6 +145,7 @@ export function AppCreationFlow() {
                     <ProvideVersionDetailsPage
                         onClickBack={() => {
                             setAppFlowListState({
+                                checkedItems: ["create", "profile", "build"],
                                 selectedItem: "storefront"
                             });
 
@@ -163,6 +166,7 @@ export function AppCreationFlow() {
                     <ChoosePricingModelPage
                         onClickBack={() => {
                             setAppFlowListState({
+                                checkedItems: ["create", "profile", "build", "storefront"],
                                 selectedItem: "version"
                             });
 
@@ -183,6 +187,7 @@ export function AppCreationFlow() {
                     <InformLicensingTermsPage
                         onClickBack={() => {
                             setAppFlowListState({
+                                checkedItems: ["create", "profile", "build", "storefront", "version"],
                                 selectedItem: "pricing"
                             });
 
@@ -203,6 +208,7 @@ export function AppCreationFlow() {
                     <ProvideAppSupportAndHelpPage 
                         onClickBack={() => {
                             setAppFlowListState({
+                                checkedItems: ["create", "profile", "build", "storefront", "version", "pricing"],
                                 selectedItem: "licensing"
                             });
 
@@ -223,6 +229,7 @@ export function AppCreationFlow() {
                     <SetAppPrivacyPage 
                         onClickBack={() => {
                             setAppFlowListState({
+                                checkedItems: ["create", "profile", "build", "storefront", "version", "pricing", "licensing"],
                                 selectedItem: "support"
                             });
 
@@ -234,7 +241,7 @@ export function AppCreationFlow() {
                                 selectedItem: "submit"
                             });
 
-                            setCurrentFlow('submit ');
+                            setCurrentFlow('submit');
                         }}
                     />
                 )}
