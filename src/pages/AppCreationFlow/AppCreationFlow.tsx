@@ -26,8 +26,6 @@ export function AppCreationFlow() {
     const [appFlowListItems, setAppFlowListItems] = useState(initialFLowListItems);
     const [currentFlow, setCurrentFlow] = useState('create');
 
-    console.log(appFlowListItems);
-
     const setAppFlowListState = ({ checkedItems, selectedItem }: SetAppFlowListStateProps) => {
         const newAppFlowListItems = appFlowListItems.map(appItem => {
             if (checkedItems?.includes(appItem.name)) {

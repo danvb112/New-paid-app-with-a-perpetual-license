@@ -16,6 +16,8 @@ import { DashboardToolbar } from "../../components/DashboardToolbar/DashboardToo
 import { Footer } from "../../components/Footer/Footer";
 
 import './DashboardPage.scss';
+import { useState } from 'react';
+import { AppDetailsPage } from '../AppDetailsPage/AppDetailsPage';
 
 const appList: AppProps[] = [
     {
@@ -27,7 +29,8 @@ const appList: AppProps[] = [
         updatedBy: 'by Hanna White',
         updatedDate: "Feb 14, 2023",
         updatedResponsible: 'you',
-        version: "1.40"
+        version: "1.40",
+        selected: false
     },
     {
         image: appIconSales,
@@ -38,7 +41,8 @@ const appList: AppProps[] = [
         updatedBy: 'by Hanna White',
         updatedDate: "Feb 14, 2023",
         updatedResponsible: 'you',
-        version: "2.28"
+        version: "2.28",
+        selected: false
     },
     {
         image: appIconPayments,
@@ -49,17 +53,18 @@ const appList: AppProps[] = [
         updatedBy: 'by Hanna White',
         updatedDate: "Feb 14, 2023",
         updatedResponsible: 'you',
-        version: "1.0"
+        version: "1.0",
+        selected: false
     },
 ];
 
-const dashboardNavigationItems: DashboardListItems[] = [
+const initialDashboardNavigationItems: DashboardListItems[] = [
     {
         itemIcon: appsIcon,
         itemTitle: "Apps",
         itemName: 'apps',
         items: appList,
-        itemSelected: false
+        itemSelected: true
     },
     {
         itemIcon: salesIcon,
@@ -79,11 +84,14 @@ const dashboardNavigationItems: DashboardListItems[] = [
         itemName: 'account',
         itemSelected: false
     },
-]
-
+];
 
 export function DashboardPage() {
     const navigate = useNavigate();
+    const [selectedApp, setSelectedApp] = useState<AppProps>();
+    const [dashboardNavigationItems, setDashboardNavigationItems] = useState(initialDashboardNavigationItems);
+
+    console.log(selectedApp);
 
     return (
         <div className="dashboard-page-container">
@@ -93,32 +101,42 @@ export function DashboardPage() {
                 </div>
                 <div className="dashboard-page-body-container">
                     <DashboardNavigation
+                        onSelectAppChange={setSelectedApp}
                         accountAppsNumber="4"
                         accountIcon={accountLogo}
                         accountTitle="Acme Co"
+                        setDashboardNavigationItems={setDashboardNavigationItems}
                         dashboardNavigationItems={dashboardNavigationItems}
                     />
 
-                    <div>
-                        <div className="dashboard-page-body-header-container">
-                            <Header
-                                title="Apps"
-                                description="Manage and publish apps on the Marketplace"
-                            />
-
-                            <button
-                                className="dashboard-page-body-header-button"
-                                onClick={() => navigate("/create-new-app")}
-                            >
-                                + New App
-                            </button>
-                        </div>
-
-                        <DashboardTable
-                            apps={appList}
+                    {selectedApp ? (
+                        <AppDetailsPage
+                            selectedApp={selectedApp}
+                            dashboardNavigationItems={dashboardNavigationItems}
+                            setSelectedApp={setSelectedApp}
+                            status='pending'
                         />
+                    )  : (                        
+                        <div>
+                            <div className="dashboard-page-body-header-container">
+                                <Header
+                                    title="Apps"
+                                    description="Manage and publish apps on the Marketplace"
+                                />
 
-                    </div>
+                                <button
+                                    className="dashboard-page-body-header-button"
+                                    onClick={() => navigate("/create-new-app")}
+                                >
+                                    + New App
+                                </button>
+                            </div>
+
+                            <DashboardTable
+                                apps={appList}
+                            />
+                        </div>
+                    )}
                 </div>
             </div>
 

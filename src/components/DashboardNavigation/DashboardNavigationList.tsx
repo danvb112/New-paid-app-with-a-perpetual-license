@@ -3,18 +3,23 @@ import classNames from 'classnames';
 import './DashboardNavigationList.scss'
 import { DashboardNavigationListItem } from './DashboardNavigationListItem';
 import { DashboardListItems } from './DashboardNavigation';
+import { AppProps } from '../DashboardTable/DashboardTable';
 
 
 interface DashboardNavigationListProps {
     navigationItemsMock: DashboardListItems[];
     navigationItemMock: DashboardListItems;
-    onItemsChange: (values: DashboardListItems[]) => void;
+    setDashboardNavigationItems: (values: DashboardListItems[]) => void;
+    dashboardNavigationItems: DashboardListItems[];
+    onSelectAppChange: (value: AppProps) => void;
 }
 
 export function DashboardNavigationList({
     navigationItemsMock,
     navigationItemMock,
-    onItemsChange,
+    dashboardNavigationItems,
+    setDashboardNavigationItems,
+    onSelectAppChange,
 }: DashboardNavigationListProps) {
     const { itemIcon, itemTitle, itemName, itemSelected, items } = navigationItemMock;
 
@@ -40,7 +45,7 @@ export function DashboardNavigationList({
 
                     });
 
-                    onItemsChange(newItems);
+                    setDashboardNavigationItems(newItems);
                 }}
             >
                 <img
@@ -62,10 +67,12 @@ export function DashboardNavigationList({
             {itemSelected && items?.map(item => (
                 <DashboardNavigationListItem
                     key={item.name}
-                    image={item.image}
-                    name={item.name}
-                    version={item.version}
-                    status={item.status}
+                    items={items}
+                    item={item}
+                    listName={itemName}
+                    dashboardNavigationItems={dashboardNavigationItems}
+                    setDashboardNavigationItems={setDashboardNavigationItems}
+                    onSelectAppChange={onSelectAppChange}
                 />
             ))}
         </>

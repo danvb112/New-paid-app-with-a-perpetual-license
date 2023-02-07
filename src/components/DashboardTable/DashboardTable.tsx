@@ -15,6 +15,7 @@ export type AppProps = {
     updatedBy: string;
     rating: string;
     status: string;
+    selected: boolean;
 }
 interface DashboardTableProps {
     apps: AppProps[]
@@ -80,15 +81,7 @@ export function DashboardTable({ apps }: DashboardTableProps) {
             <ClayTable.Body>
                 {apps.map((app) => (
                     <DashboardTableRow
-                        image={app.image}
-                        name={app.name}
-                        rating={app.rating}
-                        status={app.status}
-                        type={app.type}
-                        updatedBy={app.updatedBy}
-                        updatedResponsible={app.updatedResponsible}
-                        updatedDate={app.updatedDate}
-                        version={app.version}
+                        app={app}
                         key={app.name}
                     />
                 ))}

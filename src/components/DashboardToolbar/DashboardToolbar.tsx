@@ -9,7 +9,7 @@ import './DashboardToolbar.scss';
 import { useState } from 'react';
 
 export function DashboardToolbar() {
-    const [active, setActive] = useState('Applications');
+    const [active, setActive] = useState('Dashboard');
 
     return (
         <div className='dashboard-toolbar-container'>

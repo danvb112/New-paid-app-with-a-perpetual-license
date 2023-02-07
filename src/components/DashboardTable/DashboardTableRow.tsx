@@ -9,19 +9,25 @@ import starEmpty from '../../assets/icons/star-empty.svg';
 import { AppProps } from './DashboardTable';
 import classNames from 'classnames';
 
-interface DashboardTableRowProps extends AppProps { }
+interface DashboardTableRowProps{
+    app: AppProps
+ }
 
 export function DashboardTableRow({
-    image,
-    name,
-    type,
-    version,
-    rating,
-    status,
-    updatedBy,
-    updatedDate,
-    updatedResponsible
+    app
 }: DashboardTableRowProps) {
+    const {
+        image,
+        name,
+        rating,
+        status,
+        type,
+        updatedBy,
+        updatedDate,
+        updatedResponsible,
+        version,
+    } = app
+
     return (
         <ClayTable.Row>
             <ClayTable.Cell>
@@ -74,6 +80,7 @@ export function DashboardTableRow({
                     <div>
                         {Array(5).fill(0).map((_, index) =>
                             <img
+                                key={index}
                                 className='dashboard-table-row-rating-star'
                                 src={index < Math.floor(Number(rating))
                                     ? starFill

@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@clayui/alert": "^3.85.0",
     "@clayui/card": "^3.85.0",
     "@clayui/css": "^3.85.0",
     "@clayui/form": "^3.85.0",

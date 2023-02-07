@@ -3,22 +3,70 @@ import classNames from 'classnames';
 import circleFill from '../../assets/icons/circle_fill.svg';
 
 import './DashboardNavigationListItem.scss';
+import { AppProps } from '../DashboardTable/DashboardTable';
+import { DashboardListItems } from './DashboardNavigation';
 
 interface DashboardNavigationListItem {
-    image: string;
-    name: string;
-    version: string;
-    status: string;
+    item: AppProps;
+    items: AppProps[]
+    listName: string;
+    onSelectAppChange: (value: AppProps) => void;
+    dashboardNavigationItems: DashboardListItems[];
+    setDashboardNavigationItems: (values: DashboardListItems[]) => void;
 }
 
 export function DashboardNavigationListItem({
-    image,
-    name,
-    version,
-    status,
+    item,
+    items,
+    listName,
+    setDashboardNavigationItems,
+    onSelectAppChange,
+    dashboardNavigationItems,
 }: DashboardNavigationListItem) {
+    const {
+        image,
+        name,
+        version,
+        status,
+        selected
+    } = item;
+
     return (
-        <div className='dashboard-navigation-body-list-item'>
+        <div 
+            className={classNames('dashboard-navigation-body-list-item', {
+                'dashboard-navigation-body-list-item-selected': selected
+            })}
+            onClick={() => {
+                const newItems = items.map(item => {
+                    if(item.name === name) {
+                        return {
+                            ...item,
+                            selected: !item.selected
+                        }
+                    }
+                    
+                    return {
+                        ...item,
+                        selected: false
+                    }
+                })
+
+                const newDashboardNavigationItems = dashboardNavigationItems.map(navigationItem => {
+                    if(navigationItem.itemName === listName) {
+                        return {
+                            ...navigationItem,
+                            items: newItems
+                        }
+                    }
+
+                    return navigationItem
+                })
+
+                setDashboardNavigationItems(newDashboardNavigationItems);
+
+                onSelectAppChange(item);
+            }}
+        >
             <div>
                 <img
                     className='dashboard-navigation-body-list-item-app-logo'
