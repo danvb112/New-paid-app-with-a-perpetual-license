@@ -14,6 +14,7 @@
     "@clayui/form": "^3.85.0",
     "@clayui/icon": "^3.56.0",
     "@clayui/link": "^3.85.0",
+    "@clayui/loading-indicator": "^3.60.0",
     "@clayui/management-toolbar": "^3.65.1",
     "@clayui/navigation-bar": "^3.85.0",
     "@clayui/table": "^3.56.0",
