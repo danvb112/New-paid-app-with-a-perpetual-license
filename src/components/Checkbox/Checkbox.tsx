@@ -12,9 +12,9 @@ interface CheckboxProps {
 
 export function Checkbox({
     checked,
-    onChange,
     description,
     label,
+    onChange,
     readOnly = false
 }: CheckboxProps) {
     return (
