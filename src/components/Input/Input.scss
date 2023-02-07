@@ -5,4 +5,9 @@
 .custom-input {
     background-color: #FFF;
     border-color: #B1B2B9;
+
+    &::placeholder {
+        opacity: 40%;
+      }
 }
+

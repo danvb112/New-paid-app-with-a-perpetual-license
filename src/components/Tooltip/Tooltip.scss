@@ -1,13 +1,24 @@
 .tooltip {
-    &-base-container {
+    &-base {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 28px;
         height: 28px;
         background-color: #E6EBF5;
         border-radius: 0.25rem;
         margin-bottom: 9px;
+
+        &-auto {
+            font-weight: 600;
+            padding-left: 8px;
+            padding-right: 8px;
+            width: auto;
+
+        }
+
+        &-container {
+            width: 28px;
+        }
     }
 
     &-container {
