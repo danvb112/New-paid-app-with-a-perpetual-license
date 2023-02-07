@@ -17,7 +17,7 @@ import './AppCreationFlow.scss';
 import { SetAppPrivacyPage } from '../SetAppPrivacyPage/SetAppPrivacyPage';
 
 type SetAppFlowListStateProps = {
-    checkedItem?: string;
+    checkedItems?: string[];
     selectedItem: string;
 }
 
@@ -27,9 +27,9 @@ export function AppCreationFlow() {
 
     console.log(appFlowListItems);
 
-    const setAppFlowListState = ({ checkedItem, selectedItem }: SetAppFlowListStateProps) => {
+    const setAppFlowListState = ({ checkedItems, selectedItem }: SetAppFlowListStateProps) => {
         const newAppFlowListItems = appFlowListItems.map(appItem => {
-            if (appItem.name === checkedItem) {
+            if (checkedItems?.includes(appItem.name)) {
                 return {
                     ...appItem,
                     checked: true,
@@ -70,7 +70,7 @@ export function AppCreationFlow() {
                     <CreateNewAppPage
                         onClickContinue={() => {
                             setAppFlowListState({
-                                checkedItem: "create",
+                                checkedItems: ["create"],
                                 selectedItem: "profile"
                             });
 
@@ -90,7 +90,7 @@ export function AppCreationFlow() {
                         }}
                         onClickContinue={() => {
                             setAppFlowListState({
-                                checkedItem: "build",
+                                checkedItems: ["create", "build"],
                                 selectedItem: "storefront"
                             });
 
@@ -110,7 +110,7 @@ export function AppCreationFlow() {
                         }}
                         onClickContinue={() => {
                             setAppFlowListState({
-                                checkedItem: "storefront",
+                                checkedItems: ["create", "build", "storefront"],
                                 selectedItem: "version"
                             });
 
@@ -123,7 +123,6 @@ export function AppCreationFlow() {
                     <ProvideVersionDetailsPage
                         onClickBack={() => {
                             setAppFlowListState({
-                                checkedItem: "version",
                                 selectedItem: "storefront"
                             });
 
@@ -131,7 +130,7 @@ export function AppCreationFlow() {
                         }}
                         onClickContinue={() => {
                             setAppFlowListState({
-                                checkedItem: "version",
+                                checkedItems: ["create", "build", "storefront", "version"],
                                 selectedItem: "pricing"
                             });
 
@@ -151,7 +150,7 @@ export function AppCreationFlow() {
                         }}
                         onClickContinue={() => {
                             setAppFlowListState({
-                                checkedItem: "pricing",
+                                checkedItems: ["create", "build", "storefront", "version", "pricing"],
                                 selectedItem: "licensing"
                             });
 
@@ -171,7 +170,7 @@ export function AppCreationFlow() {
                         }}
                         onClickContinue={() => {
                             setAppFlowListState({
-                                checkedItem: "licensing",
+                                checkedItems: ["create", "build", "storefront", "version", "pricing", "licensing"],
                                 selectedItem: "support"
                             });
 
@@ -191,7 +190,7 @@ export function AppCreationFlow() {
                         }}
                         onClickContinue={() => {
                             setAppFlowListState({
-                                checkedItem: "support",
+                                checkedItems: ["create", "build", "storefront", "version", "pricing", "licensing", "support"],
                                 selectedItem: "privacy"
                             });
 
@@ -211,7 +210,7 @@ export function AppCreationFlow() {
                         }}
                         onClickContinue={() => {
                             setAppFlowListState({
-                                checkedItem: "privacy",
+                                checkedItems: ["create", "build", "storefront", "version", "pricing", "licensing", "support", "privacy"],
                                 selectedItem: "submit"
                             });
 
@@ -221,7 +220,6 @@ export function AppCreationFlow() {
                 )}
             </div>
 
-            
             <Footer />
         </div>
     )
