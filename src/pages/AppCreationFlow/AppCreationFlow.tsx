@@ -12,6 +12,7 @@ import { ChoosePricingModelPage } from '../ChoosePricingModelPage/ChoosePricingM
 import { InformLicensingTermsPage } from '../InformLicensingTermsPage/InformLicensingTermsPage';
 import { ProvideVersionDetailsPage } from '../ProvideVersionDetailsPage/ProvideVersionDetailsPage';
 import {ProvideAppSupportAndHelpPage} from '../ProvideAppSupportAndHelpPage/ProvideAppSupportAndHelpPage';
+import {ReviewAndSubmitAppPage} from '../ReviewAndSubmitAppPage/ReviewAndSubmitAppPage';
 
 type SetAppFlowListStateProps = {
     checkedItem?: string;
@@ -189,10 +190,30 @@ export function AppCreationFlow() {
                         onClickContinue={() => {
                             setAppFlowListState({
                                 checkedItem: "support",
-                                selectedItem: "privacy"
+                                selectedItem: "submit"
                             });
 
-                            setCurrentFlow('privacy');
+                            setCurrentFlow('submit');
+                        }}
+                    />
+                )}
+
+                {currentFlow === 'submit' && (
+                    <ReviewAndSubmitAppPage
+                        onClickBack={() => {
+                            setAppFlowListState({
+                                selectedItem: "licensing"
+                            });
+
+                            setCurrentFlow('submit');
+                        }}
+                        onClickContinue={() => {
+                            setAppFlowListState({
+                                checkedItem: "submit",
+                                selectedItem: ""
+                            });
+
+                            setCurrentFlow('');
                         }}
                     />
                 )}
