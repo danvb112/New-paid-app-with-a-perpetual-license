@@ -219,27 +219,7 @@ export function AppCreationFlow() {
                                 selectedItem: "privacy"
                             });
 
-                            setCurrentFlow('submit');
-                        }}
-                    />
-                )}
-
-                {currentFlow === 'submit' && (
-                    <ReviewAndSubmitAppPage
-                        onClickBack={() => {
-                            setAppFlowListState({
-                                selectedItem: "licensing"
-                            });
-
-                            setCurrentFlow('submit');
-                        }}
-                        onClickContinue={() => {
-                            setAppFlowListState({
-                                checkedItem: "submit",
-                                selectedItem: ""
-                            });
-
-                            setCurrentFlow('');
+                            setCurrentFlow('privacy');
                         }}
                     />
                 )}
@@ -261,6 +241,27 @@ export function AppCreationFlow() {
                             });
 
                             setCurrentFlow('submit');
+                        }}
+                    />
+                )}
+
+                {currentFlow === 'submit' && (
+                    <ReviewAndSubmitAppPage
+                        onClickBack={() => {
+                            setAppFlowListState({
+                                checkedItems: ["create", "profile", "build", "storefront", "version", "pricing", "licensing", "support"],
+                                selectedItem: "privacy"
+                            });
+
+                            setCurrentFlow('privacy');
+                        }}
+                        onClickContinue={() => {
+                            setAppFlowListState({
+                                checkedItems: ["create", "profile", "build", "storefront", "version", "pricing", "licensing", "support", "privacy", "submit"],
+                                selectedItem: ""
+                            });
+
+                            setCurrentFlow('');
                         }}
                     />
                 )}
