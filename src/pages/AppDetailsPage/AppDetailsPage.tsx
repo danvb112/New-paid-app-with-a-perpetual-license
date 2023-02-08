@@ -46,13 +46,15 @@ export function AppDetailsPage({
                     setSelectedApp(undefined);
                 }}
             >
-                <img
-                    className='app-details-page-back-button-icon' 
-                    src={arrowLeft} 
-                    alt="arrow left" 
-                />
+                <div>
+                    <img
+                        className='app-details-page-back-button-icon' 
+                        src={arrowLeft} 
+                        alt="arrow left" 
+                    />
 
-                Back to Apps
+                    Back to Apps
+                </div>
             </button>
 
             <ClayAlert 
