@@ -16,14 +16,12 @@ import { AppProps } from '../../components/DashboardTable/DashboardTable';
 
 interface AppDetailsPageProps {
     dashboardNavigationItems: DashboardListItems[];
-    status: string
     selectedApp: AppProps;
     setSelectedApp: (value: AppProps | undefined) => void;
 }
 
 export function AppDetailsPage({
         dashboardNavigationItems,
-        status,
         selectedApp,
         setSelectedApp,
 }: AppDetailsPageProps) {
