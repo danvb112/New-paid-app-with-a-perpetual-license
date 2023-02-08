@@ -80,6 +80,25 @@
             gap: 1rem;
         }
 
+        &-dropdown {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            margin-left: 16px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            &-icon {
+                width: 16px;
+                height: 16px;
+            }
+
+            &:hover {
+                background: #edf3fe;
+            }
+        }
 
         &-text {
             font-family: 'Source Sans Pro', sans-serif;
@@ -90,6 +109,9 @@
 
         &-exit {
             color: #2B3A4B;
+            height: 32px;
+            padding: 0;
+
 
             &:hover {
                 background: #E2E2E4;
@@ -124,6 +146,7 @@
             font-size: 0.813rem;
             font-weight: 600;
             line-height: 1rem;
+            height: 32px;
 
             &:hover {
                 color: #FFFF;

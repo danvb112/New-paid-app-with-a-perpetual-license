@@ -59,6 +59,7 @@ export function AppCreationFlow() {
         <div className='app-creation-flow-container'>
             <NewAppToolBar
                 accountName='Acme Co.'
+                enableDropdown={currentFlow === 'submit'}
             />
 
             <div className='app-creation-flow-body'>
