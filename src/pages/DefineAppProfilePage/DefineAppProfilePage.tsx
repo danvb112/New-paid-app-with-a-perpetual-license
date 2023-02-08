@@ -71,6 +71,7 @@ export function DefineAppProfilePage({
             <div className="profile-page-body-container">
                 <Section label="App Info" tooltip="More Infor" tooltipText="More info">
                     <UploadLogo
+                        uploadedFile={uploadedFiles[0]}
                         onUpload={handleUpload}
                         onDeleteFile={handleDelete}
                     />
