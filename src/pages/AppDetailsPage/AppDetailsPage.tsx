@@ -112,7 +112,6 @@ export function AppDetailsPage({
                 </div>
             </div>
 
-
            <div>
                 <ClayNavigationBar
                     className='app-details-page-navigation-bar' 

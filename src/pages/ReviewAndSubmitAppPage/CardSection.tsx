@@ -21,6 +21,7 @@ interface CardSectionProps {
     build?: boolean;
     cardInfo?: { title: string; link: string; icon: string }[];
     cardTitle?: string;
+    enableEdit?: boolean;
     files?: File[];
     cardDescription?: string;
     paragraph?: string;
@@ -30,10 +31,11 @@ interface CardSectionProps {
     cardView?: boolean;
     cardLink?: boolean;
     cardTags?: { icon: string; title: string; tags: string[] }[];
-    sectionName: string;
+    sectionName?: string;
     storefront?: boolean;
     tags?: string[];
     version?: string;
+    localized?: boolean;
   }
   
 export function CardSection({
@@ -41,6 +43,7 @@ export function CardSection({
     cardInfo,
     cardTitle,
     cardDescription,
+    enableEdit = true,
     files,
     paragraph,
     description,
@@ -53,6 +56,7 @@ export function CardSection({
     storefront,
     tags,
     version,
+    localized,
   }: CardSectionProps) {
     return (
       <div className="card-section-body-section">
@@ -62,21 +66,27 @@ export function CardSection({
           </span>
   
           <div className="card-section-body-section-header-actions">
-            <div className="field-base-localized-field">
-              <ClayButton displayType={null}>
-                {"English (US)"}
-                <img className="arrow-down-icon" src={arrowDown} />
-              </ClayButton>
-  
-              <>
-                &nbsp;
-                <Tooltip tooltip={"choose a language"} />
-              </>
-            </div>
-  
-            <ClayButton className="edit-button" displayType={null}>
-              {"Edit"}
-            </ClayButton>
+            {localized && (
+                <div className="field-base-localized-field">
+
+                <ClayButton displayType={null}>
+                    {"English (US)"}
+                    <img className="arrow-down-icon" src={arrowDown} />
+                </ClayButton>
+    
+                <>
+                    &nbsp;
+                    <Tooltip tooltip={"choose a language"} />
+                </>
+                </div>    
+            )}
+
+
+            {enableEdit && (
+                <ClayButton className="edit-button" displayType={null}>
+                {"Edit"}
+                </ClayButton>
+            )}
           </div>
         </div>
   

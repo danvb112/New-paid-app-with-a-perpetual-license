@@ -14,11 +14,13 @@ import { Checkbox } from "../../components/Checkbox/Checkbox";
 import { CardSection } from "./CardSection";
 
 interface ReviewAndSubmitAppPageProps {
+  enableEdit: boolean;
   onClickBack: () => void;
   onClickContinue: () => void;
 }
 
 export function ReviewAndSubmitAppPage({
+  enableEdit,
   onClickBack,
   onClickContinue,
 }: ReviewAndSubmitAppPageProps) {
@@ -56,82 +58,38 @@ export function ReviewAndSubmitAppPage({
 
           <div className="review-and-submit-app-page-card-body">
             <CardSection
+              localized
               paragraph="Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id dolor id nibh ultricies vehicula ut id elit. Curabitur blandit tempus porttitor."
               sectionName="Description"
             />
 
             {initialReviewAndSubmitAppPageItems.map((item) => {
-              if (item.section === "Categories") {
-                return (
-                  <CardSection sectionName="Categories" tags={item.tags} />
-                );
-              } else if (item.section === "Tags") {
-                return <CardSection sectionName="Tags" tags={item.tags} />;
-              } else if (item.section === "Build") {
-                return (
-                  <CardSection
-                    build
-                    sectionName="Build"
-                    title={item.fileName}
-                  />
-                );
-              } else if (item.section === "Pricing") {
-                return (
-                  <CardSection
-                    icon={item.icon}
-                    cardView
-                    sectionName="Pricing"
-                    cardTitle={item.title}
-                    cardDescription={item.description}
-                  />
-                );
-              } else if (item.section === "Licensing") {
-                return (
-                  <CardSection
-                    icon={item.icon}
-                    cardView
-                    sectionName="Licensings"
-                    cardTitle={item.title}
-                    cardDescription={item.description}
-                  />
-                );
-              } else if (item.section === "Storefront") {
-                return (
-                  <>
-                    <CardSection
-                      storefront
-                      files={item.files}
-                      sectionName="Storefront"
-                    />
-                    
-                  </>
-                );
-              } else if (item.section === "Version") {
-                return (
-                  <CardSection
-                    version={item.version}
-                    description={item.description}
-                    title={item.title}
-                    sectionName="Version"
-                  />
-                );
-              } else if (item.section === "Support & Help") {
-                return (
-                  <CardSection
-                    cardLink
-                    cardInfo={item.cardInfos}
-                    sectionName="Support & Help"
-                  />
-                );
-              } else if (item.section === "User Data Collection") {
-                return (
-                  <CardSection
-                    cardLink
-                    cardTags={item.cardTags}
-                    sectionName="User Data Collection"
-                  />
-                );
-              }
+              return (
+                <CardSection 
+                  build={item.section === "Build"}
+                  cardDescription={item.description}
+                  cardInfo={item.cardInfos}
+                  cardLink={
+                    item.section === "Support & Help" ||
+                    item.section === "User Data Collection"
+                  }
+                  cardTags={item.cardTags}
+                  cardTitle={item.title}
+                  cardView={
+                    item.section === "Pricing" ||
+                    item.section === "Licensing" 
+                  }
+                  description={item.description}
+                  enableEdit={enableEdit}
+                  files={item.files}
+                  icon={item.icon}
+                  sectionName={item.section}
+                  storefront={item.section === "Storefront"}
+                  tags={item.tags}
+                  title={item.section === "Build" ? item.fileName : item.title}
+                  version={item.version}
+                />
+              )
             })}
           </div>
         </div>

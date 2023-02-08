@@ -247,6 +247,7 @@ export function AppCreationFlow() {
 
                 {currentFlow === 'submit' && (
                     <ReviewAndSubmitAppPage
+                        enableEdit
                         onClickBack={() => {
                             setAppFlowListState({
                                 checkedItems: ["create", "profile", "build", "storefront", "version", "pricing", "licensing", "support"],
