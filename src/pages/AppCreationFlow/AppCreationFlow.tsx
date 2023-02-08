@@ -12,6 +12,7 @@ import { ChoosePricingModelPage } from '../ChoosePricingModelPage/ChoosePricingM
 import { InformLicensingTermsPage } from '../InformLicensingTermsPage/InformLicensingTermsPage';
 import { ProvideVersionDetailsPage } from '../ProvideVersionDetailsPage/ProvideVersionDetailsPage';
 import {ProvideAppSupportAndHelpPage} from '../ProvideAppSupportAndHelpPage/ProvideAppSupportAndHelpPage';
+import {ReviewAndSubmitAppPage} from '../ReviewAndSubmitAppPage/ReviewAndSubmitAppPage';
 
 import './AppCreationFlow.scss';
 import { SetAppPrivacyPage } from '../SetAppPrivacyPage/SetAppPrivacyPage';
@@ -218,7 +219,27 @@ export function AppCreationFlow() {
                                 selectedItem: "privacy"
                             });
 
-                            setCurrentFlow('privacy');
+                            setCurrentFlow('submit');
+                        }}
+                    />
+                )}
+
+                {currentFlow === 'submit' && (
+                    <ReviewAndSubmitAppPage
+                        onClickBack={() => {
+                            setAppFlowListState({
+                                selectedItem: "licensing"
+                            });
+
+                            setCurrentFlow('submit');
+                        }}
+                        onClickContinue={() => {
+                            setAppFlowListState({
+                                checkedItem: "submit",
+                                selectedItem: ""
+                            });
+
+                            setCurrentFlow('');
                         }}
                     />
                 )}
