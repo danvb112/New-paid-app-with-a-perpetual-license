@@ -6,6 +6,7 @@ import './Section.scss';
 interface SectionProps {
     className?: string;
     description?: string;
+    disabled?: boolean;
     label?: string;
     required?: boolean;
     tooltip?: string;
@@ -16,6 +17,7 @@ interface SectionProps {
 export function Section({
     className,
     description,
+    disabled = false,
     label,
     required = false,
     tooltip,
@@ -31,7 +33,10 @@ export function Section({
             tooltip={tooltip}
             tooltipText={tooltipText}
         >
-            <div className='section-divider'></div>
+            {!disabled && (
+                <div className='section-divider'></div>
+            )}
+
             {children}
         </FieldBase>
     );

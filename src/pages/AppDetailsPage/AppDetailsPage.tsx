@@ -13,6 +13,7 @@ import './AppDetailsPage.scss';
 import { useState } from 'react';
 import { DashboardListItems } from '../../components/DashboardNavigation/DashboardNavigation';
 import { AppProps } from '../../components/DashboardTable/DashboardTable';
+import { ReviewAndSubmitAppPage } from '../ReviewAndSubmitAppPage/ReviewAndSubmitAppPage';
 
 interface AppDetailsPageProps {
     dashboardNavigationItems: DashboardListItems[];
@@ -21,14 +22,14 @@ interface AppDetailsPageProps {
 }
 
 export function AppDetailsPage({
-        dashboardNavigationItems,
-        selectedApp,
-        setSelectedApp,
+    dashboardNavigationItems,
+    selectedApp,
+    setSelectedApp,
 }: AppDetailsPageProps) {
     const [navigationBarActive, setNavigationBarActive] = useState('App Details');
 
     return (
-        <div>
+        <div className='app-details-page-container'>
             <button
                 className='app-details-page-back-button'
                 onClick={() => {
@@ -154,6 +155,13 @@ export function AppDetailsPage({
                         </ClayButton>
                     </ClayNavigationBar.Item>              
                 </ClayNavigationBar>
+
+
+                <ReviewAndSubmitAppPage
+                    readonly
+                    onClickBack={() => {}}
+                    onClickContinue={() => {}}
+                />
            </div>
         </div>
     );
