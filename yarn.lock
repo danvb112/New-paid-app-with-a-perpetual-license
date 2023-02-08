@@ -216,6 +216,15 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
+"@clayui/alert@^3.85.0":
+  version "3.85.0"
+  resolved "https://registry.yarnpkg.com/@clayui/alert/-/alert-3.85.0.tgz#f1556e22cbbaa36048aff1130738bea24959d6fc"
+  integrity sha512-2pPfBU7fbQY5EK29iNxyno9jXiREnc0wUkrzmK58hbMzOltNF0C6pinXkqjgaLVtOMPL57qNG2bSfFQoB+dKmQ==
+  dependencies:
+    "@clayui/icon" "^3.56.0"
+    "@clayui/layout" "^3.65.1"
+    classnames "^2.2.6"
+
 "@clayui/button@^3.83.0":
   version "3.83.0"
   resolved "https://registry.yarnpkg.com/@clayui/button/-/button-3.83.0.tgz#c783cbfc7902fbd08b0c27749a0ae226a370101a"

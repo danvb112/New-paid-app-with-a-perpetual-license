@@ -6,6 +6,16 @@
     padding: 1rem;
     cursor: pointer;
 
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: #E6EDFB;
+    }
+
+    &-selected {
+        background-color: #E6EDFB;
+    }
+
     &-app-logo {
         width: 1.5rem;
         height: 1.5rem;

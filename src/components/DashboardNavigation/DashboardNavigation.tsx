@@ -22,6 +22,8 @@ interface DashboardNavigationProps {
     accountTitle: string;
     accountAppsNumber: string;
     dashboardNavigationItems: DashboardListItems[]
+    onSelectAppChange: (value: AppProps) => void;
+    setDashboardNavigationItems: (values: DashboardListItems[]) => void;
 }
 
 export function DashboardNavigation({
@@ -29,9 +31,10 @@ export function DashboardNavigation({
     accountIcon,
     accountTitle,
     dashboardNavigationItems,
+    setDashboardNavigationItems,
+    onSelectAppChange,
 }: DashboardNavigationProps) {
     const [expandList, setExpandList] = useState(true);
-    const [navigationItems, setNavigationItems] = useState<DashboardListItems[]>(dashboardNavigationItems);
 
     return (
         <div className='dashboard-navigation-container'>
@@ -61,12 +64,14 @@ export function DashboardNavigation({
 
             {expandList && (
                 <div className='dashboard-navigation-body'>
-                    {navigationItems.map(navigationMock => (
+                    {dashboardNavigationItems.map(navigationMock => (
                         <DashboardNavigationList
+                            onSelectAppChange={onSelectAppChange}
                             key={navigationMock.itemName}
                             navigationItemMock={navigationMock}
-                            navigationItemsMock={navigationItems}
-                            onItemsChange={setNavigationItems}
+                            navigationItemsMock={dashboardNavigationItems}
+                            dashboardNavigationItems={dashboardNavigationItems}
+                            setDashboardNavigationItems={setDashboardNavigationItems}
                         />
                     ))}
                 </div>
