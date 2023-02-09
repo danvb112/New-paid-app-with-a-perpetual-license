@@ -18,8 +18,6 @@ export function DashboardPage() {
     const [selectedApp, setSelectedApp] = useState<AppProps>();
     const [dashboardNavigationItems, setDashboardNavigationItems] = useState(initialDashboardNavigationItems);
 
-    console.log(selectedApp);
-
     return (
         <div className="dashboard-page-container">
             <div>

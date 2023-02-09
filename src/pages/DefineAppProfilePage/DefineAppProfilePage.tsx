@@ -9,10 +9,48 @@ import { uniqueId } from "lodash";
 import { filesize } from "filesize";
 
 import './DefineAppProfilePage.scss'
+import { MultiSelect } from "../../components/MultiSelect/MultiSelect";
 interface DefineAppProfilePageProps {
     onClickBack: () => void,
     onClickContinue: () => void
 }
+
+const CategoriesItems = [
+    {
+      label: "Experience Management",
+      value: "Experience Management",
+      checked: false
+    },
+    {
+      label: "Collaboration and Knowledge Sharing",
+      value: "Collaboration and Knowledge Sharing",
+      checked: false
+    },
+];
+
+const TagsItems = [
+    {
+      label: "Analytics",
+      value: "Analytics",
+      checked: false
+    },
+    {
+      label: "Database",
+      value: "Database",
+      checked: false
+    },
+    {
+      label: "Data Visualization",
+      value: "Data Visualization",
+      checked: false
+    },
+    {
+      label: "Performance Management",
+      value: "Performance Management",
+      checked: false
+    },
+  ]
+
 export function DefineAppProfilePage({
     onClickBack,
     onClickContinue
@@ -60,6 +98,7 @@ export function DefineAppProfilePage({
             uploadedFiles.filter(uploadedFile => uploadedFile.id !== id)
         );
     }
+
     return (
         <div className="profile-page-container">
             <Header
@@ -94,20 +133,22 @@ export function DefineAppProfilePage({
                             tooltip="Description"
                         />
 
-                        <Input
-                            placeholder="Select categories"
-                            component="input"
+                        <MultiSelect 
                             label="Categories"
-                            required 
+                            required
                             tooltip="Categories"
+                            items={CategoriesItems}
+                            onChange={() => {}}
+                            placeholder="Select categories"
                         />
 
-                        <Input 
-                            placeholder="Select tags" 
-                            component="input" 
-                            label="Tags" 
-                            required 
+                        <MultiSelect 
+                            label="Tags"
+                            required
                             tooltip="Tags"
+                            items={TagsItems}
+                            onChange={() => {}}
+                            placeholder="Select tags"
                         />
                     </div>
                 </Section>
