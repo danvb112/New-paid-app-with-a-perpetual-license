@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@clayui/alert": "^3.85.0",
-    "@clayui/autocomplete": "^3.87.0",
     "@clayui/card": "^3.85.0",
     "@clayui/css": "^3.85.0",
     "@clayui/drop-down": "^3.87.0",
@@ -19,7 +18,6 @@
     "@clayui/link": "^3.85.0",
     "@clayui/loading-indicator": "^3.60.0",
     "@clayui/management-toolbar": "^3.65.1",
-    "@clayui/multi-select": "^3.87.0",
     "@clayui/navigation-bar": "^3.85.0",
     "@clayui/table": "^3.56.0",
     "@clayui/tooltip": "^3.85.0",

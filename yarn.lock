@@ -232,18 +232,6 @@
     "@clayui/layout" "^3.65.1"
     classnames "^2.2.6"
 
-"@clayui/autocomplete@^3.87.0":
-  version "3.87.0"
-  resolved "https://registry.yarnpkg.com/@clayui/autocomplete/-/autocomplete-3.87.0.tgz#17bd0d4ea4844cceaad387ff65d81aa824b4a454"
-  integrity sha512-idHqCrg4PVVqhOaihK8MVoyUhuj08K062Ls2YZHdxPWGzcTnvgM+E9Kxi4S670XtFd3ywWDIrUwhTLzaoZFrsg==
-  dependencies:
-    "@clayui/core" "^3.87.0"
-    "@clayui/drop-down" "^3.87.0"
-    "@clayui/form" "^3.87.0"
-    "@clayui/loading-indicator" "^3.60.0"
-    "@clayui/shared" "^3.87.0"
-    fuzzy "^0.1.3"
-
 "@clayui/button@^3.83.0":
   version "3.83.0"
   resolved "https://registry.yarnpkg.com/@clayui/button/-/button-3.83.0.tgz#c783cbfc7902fbd08b0c27749a0ae226a370101a"
@@ -430,22 +418,6 @@
     aria-hidden "^1.2.2"
     classnames "^2.2.6"
     warning "^4.0.3"
-
-"@clayui/multi-select@^3.87.0":
-  version "3.87.0"
-  resolved "https://registry.yarnpkg.com/@clayui/multi-select/-/multi-select-3.87.0.tgz#1e3d29ef20f927eaddfa97571de0c30031d24138"
-  integrity sha512-KlMP/xwIwVl+7hPnUs7JRTZjHtx75Ivnfh2uk7wAQE57XmnKAMXzmq7FTCajbuD46tnB96vS9XVnw94tiVPs/Q==
-  dependencies:
-    "@clayui/autocomplete" "^3.87.0"
-    "@clayui/button" "^3.83.0"
-    "@clayui/drop-down" "^3.87.0"
-    "@clayui/form" "^3.87.0"
-    "@clayui/icon" "^3.56.0"
-    "@clayui/label" "^3.85.0"
-    "@clayui/loading-indicator" "^3.60.0"
-    "@clayui/shared" "^3.87.0"
-    classnames "^2.2.6"
-    fuzzy "^0.1.3"
 
 "@clayui/navigation-bar@^3.85.0":
   version "3.85.0"
@@ -1445,11 +1417,6 @@ function-bind@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
   integrity sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==
-
-fuzzy@^0.1.3:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/fuzzy/-/fuzzy-0.1.3.tgz#4c76ec2ff0ac1a36a9dccf9a00df8623078d4ed8"
-  integrity sha512-/gZffu4ykarLrCiP3Ygsa86UAo1E5vEVlvTrpkKywXSbP9Xhln3oSp9QSV57gEq3JFFpGJ4GZ+5zdEp3FcUh4w==
 
 gauge@^4.0.3:
   version "4.0.4"
