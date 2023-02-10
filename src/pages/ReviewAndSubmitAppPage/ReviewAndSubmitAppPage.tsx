@@ -2,9 +2,7 @@ import { Header } from "../../components/Header/Header";
 import { NewAppPageFooterButtons } from "../../components/NewAppPageFooterButtons/NewAppPageFooterButtons";
 import { Section } from "../../components/Section/Section";
 
-import {
-  initialReviewAndSubmitAppPageItems,
-} from "./ReviewAndSubmitAppPageUtil";
+import { initialReviewAndSubmitAppPageItems } from "./ReviewAndSubmitAppPageUtil";
 
 import "./ReviewAndSubmitAppPage.scss";
 
@@ -37,6 +35,7 @@ export function ReviewAndSubmitAppPage({
       <Section
         disabled={readonly}
         label={!readonly ? "App Submission" : ""}
+        required
         tooltip={!readonly ? "More info" : ""}
         tooltipText={!readonly ? "More Info" : ""}
       >
@@ -65,35 +64,34 @@ export function ReviewAndSubmitAppPage({
               localized
               enableEdit={!readonly}
               paragraph="Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id dolor id nibh ultricies vehicula ut id elit. Curabitur blandit tempus porttitor."
+              required
               sectionName="Description"
             />
 
             {initialReviewAndSubmitAppPageItems.map((item) => {
               return (
-                <CardSection 
+                <CardSection
                   build={item.section === "Build"}
                   cardDescription={item.description}
                   cardInfo={item.cardInfos}
-                  cardLink={
-                    item.section === "Support & Help"
-                  }
+                  cardLink={item.section === "Support & Help"}
                   cardTags={item.cardTags}
                   cardTitle={item.title}
                   cardView={
-                    item.section === "Pricing" ||
-                    item.section === "Licensing" 
+                    item.section === "Pricing" || item.section === "Licensing"
                   }
                   description={item.description}
                   enableEdit={!readonly}
                   files={item.files}
                   icon={item.icon}
+                  required
                   sectionName={item.section}
                   storefront={item.section === "Storefront"}
                   tags={item.tags}
                   title={item.section === "Build" ? item.fileName : item.title}
                   version={item.version}
                 />
-              )
+              );
             })}
           </div>
         </div>
@@ -101,19 +99,19 @@ export function ReviewAndSubmitAppPage({
 
       {!readonly && (
         <div className="review-and-submit-app-page-agreement">
-          <Checkbox checked={false} onChange={() => {}}></Checkbox>
+          <Checkbox checked={false} onChange={() => { }}></Checkbox>
           <span>
             <span className="review-and-submit-app-page-agreement-highlight">
               {"Attention: this cannot be undone. "}
             </span>
             I am aware I cannot edit any data or information regarding this app
-            submission until Liferay completes its review process and I agree with
-            the Liferay Marketplace <a href="#">terms</a> and{" "}
+            submission until Liferay completes its review process and I agree
+            with the Liferay Marketplace <a href="#">terms</a> and{" "}
             <a href="#">privacy</a>
           </span>
         </div>
       )}
-      
+
       {!readonly && (
         <NewAppPageFooterButtons
           showBackButton={true}

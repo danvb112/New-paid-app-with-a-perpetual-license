@@ -22,7 +22,7 @@ import asteriskIcon from "../assets/icons/asterisk.svg";
 import "./FieldBase.scss";
 import { Tooltip } from "./Tooltip/Tooltip";
 
-function RequiredMask() {
+export function RequiredMask() {
 	return (
 		<>
 			<span className="field-base-required-asterisk">
