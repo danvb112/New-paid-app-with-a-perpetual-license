@@ -3,6 +3,7 @@ import { CardLink } from "../../components/Card/CardLink";
 import { CardTags } from "../../components/Card/CardTags";
 
 import { Tag } from "../../components/Tag/Tag";
+import {RequiredMask} from "../../components/FieldBase";
 
 import ClayButton from "@clayui/button";
 import { Tooltip } from "../../components/Tooltip/Tooltip";
@@ -31,6 +32,7 @@ interface CardSectionProps {
     cardView?: boolean;
     cardLink?: boolean;
     cardTags?: { icon: string; title: string; tags: string[] }[];
+    required?: boolean;
     sectionName?: string;
     storefront?: boolean;
     tags?: string[];
@@ -52,6 +54,7 @@ export function CardSection({
     cardView,
     cardLink,
     cardTags,
+    required,
     sectionName,
     storefront,
     tags,
@@ -63,6 +66,7 @@ export function CardSection({
         <div className="card-section-body-section-header">
           <span className="card-section-body-section-header-title">
             {sectionName}
+            {required && <RequiredMask />}
           </span>
   
           <div className="card-section-body-section-header-actions">
