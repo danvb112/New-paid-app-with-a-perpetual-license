@@ -131,39 +131,4 @@ export const initialReviewAndSubmitAppPageItems: ReviewAndSubmitAppPageUtilProps
       ],
       section: "Support & Help",
     },
-    {
-      cardTags: [
-        {
-          icon: contactIcon,
-          title: "Contact info",
-          tags: ["Name", "Email address", "Phone number", "Physical address"],
-        },
-        {
-          icon: financialIcon,
-          title: "Financial info",
-          tags: ["Payment info"],
-        },
-        {
-          icon: browsingHistoryIcon,
-          title: "Browsing history",
-          tags: ["Search history"],
-        },
-        {
-          icon: identifiersIcon,
-          title: "Identifiers",
-          tags: ["User ID", "Device ID"],
-        },
-        {
-          icon: userDataIcon,
-          title: "User data",
-          tags: ["Product Interaction"],
-        },
-        {
-          icon: diagnosticsIcon,
-          title: "Diagnostics",
-          tags: ["Crash data", "Performance dta"],
-        },
-      ],
-      section: "User Data Collection",
-    },
   ];

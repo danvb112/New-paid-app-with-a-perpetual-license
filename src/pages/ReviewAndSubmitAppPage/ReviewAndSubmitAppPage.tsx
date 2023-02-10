@@ -75,8 +75,7 @@ export function ReviewAndSubmitAppPage({
                   cardDescription={item.description}
                   cardInfo={item.cardInfos}
                   cardLink={
-                    item.section === "Support & Help" ||
-                    item.section === "User Data Collection"
+                    item.section === "Support & Help"
                   }
                   cardTags={item.cardTags}
                   cardTitle={item.title}
