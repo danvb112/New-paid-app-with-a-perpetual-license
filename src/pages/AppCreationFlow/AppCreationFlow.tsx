@@ -10,6 +10,7 @@ import { ProvideAppBuildPage } from "../ProvideAppBuildPage/ProvideAppBuildPage"
 import { CustomizeAppStorefrontPage } from "../StorefrontPage/CustomizeAppStorefrontPage";
 import { ChoosePricingModelPage } from "../ChoosePricingModelPage/ChoosePricingModelPage";
 import { InformLicensingTermsPage } from "../InformLicensingTermsPage/InformLicensingTermsPage";
+import { InformLicensingTermsPricePage } from "../InformLicensingTermsPage/InformLicensingTermsPricePage";
 import { ProvideVersionDetailsPage } from "../ProvideVersionDetailsPage/ProvideVersionDetailsPage";
 import { ProvideAppSupportAndHelpPage } from "../ProvideAppSupportAndHelpPage/ProvideAppSupportAndHelpPage";
 import { ReviewAndSubmitAppPage } from "../ReviewAndSubmitAppPage/ReviewAndSubmitAppPage";
@@ -223,6 +224,41 @@ export function AppCreationFlow() {
                   "storefront",
                   "version",
                   "pricing",
+                ],
+                selectedItem: "licensing",
+              });
+
+              setCurrentFlow("licensingPrice");
+            }}
+          />
+        )}
+
+        {currentFlow === "licensingPrice" && (
+          <InformLicensingTermsPricePage
+            onClickBack={() => {
+              setAppFlowListState({
+                checkedItems: [
+                  "create",
+                  "profile",
+                  "build",
+                  "storefront",
+                  "version",
+                  "pricing",
+                ],
+                selectedItem: "licensing",
+              });
+
+              setCurrentFlow("licensing");
+            }}
+            onClickContinue={() => {
+              setAppFlowListState({
+                checkedItems: [
+                  "create",
+                  "profile",
+                  "build",
+                  "storefront",
+                  "version",
+                  "pricing",
                   "licensing",
                 ],
                 selectedItem: "support",
@@ -248,7 +284,7 @@ export function AppCreationFlow() {
                 selectedItem: "licensing",
               });
 
-              setCurrentFlow("licensing");
+              setCurrentFlow("licensingPrice");
             }}
             onClickContinue={() => {
               setAppFlowListState({
