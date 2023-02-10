@@ -26,17 +26,15 @@
     }
 
     &-continue {
-        background: #0053F0;
+        background: #0B5FFF;
         border: none;
         border-radius: 0.5rem;
         color: #FFFFFF;
         height: 2.5rem;
-        width: 5.938rem;
+        width: 113px;
 
         &:hover {
-            background: #FFFFFF;
-            border: 1.5px solid #0053F0;
-            color: #0053F0;
+            background: #0053F0;
         }
     }
 }
