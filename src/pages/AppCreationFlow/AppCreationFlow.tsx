@@ -11,11 +11,10 @@ import { CustomizeAppStorefrontPage } from '../StorefrontPage/CustomizeAppStoref
 import { ChoosePricingModelPage } from '../ChoosePricingModelPage/ChoosePricingModelPage';
 import { InformLicensingTermsPage } from '../InformLicensingTermsPage/InformLicensingTermsPage';
 import { ProvideVersionDetailsPage } from '../ProvideVersionDetailsPage/ProvideVersionDetailsPage';
-import {ProvideAppSupportAndHelpPage} from '../ProvideAppSupportAndHelpPage/ProvideAppSupportAndHelpPage';
-import {ReviewAndSubmitAppPage} from '../ReviewAndSubmitAppPage/ReviewAndSubmitAppPage';
+import { ProvideAppSupportAndHelpPage } from '../ProvideAppSupportAndHelpPage/ProvideAppSupportAndHelpPage';
+import { ReviewAndSubmitAppPage } from '../ReviewAndSubmitAppPage/ReviewAndSubmitAppPage';
 
 import './AppCreationFlow.scss';
-import { SetAppPrivacyPage } from '../SetAppPrivacyPage/SetAppPrivacyPage';
 import { DefineAppProfilePage } from '../DefineAppProfilePage/DefineAppProfilePage';
 
 type SetAppFlowListStateProps = {
@@ -90,7 +89,7 @@ export function AppCreationFlow() {
                         }}
                         onClickContinue={() => {
                             setAppFlowListState({
-                                checkedItems: ["create","profile"],
+                                checkedItems: ["create", "profile"],
                                 selectedItem: "build"
                             });
 
@@ -205,7 +204,7 @@ export function AppCreationFlow() {
                 )}
 
                 {currentFlow === 'support' && (
-                    <ProvideAppSupportAndHelpPage 
+                    <ProvideAppSupportAndHelpPage
                         onClickBack={() => {
                             setAppFlowListState({
                                 checkedItems: ["create", "profile", "build", "storefront", "version", "pricing"],
@@ -217,27 +216,6 @@ export function AppCreationFlow() {
                         onClickContinue={() => {
                             setAppFlowListState({
                                 checkedItems: ["create", "profile", "build", "storefront", "version", "pricing", "licensing", "support"],
-                                selectedItem: "privacy"
-                            });
-
-                            setCurrentFlow('privacy');
-                        }}
-                    />
-                )}
-
-                {currentFlow === 'privacy' && (
-                    <SetAppPrivacyPage 
-                        onClickBack={() => {
-                            setAppFlowListState({
-                                checkedItems: ["create", "profile", "build", "storefront", "version", "pricing", "licensing"],
-                                selectedItem: "support"
-                            });
-
-                            setCurrentFlow('support');
-                        }}
-                        onClickContinue={() => {
-                            setAppFlowListState({
-                                checkedItems: ["create", "profile", "build", "storefront", "version", "pricing", "licensing", "support", "privacy"],
                                 selectedItem: "submit"
                             });
 
@@ -251,14 +229,14 @@ export function AppCreationFlow() {
                         onClickBack={() => {
                             setAppFlowListState({
                                 checkedItems: ["create", "profile", "build", "storefront", "version", "pricing", "licensing", "support"],
-                                selectedItem: "privacy"
+                                selectedItem: "support"
                             });
 
-                            setCurrentFlow('privacy');
+                            setCurrentFlow('support');
                         }}
                         onClickContinue={() => {
                             setAppFlowListState({
-                                checkedItems: ["create", "profile", "build", "storefront", "version", "pricing", "licensing", "support", "privacy", "submit"],
+                                checkedItems: ["create", "profile", "build", "storefront", "version", "pricing", "licensing", "support", "submit"],
                                 selectedItem: ""
                             });
 
