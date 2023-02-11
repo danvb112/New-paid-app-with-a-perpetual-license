@@ -9,6 +9,7 @@ import "./ReviewAndSubmitAppPage.scss";
 import aCoLibraries from "../../assets/images/a&co-libraries.svg";
 import { Checkbox } from "../../components/Checkbox/Checkbox";
 import { CardSection } from "./CardSection";
+import { useState } from "react";
 
 interface ReviewAndSubmitAppPageProps {
   onClickBack: () => void;
@@ -21,6 +22,8 @@ export function ReviewAndSubmitAppPage({
   onClickBack,
   onClickContinue,
 }: ReviewAndSubmitAppPageProps) {
+  const [checked, setChecked] = useState(false);
+
   return (
     <div className="review-and-submit-app-page-container">
       {!readonly && (
@@ -99,7 +102,12 @@ export function ReviewAndSubmitAppPage({
 
       {!readonly && (
         <div className="review-and-submit-app-page-agreement">
-          <Checkbox checked={false} onChange={() => { }}></Checkbox>
+          <Checkbox
+            checked={checked}
+            onChange={() => {
+              setChecked(!checked);
+            }}
+          ></Checkbox>
           <span>
             <span className="review-and-submit-app-page-agreement-highlight">
               {"Attention: this cannot be undone. "}
@@ -114,10 +122,11 @@ export function ReviewAndSubmitAppPage({
 
       {!readonly && (
         <NewAppPageFooterButtons
+          continueButtonText="Submit App"
+          disableContinueButton={!checked}
           showBackButton={true}
           onClickBack={() => onClickBack()}
           onClickContinue={() => onClickContinue()}
-          continueButtonText="Submit App"
         />
       )}
     </div>
