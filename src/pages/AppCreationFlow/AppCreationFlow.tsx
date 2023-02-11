@@ -16,7 +16,6 @@ import { ProvideAppSupportAndHelpPage } from "../ProvideAppSupportAndHelpPage/Pr
 import { ReviewAndSubmitAppPage } from "../ReviewAndSubmitAppPage/ReviewAndSubmitAppPage";
 
 import "./AppCreationFlow.scss";
-import { SetAppPrivacyPage } from "../SetAppPrivacyPage/SetAppPrivacyPage";
 import { DefineAppProfilePage } from "../DefineAppProfilePage/DefineAppProfilePage";
 
 type SetAppFlowListStateProps = {
@@ -298,45 +297,6 @@ export function AppCreationFlow() {
                   "licensing",
                   "support",
                 ],
-                selectedItem: "privacy",
-              });
-
-              setCurrentFlow("privacy");
-            }}
-          />
-        )}
-
-        {currentFlow === "privacy" && (
-          <SetAppPrivacyPage
-            onClickBack={() => {
-              setAppFlowListState({
-                checkedItems: [
-                  "create",
-                  "profile",
-                  "build",
-                  "storefront",
-                  "version",
-                  "pricing",
-                  "licensing",
-                ],
-                selectedItem: "support",
-              });
-
-              setCurrentFlow("support");
-            }}
-            onClickContinue={() => {
-              setAppFlowListState({
-                checkedItems: [
-                  "create",
-                  "profile",
-                  "build",
-                  "storefront",
-                  "version",
-                  "pricing",
-                  "licensing",
-                  "support",
-                  "privacy",
-                ],
                 selectedItem: "submit",
               });
 
@@ -359,10 +319,10 @@ export function AppCreationFlow() {
                   "licensing",
                   "support",
                 ],
-                selectedItem: "privacy",
+                selectedItem: "licensing",
               });
 
-              setCurrentFlow("privacy");
+              setCurrentFlow("licensingPrice");
             }}
             onClickContinue={() => {
               setAppFlowListState({
@@ -375,7 +335,6 @@ export function AppCreationFlow() {
                   "pricing",
                   "licensing",
                   "support",
-                  "privacy",
                   "submit",
                 ],
                 selectedItem: "",

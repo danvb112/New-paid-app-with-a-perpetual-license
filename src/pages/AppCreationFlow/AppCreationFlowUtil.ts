@@ -55,12 +55,6 @@ export const initialFLowListItems: AppFlowListItemProps[] = [
         selected: false,
     },
     {
-        label: "Privacy",
-        name: "privacy",
-        checked: false,
-        selected: false,
-    },
-    {
         label: "Submit",
         name: "submit",
         checked: false,
