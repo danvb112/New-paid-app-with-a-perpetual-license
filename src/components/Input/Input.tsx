@@ -43,13 +43,13 @@ export function Input({
             tooltip={tooltip}
         >
             <ClayInput 
-                component={component}
                 className='custom-input'
+                component={component}
                 placeholder={placeholder}
                 onChange={onChange}
                 type={type}
-                {...otherProps}
                 value={value}
+                {...otherProps}
             />
         </FieldBase>
     );
