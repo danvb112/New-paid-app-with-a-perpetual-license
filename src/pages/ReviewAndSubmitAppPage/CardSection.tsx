@@ -1,6 +1,8 @@
 import { CardView } from "../../components/Card/CardView";
 import { CardLink } from "../../components/Card/CardLink";
 import { CardTags } from "../../components/Card/CardTags";
+import { LicensePriceChildren } from "../../components/LicensePriceCard/LicensePriceChildren";
+import unitedStatesIcon from "../../assets/icons/united-states.svg";
 
 import { Tag } from "../../components/Tag/Tag";
 import { RequiredMask } from "../../components/FieldBase";
@@ -59,6 +61,17 @@ export function CardSection({
   version,
   localized,
 }: CardSectionProps) {
+  const price = {
+    currency: {
+      icon: unitedStatesIcon,
+      name: "USA",
+    },
+    quantity: {
+      from: "1",
+      to: "1",
+    },
+    value: "$1,000",
+  };
   return (
     <div className="card-section-body-section">
       <div className="card-section-body-section-header">
@@ -122,9 +135,20 @@ export function CardSection({
 
       {cardView && (
         <CardView
+          children={
+            sectionName == "Licensing" ? (
+              <LicensePriceChildren
+                currency={price.currency}
+                quantity={price.quantity}
+                value={price.value}
+              />
+            ) : (
+              ""
+            )
+          }
+          description={cardDescription as string}
           icon={icon}
           title={cardTitle as string}
-          description={cardDescription as string}
         />
       )}
 
