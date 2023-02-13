@@ -1,9 +1,9 @@
 import { Header } from "../../components/Header/Header";
 import { Input } from "../../components/Input/Input";
-
 import { NewAppPageFooterButtons } from "../../components/NewAppPageFooterButtons/NewAppPageFooterButtons";
 import { Section } from "../../components/Section/Section";
-
+import { useAppContext } from "../../manage-app-state/AppManageState";
+import { TYPES } from "../../manage-app-state/actionTypes";
 import './ProvideAppSupportAndHelpPage.scss';
 
 interface ProvideAppSupportAndHelpPageProps {
@@ -15,6 +15,8 @@ export function ProvideAppSupportAndHelpPage({
   onClickBack,
   onClickContinue,
 }: ProvideAppSupportAndHelpPageProps) {
+  const [_, dispatch] = useAppContext();
+
   return (
     <div className="provide-app-support-and-help-page-container">
       <div className="provide-app-support-and-help-page-header">
@@ -55,7 +57,13 @@ export function ProvideAppSupportAndHelpPage({
       <NewAppPageFooterButtons
         showBackButton={true}
         onClickBack={() => onClickBack()}
-        onClickContinue={() => onClickContinue()}
+        onClickContinue={() => {
+					dispatch({
+						type: TYPES.SUBMIT_APP_SUPPORT,
+					});
+
+					onClickContinue();
+				}}
       />
     </div>
   );
