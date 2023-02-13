@@ -52,7 +52,7 @@ export function appReducer(state: InitialStateProps, action: TAction) {
 		case TYPES.UPDATE_APP_LOGO: {
 			const appLogo = action.payload.file;
 
-			return {...state, appLogo};
+			return { ...state, appLogo };
 		}
 		case TYPES.UPLOAD_APP_LPKG: {
 			return state;

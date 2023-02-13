@@ -112,11 +112,11 @@ export function ReviewAndSubmitAppPage({
 			{!readonly && (
 				<div className='review-and-submit-app-page-agreement'>
 					<Checkbox
-            checked={checked}
-            onChange={() => {
-              setChecked(!checked);
-            }}
-          ></Checkbox>
+						checked={checked}
+						onChange={() => {
+							setChecked(!checked);
+						}}
+					></Checkbox>
 					<span>
 						<span className='review-and-submit-app-page-agreement-highlight'>
 							{'Attention: this cannot be undone. '}

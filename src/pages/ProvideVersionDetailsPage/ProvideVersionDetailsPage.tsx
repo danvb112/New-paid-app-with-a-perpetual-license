@@ -15,7 +15,7 @@ export function ProvideVersionDetailsPage({
 	onClickBack,
 	onClickContinue,
 }: ProvideVersionDetailsPageProps) {
-  const [_, dispatch] = useAppContext();
+	const [_, dispatch] = useAppContext();
 
 	return (
 		<div className='provide-version-details-page-container'>
