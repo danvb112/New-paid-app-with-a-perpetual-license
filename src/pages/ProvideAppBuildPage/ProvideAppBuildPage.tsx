@@ -32,7 +32,7 @@ export function ProvideAppBuildPage({
 	onClickBack,
 	onClickContinue,
 }: ProvideAppBuildPageProps) {
-    const [_, dispatch] = useAppContext();
+	const [_, dispatch] = useAppContext();
 
 	const [selectedSaasCompatible, setSelectedSaasCompatible] = useState('yes');
 	const [selectedAppBuild, setSelectedAppBuild] =
@@ -180,7 +180,7 @@ export function ProvideAppBuildPage({
 			<NewAppPageFooterButtons
 				showBackButton
 				onClickContinue={() => {
-                    dispatch({
+					dispatch({
 						type: TYPES.SUBMIT_APP_PROFILE,
 					});
 
