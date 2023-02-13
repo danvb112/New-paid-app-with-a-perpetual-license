@@ -1,12 +1,14 @@
-import { useState } from 'react';
-import { DropzoneUpload } from '../../components/DropzoneUpload/DropzoneUpload';
-import { Header } from '../../components/Header/Header';
-import { Section } from '../../components/Section/Section';
-import { FileList, UploadedFile } from '../../components/FileList/FileList';
 import { filesize } from 'filesize';
 import { uniqueId } from 'lodash';
-import { NewAppPageFooterButtons } from '../../components/NewAppPageFooterButtons/NewAppPageFooterButtons';
+import { useState } from 'react';
 
+import { DropzoneUpload } from '../../components/DropzoneUpload/DropzoneUpload';
+import { FileList, UploadedFile } from '../../components/FileList/FileList';
+import { Header } from '../../components/Header/Header';
+import { NewAppPageFooterButtons } from '../../components/NewAppPageFooterButtons/NewAppPageFooterButtons';
+import { Section } from '../../components/Section/Section';
+import { useAppContext } from '../../manage-app-state/AppManageState';
+import { TYPES } from '../../manage-app-state/actionTypes';
 import './CustomizeAppStorefrontPage.scss';
 
 const acceptFileTypes = {
@@ -22,6 +24,8 @@ export function CustomizeAppStorefrontPage({
     onClickBack,
     onClickContinue,
 }: CustomizeAppStorefrontPageProps) {
+    const [_, dispatch] = useAppContext();
+
     const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
 
     const updateFile = (id: string, data: UploadedFile) => {
@@ -128,7 +132,13 @@ export function CustomizeAppStorefrontPage({
 
             <NewAppPageFooterButtons
                 onClickBack={() => onClickBack()}
-                onClickContinue={() => onClickContinue()}
+                onClickContinue={() => {
+                    dispatch({
+						type: TYPES.SUBMIT_APP_STOREFRONT,
+					});
+
+					onClickContinue();
+				}}
             />
         </div>
     )
