@@ -1,13 +1,16 @@
 
+import { ReactNode } from 'react';
 import './CardView.scss';
 
 interface CardViewProps {
+    children? : ReactNode
     title: string;
     icon?: string;
     description: string;
 }
 
 export function CardView({
+    children,
     description,
     title,
     icon,
@@ -38,6 +41,7 @@ export function CardView({
             </div>
 
             <span className='card-view-description'>{description}</span>
+            {children}
         </div>
     );
 }
