@@ -1,6 +1,5 @@
 import { filesize } from 'filesize';
 import { uniqueId } from 'lodash';
-import { useState } from 'react';
 
 import { UploadedFile } from '../../components/FileList/FileList';
 import { Header } from '../../components/Header/Header';
@@ -68,7 +67,7 @@ export function DefineAppProfilePage({
 		// api.post().then().catch()...
 	};
 
-	const handleUpload = (files: FileList) => {
+	const handleLogoUpload = (files: FileList) => {
 		const file = files[0];
 
 		const newUploadedFile: UploadedFile = {
@@ -88,13 +87,9 @@ export function DefineAppProfilePage({
 			},
 			type: TYPES.UPDATE_APP_LOGO,
 		});
-		processUpload(newUploadedFile);
-
-		// await api.post();
 	};
-	const handleDelete = (id: string) => {
-		// await api.delete()
 
+	const handleLogoDelete = () => {
 		dispatch({
 			payload: {
 				file: undefined,
@@ -119,18 +114,18 @@ export function DefineAppProfilePage({
 				>
 					<UploadLogo
 						uploadedFile={appLogo}
-						onUpload={handleUpload}
-						onDeleteFile={handleDelete}
+						onUpload={handleLogoUpload}
+						onDeleteFile={handleLogoDelete}
 					/>
 
 					<div>
 						<Input
 							component='input'
 							label='Name'
-							onChange={({ target: value }) =>
+							onChange={({ target }) =>
 								dispatch({
 									payload: {
-										value,
+										value: target.value,
 									},
 									type: TYPES.UPDATE_APP_NAME,
 								})
@@ -164,7 +159,14 @@ export function DefineAppProfilePage({
 							required
 							tooltip='Categories'
 							items={CategoriesItems}
-							onChange={() => {}}
+							onChange={(value) =>
+								dispatch({
+									payload: {
+										value,
+									},
+									type: TYPES.UPDATE_APP_CATEGORIES,
+								})
+							}
 							placeholder='Select categories'
 						/>
 
