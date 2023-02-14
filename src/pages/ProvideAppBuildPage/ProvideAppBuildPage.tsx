@@ -181,7 +181,7 @@ export function ProvideAppBuildPage({
 				showBackButton
 				onClickContinue={() => {
 					dispatch({
-						type: TYPES.SUBMIT_APP_PROFILE,
+						type: TYPES.SUBMIT_APP_BUILD,
 					});
 
 					onClickContinue();

@@ -1,5 +1,12 @@
 import { InitialStateProps } from './AppManageState';
 import { TYPES } from './actionTypes';
+import {
+	createApp,
+	patchAppByExternalReferenceCode,
+	submitAttachment,
+	submitImage,
+} from '../utils/api';
+import { update } from 'lodash';
 
 export type TAction = {
 	payload?: any;
@@ -18,7 +25,48 @@ export function appReducer(state: InitialStateProps, action: TAction) {
 			return state;
 		}
 		case TYPES.SUBMIT_APP_PROFILE: {
-			return state;
+			const { appDescription, appLogo, appName } = state;
+
+			const submitAppProfile = async () => {
+				const createAppResponse = await createApp({
+					appDescription,
+					appName,
+				});
+
+				const product = await createAppResponse.json();
+
+				const { externalReferenceCode, productId, workflowStatusInfo } =
+					product;
+
+				console.log('appLogo', appLogo);
+
+				if (appLogo) {
+					// const submitImageResponse = await submitImage({
+					// 	body: { src: URL.createObjectURL(appLogo.file) },
+					// 	externalReferenceCode,
+					// });
+
+					// const logo = await submitImageResponse.json();
+
+					// console.log('logo', logo);
+
+					// patchAppByExternalReferenceCode({
+					// 	body: { thumbnail: appLogo.preview },
+					// 	externalReferenceCode,
+					// });
+				}
+
+				// TODO: Categories and Tags
+
+				return {
+					...state,
+					appId: productId,
+					appERC: externalReferenceCode,
+					appWorkflowStatusInfo: workflowStatusInfo,
+				};
+			};
+
+			submitAppProfile();
 		}
 		case TYPES.SUBMIT_APP_STOREFRONT: {
 			return state;
@@ -30,7 +78,9 @@ export function appReducer(state: InitialStateProps, action: TAction) {
 			return state;
 		}
 		case TYPES.UPDATE_APP_CATEGORIES: {
-			return state;
+			const appCategories = action.payload.value;
+
+			return { ...state, appCategories };
 		}
 		case TYPES.UPDATE_APP_DESCRIPTION: {
 			const appDescription = action.payload.value;

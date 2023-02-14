@@ -3,7 +3,14 @@ import { UploadedFile } from '../components/FileList/FileList';
 
 import { appReducer, TAction } from './reducer';
 
+type Categories = {
+	label: string;
+	value: string;
+	checked: boolean;
+};
+
 export interface InitialStateProps {
+	appCategories: Categories[];
 	appDescription: string;
 	appLogo: UploadedFile;
 	appName: string;
