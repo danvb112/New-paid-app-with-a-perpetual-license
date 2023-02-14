@@ -49,7 +49,6 @@ export function InformLicensingTermsPage({
                     />
 
                     <RadioCard
-                        disabled
                         description="License must be renewed annually."
                         selected={appLicense}
                         setSelected={setAppLicense}
