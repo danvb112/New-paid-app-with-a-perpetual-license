@@ -1,157 +1,148 @@
-import { InitialStateProps } from './AppManageState';
-import { TYPES } from './actionTypes';
+import { InitialStateProps } from "./AppManageState";
+import { TYPES } from "./actionTypes";
 import {
-	createApp,
-	patchAppByExternalReferenceCode,
-	submitAttachment,
-	submitImage,
-} from '../utils/api';
-import { update } from 'lodash';
+  createApp,
+  createSpecification,
+  createProductSpecification,
+  patchAppByExternalReferenceCode,
+  submitAttachment,
+  submitImage,
+} from "../utils/api";
+import { update } from "lodash";
 
 export type TAction = {
-	payload?: any;
-	type: TYPES;
+  payload?: any;
+  type: TYPES;
 };
 
 export function appReducer(state: InitialStateProps, action: TAction) {
-	switch (action.type) {
-		case TYPES.SUBMIT_APP: {
-			return state;
-		}
-		case TYPES.SUBMIT_APP_BUILD: {
-			return state;
-		}
-		case TYPES.SUBMIT_APP_LICENSING: {
-			return state;
-		}
-		case TYPES.SUBMIT_APP_PROFILE: {
-			const { appDescription, appLogo, appName } = state;
+  switch (action.type) {
+    case TYPES.SUBMIT_APP: {
+      return state;
+    }
+    case TYPES.SUBMIT_APP_BUILD: {
+      const { appType, appId, appProductId } = state;
 
-			const submitAppProfile = async () => {
-				const createAppResponse = await createApp({
-					appDescription,
-					appName,
-				});
+      const submitAppBuild = async () => {
+        const dataSpecification = await createSpecification({
+          body: {
+            key: "type",
+            title: { en_US: "Type" },
+          },
+        });
 
-				const product = await createAppResponse.json();
+        createProductSpecification({
+          body: {
+            productId: appProductId,
+            specificationId: dataSpecification.id,
+            specificationKey: dataSpecification.key,
+            value: { en_US: appType },
+          },
+          appId,
+        });
+      };
 
-				const { externalReferenceCode, productId, workflowStatusInfo } =
-					product;
+      submitAppBuild();
+    }
+    case TYPES.SUBMIT_APP_LICENSING: {
+      return state;
+    }
+    case TYPES.SUBMIT_APP_PROFILE: {
+      const { appId, appProductId, appERC, appWorkflowStatusInfo } =
+        action.payload.value;
 
-				console.log('appLogo', appLogo);
+      return {
+        ...state,
+        appId,
+        appProductId,
+        appERC,
+        appWorkflowStatusInfo,
+      };
+    }
+    case TYPES.SUBMIT_APP_STOREFRONT: {
+      return state;
+    }
+    case TYPES.SUBMIT_APP_SUPPORT: {
+      return state;
+    }
+    case TYPES.SUBMIT_APP_VERSION: {
+      return state;
+    }
+    case TYPES.UPDATE_APP_BUILD: {
+      const appBuild = action.payload.value;
 
-				if (appLogo) {
-					// const submitImageResponse = await submitImage({
-					// 	body: { src: URL.createObjectURL(appLogo.file) },
-					// 	externalReferenceCode,
-					// });
+      return { ...state, appBuild };
+    }
+    case TYPES.UPDATE_APP_CATEGORIES: {
+      const appCategories = action.payload.value;
 
-					// const logo = await submitImageResponse.json();
+      return { ...state, appCategories };
+    }
+    case TYPES.UPDATE_APP_DESCRIPTION: {
+      const appDescription = action.payload.value;
 
-					// console.log('logo', logo);
+      return { ...state, appDescription };
+    }
+    case TYPES.UPDATE_APP_DOCUMENTATION_URL: {
+      return state;
+    }
+    case TYPES.UPDATE_APP_INSTALLATION_AND_UNINSTALLATION_GUIDE_URL: {
+      return state;
+    }
+    case TYPES.UPDATE_APP_LICENSE: {
+      return state;
+    }
+    case TYPES.UPDATE_APP_LICENSE_PRICE: {
+      return state;
+    }
+    case TYPES.UPDATE_APP_LOGO: {
+      const appLogo = action.payload.file;
 
-					// patchAppByExternalReferenceCode({
-					// 	body: { thumbnail: appLogo.preview },
-					// 	externalReferenceCode,
-					// });
-				}
+      return { ...state, appLogo };
+    }
+    case TYPES.UPLOAD_APP_LPKG: {
+      return state;
+    }
+    case TYPES.UPDATE_APP_LXC_COMPATIBILITY: {
+      const LXC_Compatibility = action.payload.value;
 
-				// TODO: Categories and Tags
+      return { ...state, appType: LXC_Compatibility };
+    }
+    case TYPES.UPDATE_APP_NAME: {
+      const appName = action.payload.value;
 
-				return {
-					...state,
-					appId: productId,
-					appERC: externalReferenceCode,
-					appWorkflowStatusInfo: workflowStatusInfo,
-				};
-			};
+      return { ...state, appName };
+    }
+    case TYPES.UPDATE_APP_NOTES: {
+      return state;
+    }
+    case TYPES.UPDATE_APP_PRICE_MODEL: {
+      const priceModel = action.payload.value;
 
-			submitAppProfile();
-		}
-		case TYPES.SUBMIT_APP_STOREFRONT: {
-			return state;
-		}
-		case TYPES.SUBMIT_APP_SUPPORT: {
-			return state;
-		}
-		case TYPES.SUBMIT_APP_VERSION: {
-			return state;
-		}
-		case TYPES.UPDATE_APP_BUILD: {
-			const appBuild = action.payload.value;
-
-			return {...state, appBuild};
-		}
-		case TYPES.UPDATE_APP_CATEGORIES: {
-			const appCategories = action.payload.value;
-
-			return { ...state, appCategories };
-		}
-		case TYPES.UPDATE_APP_DESCRIPTION: {
-			const appDescription = action.payload.value;
-
-			return { ...state, appDescription };
-		}
-		case TYPES.UPDATE_APP_DOCUMENTATION_URL: {
-			return state;
-		}
-		case TYPES.UPDATE_APP_INSTALLATION_AND_UNINSTALLATION_GUIDE_URL: {
-			return state;
-		}
-		case TYPES.UPDATE_APP_LICENSE: {
-			return state;
-		}
-		case TYPES.UPDATE_APP_LICENSE_PRICE: {
-			return state;
-		}
-		case TYPES.UPDATE_APP_LOGO: {
-			const appLogo = action.payload.file;
-
-			return { ...state, appLogo };
-		}
-		case TYPES.UPLOAD_APP_LPKG: {
-			return state;
-		}
-		case TYPES.UPDATE_APP_LXC_COMPATIBILITY: {
-			const LXC_Compatibility = action.payload.value;
-
-			return {...state, LXC_Compatibility};
-		}
-		case TYPES.UPDATE_APP_NAME: {
-			const appName = action.payload.value;
-
-			return { ...state, appName };
-		}
-		case TYPES.UPDATE_APP_NOTES: {
-			return state;
-		}
-		case TYPES.UPDATE_APP_PRICE_MODEL: {
-			const priceModel = action.payload.value;
-
-			return {...state, priceModel};
-		}
-		case TYPES.UPDATE_APP_PUBLISHER_WEBSITE_URL: {
-			return state;
-		}
-		case TYPES.UPLOAD_APP_STOREFRONT_IMAGES: {
-			return state;
-		}
-		case TYPES.UPDATE_APP_SUPPORT_URL: {
-			return state;
-		}
-		case TYPES.UPDATE_APP_TAGS: {
-			return state;
-		}
-		case TYPES.UPDATE_APP_TRIAL_INFO: {
-			return state;
-		}
-		case TYPES.UPDATE_APP_USAGE_TERMS_URL: {
-			return state;
-		}
-		case TYPES.UPDATE_APP_VERSION: {
-			return state;
-		}
-		default:
-			return state;
-	}
+      return { ...state, priceModel };
+    }
+    case TYPES.UPDATE_APP_PUBLISHER_WEBSITE_URL: {
+      return state;
+    }
+    case TYPES.UPLOAD_APP_STOREFRONT_IMAGES: {
+      return state;
+    }
+    case TYPES.UPDATE_APP_SUPPORT_URL: {
+      return state;
+    }
+    case TYPES.UPDATE_APP_TAGS: {
+      return state;
+    }
+    case TYPES.UPDATE_APP_TRIAL_INFO: {
+      return state;
+    }
+    case TYPES.UPDATE_APP_USAGE_TERMS_URL: {
+      return state;
+    }
+    case TYPES.UPDATE_APP_VERSION: {
+      return state;
+    }
+    default:
+      return state;
+  }
 }
