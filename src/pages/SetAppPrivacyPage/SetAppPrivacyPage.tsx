@@ -62,7 +62,7 @@ export function SetAppPrivacyPage({
                 tooltip='More Info'
                 tooltipText='More Info'
             >   
-                <RadioCard 
+                {/* <RadioCard 
                     toggle
                     description='This app will be used to collect users data.'
                     title='Collect users data'
@@ -70,11 +70,10 @@ export function SetAppPrivacyPage({
                     selected={collectUsersData === true ? 'collectUsersData' : ""}
                     icon={analyticsIcon}
                     setSelected={() => setCollectUsersData(!collectUsersData)}
-                    value='collectUsersData'
                 />
                 <span className='set-app-privacy-page-text'>
                     By collecting users data or not, you agree to the <a href="#">Content Policy.</a> Liferay’s  <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a> apply to your use of this service
-                </span>
+                </span> */}
             </Section>
 
             {collectUsersData && (

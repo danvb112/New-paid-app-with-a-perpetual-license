@@ -77,6 +77,11 @@ export function appReducer(state: InitialStateProps, action: TAction) {
 		case TYPES.SUBMIT_APP_VERSION: {
 			return state;
 		}
+		case TYPES.UPDATE_APP_BUILD: {
+			const appBuild = action.payload.value;
+
+			return {...state, appBuild};
+		}
 		case TYPES.UPDATE_APP_CATEGORIES: {
 			const appCategories = action.payload.value;
 
@@ -108,7 +113,9 @@ export function appReducer(state: InitialStateProps, action: TAction) {
 			return state;
 		}
 		case TYPES.UPDATE_APP_LXC_COMPATIBILITY: {
-			return state;
+			const LXC_Compatibility = action.payload.value;
+
+			return {...state, LXC_Compatibility};
 		}
 		case TYPES.UPDATE_APP_NAME: {
 			const appName = action.payload.value;
@@ -119,7 +126,9 @@ export function appReducer(state: InitialStateProps, action: TAction) {
 			return state;
 		}
 		case TYPES.UPDATE_APP_PRICE_MODEL: {
-			return state;
+			const priceModel = action.payload.value;
+
+			return {...state, priceModel};
 		}
 		case TYPES.UPDATE_APP_PUBLISHER_WEBSITE_URL: {
 			return state;
