@@ -41,7 +41,7 @@ export function ChoosePricingModelPage({
             selected={priceModel === "free"}
             onChange={() => {
               dispatch({
-                payload: { value: `free` },
+                payload: { value: "free" },
                 type: TYPES.UPDATE_APP_PRICE_MODEL,
               });
             }}
@@ -55,7 +55,7 @@ export function ChoosePricingModelPage({
             selected={priceModel === "paid"}
             onChange={() => {
               dispatch({
-                payload: { value: `paid` },
+                payload: { value: "paid" },
                 type: TYPES.UPDATE_APP_PRICE_MODEL,
               });
             }}
