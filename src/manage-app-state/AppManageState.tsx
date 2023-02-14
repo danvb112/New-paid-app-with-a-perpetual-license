@@ -13,15 +13,21 @@ export interface InitialStateProps {
   appBuild: string;
   appCategories: Categories[];
   appDescription: string;
+  appERC: string;
+  appId: string;
+  appProductId: number;
+  appWorkflowStatusInfo: string;
   appLogo: UploadedFile;
+  appLicense: string;
   appName: string;
-  LXC_Compatibility: string;
+  appType: string;
+  dayTrial: string;
   priceModel: string;
 }
 
 const initialState = {
   appBuild: "upload",
-  LXC_Compatibility: "yes",
+  appType: "saas",
   priceModel: "paid",
 } as InitialStateProps;
 
