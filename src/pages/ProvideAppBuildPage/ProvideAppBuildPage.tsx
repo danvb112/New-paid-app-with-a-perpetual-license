@@ -9,7 +9,7 @@ import githubIcon from "../../assets/icons/github-icon.svg";
 import uploadIcon from "../../assets/icons/upload-fill.svg";
 
 import "./ProvideAppBuildPage.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NewAppPageFooterButtons } from "../../components/NewAppPageFooterButtons/NewAppPageFooterButtons";
 import { DropzoneUpload } from "../../components/DropzoneUpload/DropzoneUpload";
 import { FileList, UploadedFile } from "../../components/FileList/FileList";
@@ -32,7 +32,7 @@ export function ProvideAppBuildPage({
   onClickBack,
   onClickContinue,
 }: ProvideAppBuildPageProps) {
-  const [{ appBuild, LXC_Compatibility }, dispatch] = useAppContext();
+  const [state, dispatch] = useAppContext();
   const [selectedAppBuild, setSelectedAppBuild] =
     useState("viaZipOrLpkgUpload");
 
@@ -91,10 +91,10 @@ export function ProvideAppBuildPage({
             description="Lorem ipsum dolor sit amet consectetur."
             title="Yes"
             icon={taskCheckedIcon}
-            selected={LXC_Compatibility === "yes"}
+            selected={state.appType === "saas"}
             onChange={() => {
               dispatch({
-                payload: { value: "yes" },
+                payload: { value: "saas" },
                 type: TYPES.UPDATE_APP_LXC_COMPATIBILITY,
               });
             }}
@@ -105,10 +105,10 @@ export function ProvideAppBuildPage({
             description="Lorem ipsum dolor sit amet consectetur."
             title="No"
             icon={cancelIcon}
-            selected={LXC_Compatibility === "no"}
+            selected={state.appType === "osgi"}
             onChange={() => {
               dispatch({
-                payload: { value: "no" },
+                payload: { value: "osgi" },
                 type: TYPES.UPDATE_APP_LXC_COMPATIBILITY,
               });
             }}
@@ -129,7 +129,7 @@ export function ProvideAppBuildPage({
             description="Use any build from any available Liferay Experience Cloud account (requires LXC account) "
             title="Via Liferay Experience Cloud Integration"
             icon={cloudIcon}
-            selected={appBuild === "LXC"}
+            selected={state.appBuild === "LXC"}
             onChange={() => {
               dispatch({
                 payload: { value: "LXC" },
@@ -144,7 +144,7 @@ export function ProvideAppBuildPage({
             description="Use any build from your computer connecting with a Github provider"
             title="Via GitHub Repo"
             icon={githubIcon}
-            selected={appBuild === "GitHub"}
+            selected={state.appBuild === "GitHub"}
             onChange={() => {
               dispatch({
                 payload: { value: "GitHub" },
@@ -158,7 +158,7 @@ export function ProvideAppBuildPage({
             description="Lorem ipsum dolor sit amet consectetur. Consectetur vulputate massa faucibus mattis a quam."
             title="Via ZIP or LPKG Upload"
             icon={uploadIcon}
-            selected={appBuild === "upload"}
+            selected={state.appBuild === "upload"}
             onChange={() => {
               dispatch({
                 payload: { value: "upload" },
