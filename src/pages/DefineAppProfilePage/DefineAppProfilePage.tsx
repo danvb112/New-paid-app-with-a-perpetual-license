@@ -10,8 +10,8 @@ import { Section } from "../../components/Section/Section";
 import { UploadLogo } from "../../components/UploadLogo/UploadLogo";
 import { useAppContext } from "../../manage-app-state/AppManageState";
 import { TYPES } from "../../manage-app-state/actionTypes";
+import { createApp, createImage } from "../../utils/api";
 import "./DefineAppProfilePage.scss";
-import { createApp } from "../../utils/api";
 
 interface DefineAppProfilePageProps {
   onClickBack: () => void;
@@ -60,37 +60,27 @@ export function DefineAppProfilePage({
 }: DefineAppProfilePageProps) {
   const [{ appDescription, appLogo, appName }, dispatch] = useAppContext();
 
-  const processUpload = (uploadedFile: UploadedFile) => {
-    const data = new FormData();
+	const handleLogoUpload = (files: FileList) => {
+		const file = files[0];
 
-    data.append("file", uploadedFile.file, uploadedFile.fileName);
+		const newUploadedFile: UploadedFile = {
+			error: false,
+			file,
+			fileName: file.name,
+			id: uniqueId(),
+			preview: URL.createObjectURL(file),
+			progress: 0,
+			readableSize: filesize(file.size),
+			uploaded: true,
+		};
 
-    // api.post().then().catch()...
-  };
-
-  const handleLogoUpload = (files: FileList) => {
-    const file = files[0];
-
-    const newUploadedFile: UploadedFile = {
-      error: false,
-      file,
-      fileName: file.name,
-      id: uniqueId(),
-      preview: URL.createObjectURL(file),
-      progress: 0,
-      readableSize: filesize(file.size),
-      uploaded: true,
-    };
-
-    console.log("logo", newUploadedFile);
-
-    dispatch({
-      payload: {
-        file: newUploadedFile,
-      },
-      type: TYPES.UPDATE_APP_LOGO,
-    });
-  };
+		dispatch({
+			payload: {
+				file: newUploadedFile,
+			},
+			type: TYPES.UPDATE_APP_LOGO,
+		});
+	};
 
   const handleLogoDelete = () => {
     dispatch({
@@ -190,36 +180,53 @@ export function DefineAppProfilePage({
             appName,
           });
 
-          const product = await createAppResponse.json();
+     	  const product = await createAppResponse.json();
+		  
+		    dispatch({
+			    payload: {
+				    value: {
+						appProductId: product.productId,
+						appId: product.id,
+						appERC: product.externalReferenceCode,
+						appWorkflowStatusInfo:
+							product.workflowStatusInfo,
+						},
+					},
+					type: TYPES.SUBMIT_APP_PROFILE,
+				});
 
-          dispatch({
-            payload: {
-              value: {
-                appProductId: product.productId,
-                appId: product.id,
-                appERC: product.externalReferenceCode,
-                appWorkflowStatusInfo: product.workflowStatusInfo,
-              },
-            },
-            type: TYPES.SUBMIT_APP_PROFILE,
-          });
+				if (appLogo) {
+					const reader = new FileReader();
 
-          //     if (appLogo) {
-          //       // const submitImageResponse = await submitImage({
-          //       // 	body: { src: URL.createObjectURL(appLogo.file) },
-          //       // 	externalReferenceCode,
-          //       // });
-          //       // const logo = await submitImageResponse.json();
-          //       // console.log('logo', logo);
-          //       // patchAppByExternalReferenceCode({
-          //       // 	body: { thumbnail: appLogo.preview },
-          //       // 	externalReferenceCode,
-          //       // });
-          //     }
+					const submitImage = async (imageBase64: string) => {
+						const createImageResponse = await createImage({
+							body: {
+								attachment: imageBase64,
+								title: { en_US: appLogo.fileName },
+							},
+							externalReferenceCode:
+								product.externalReferenceCode,
+						});
 
-          onClickContinue();
-        }}
-      />
-    </div>
-  );
+						createImageResponse.json()
+					};
+
+					reader.addEventListener(
+						'load',
+						() => {
+							const result = reader.result as string;
+
+							submitImage(result?.substring(22));
+						},
+						false
+					);
+
+					reader.readAsDataURL(appLogo.file);
+				}
+
+				onClickContinue();
+			}}
+			/>
+		</div>
+	);
 }
