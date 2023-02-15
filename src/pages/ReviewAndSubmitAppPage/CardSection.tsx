@@ -17,6 +17,7 @@ import folderIcon from "../../assets/icons/folder-fill.svg";
 import { File } from "./ReviewAndSubmitAppPageUtil";
 
 import "./CardSection.scss";
+import { useAppContext } from "../../manage-app-state/AppManageState";
 
 interface CardSectionProps {
   build?: boolean;
@@ -72,6 +73,7 @@ export function CardSection({
     },
     value: "$1,000",
   };
+  const [{ priceModel }] = useAppContext();
   return (
     <div className="card-section-body-section">
       <div className="card-section-body-section-header">
@@ -136,7 +138,7 @@ export function CardSection({
       {cardView && (
         <CardView
           children={
-            sectionName == "Licensing" ? (
+            sectionName == "Licensing" && priceModel !== "free" ? (
               <LicensePriceChildren
                 currency={price.currency}
                 quantity={price.quantity}

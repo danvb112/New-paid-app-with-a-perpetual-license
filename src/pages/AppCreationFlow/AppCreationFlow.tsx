@@ -18,6 +18,8 @@ import { ReviewAndSubmitAppPage } from "../ReviewAndSubmitAppPage/ReviewAndSubmi
 import "./AppCreationFlow.scss";
 import { DefineAppProfilePage } from "../DefineAppProfilePage/DefineAppProfilePage";
 
+import { useAppContext } from "../../manage-app-state/AppManageState";
+
 type SetAppFlowListStateProps = {
   checkedItems?: string[];
   selectedItem: string;
@@ -27,6 +29,7 @@ export function AppCreationFlow() {
   const [appFlowListItems, setAppFlowListItems] =
     useState(initialFLowListItems);
   const [currentFlow, setCurrentFlow] = useState("create");
+  const [{ priceModel }] = useAppContext();
 
   const setAppFlowListState = ({
     checkedItems,
@@ -215,19 +218,36 @@ export function AppCreationFlow() {
               setCurrentFlow("pricing");
             }}
             onClickContinue={() => {
-              setAppFlowListState({
-                checkedItems: [
-                  "create",
-                  "profile",
-                  "build",
-                  "storefront",
-                  "version",
-                  "pricing",
-                ],
-                selectedItem: "licensing",
-              });
+              if (priceModel !== "free") {
+                setAppFlowListState({
+                  checkedItems: [
+                    "create",
+                    "profile",
+                    "build",
+                    "storefront",
+                    "version",
+                    "pricing",
+                  ],
+                  selectedItem: "licensing",
+                });
 
-              setCurrentFlow("licensingPrice");
+                setCurrentFlow("licensingPrice");
+              } else {
+                setAppFlowListState({
+                  checkedItems: [
+                    "create",
+                    "profile",
+                    "build",
+                    "storefront",
+                    "version",
+                    "pricing",
+                    "licensing",
+                  ],
+                  selectedItem: "support",
+                });
+
+                setCurrentFlow("support");
+              }
             }}
           />
         )}
@@ -271,19 +291,35 @@ export function AppCreationFlow() {
         {currentFlow === "support" && (
           <ProvideAppSupportAndHelpPage
             onClickBack={() => {
-              setAppFlowListState({
-                checkedItems: [
-                  "create",
-                  "profile",
-                  "build",
-                  "storefront",
-                  "version",
-                  "pricing",
-                ],
-                selectedItem: "licensing",
-              });
+              if (priceModel !== "free") {
+                setAppFlowListState({
+                  checkedItems: [
+                    "create",
+                    "profile",
+                    "build",
+                    "storefront",
+                    "version",
+                    "pricing",
+                  ],
+                  selectedItem: "licensing",
+                });
 
-              setCurrentFlow("licensingPrice");
+                setCurrentFlow("licensingPrice");
+              } else {
+                setAppFlowListState({
+                  checkedItems: [
+                    "create",
+                    "profile",
+                    "build",
+                    "storefront",
+                    "version",
+                    "pricing",
+                  ],
+                  selectedItem: "licensing",
+                });
+
+                setCurrentFlow("licensing");
+              }
             }}
             onClickContinue={() => {
               setAppFlowListState({
