@@ -13,8 +13,10 @@ export interface InitialStateProps {
   appBuild: string;
   appCategories: Categories[];
   appDescription: string;
+  appDocumentationURL: string;
   appERC: string;
   appId: string;
+  appInstallationGuideURL: string;
   appProductId: number;
   appWorkflowStatusInfo: string;
   appLogo: UploadedFile;
@@ -22,9 +24,12 @@ export interface InitialStateProps {
   appName: string;
   appNotes: string;
   appType: string;
+  appUsageTermsURL: string;
   appVersion: string;
   dayTrial: string;
   priceModel: string;
+  publisherWebsiteURL: string;
+  supportURL: string;
 }
 
 const initialState = {
