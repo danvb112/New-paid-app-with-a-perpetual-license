@@ -54,10 +54,14 @@ export function appReducer(state: InitialStateProps, action: TAction) {
       return { ...state, appDescription };
     }
     case TYPES.UPDATE_APP_DOCUMENTATION_URL: {
-      return state;
+      const appDocumentationURL = action.payload.value;
+
+      return { ...state, appDocumentationURL };
     }
     case TYPES.UPDATE_APP_INSTALLATION_AND_UNINSTALLATION_GUIDE_URL: {
-      return state;
+      const appInstallationGuideURL = action.payload.value;
+
+      return { ...state, appInstallationGuideURL };
     }
     case TYPES.UPDATE_APP_LICENSE: {
       const appLicense = action.payload.value;
@@ -98,13 +102,17 @@ export function appReducer(state: InitialStateProps, action: TAction) {
       return { ...state, priceModel };
     }
     case TYPES.UPDATE_APP_PUBLISHER_WEBSITE_URL: {
-      return state;
+      const publisherWebsiteURL= action.payload.value;
+
+      return { ...state, publisherWebsiteURL };
     }
     case TYPES.UPLOAD_APP_STOREFRONT_IMAGES: {
       return state;
     }
     case TYPES.UPDATE_APP_SUPPORT_URL: {
-      return state;
+      const supportURL= action.payload.value;
+
+      return { ...state, supportURL };
     }
     case TYPES.UPDATE_APP_TAGS: {
       return state;
@@ -115,7 +123,9 @@ export function appReducer(state: InitialStateProps, action: TAction) {
       return { ...state, dayTrial };
     }
     case TYPES.UPDATE_APP_USAGE_TERMS_URL: {
-      return state;
+      const appUsageTermsURL= action.payload.value;
+
+      return { ...state, appUsageTermsURL };
     }
     case TYPES.UPDATE_APP_VERSION: {
       const appVersion = action.payload.value;
