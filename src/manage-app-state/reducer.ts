@@ -1,7 +1,7 @@
 import { InitialStateProps } from "./AppManageState";
 import { TYPES } from "./actionTypes";
 import {
-  createApp,
+  createSubscription,
   createSpecification,
   createProductSpecification,
   patchAppByExternalReferenceCode,
@@ -21,6 +21,30 @@ export function appReducer(state: InitialStateProps, action: TAction) {
       return state;
     }
     case TYPES.SUBMIT_APP_LICENSING: {
+      const { appLicense, appERC, dayTrial } = state;
+
+      const submitAppLicensing = () => {
+          const license = createSubscription({
+            body: {
+              subscriptionType: "yearly",
+            },
+            appERC,
+          });
+        
+
+          // const trial = await createSubscription({
+          //   body: {
+          //     numberOfLength: 30,
+          //     subscriptionTypeSettings: "day",
+          //   },
+          //   appERC,
+          // });
+
+          // console.log(trial);
+        
+      };
+
+      submitAppLicensing();
       return state;
     }
     case TYPES.SUBMIT_APP_PROFILE: {
@@ -66,7 +90,9 @@ export function appReducer(state: InitialStateProps, action: TAction) {
       return state;
     }
     case TYPES.UPDATE_APP_LICENSE: {
-      return state;
+      const appLicense = action.payload.value;
+
+      return { ...state, appLicense };
     }
     case TYPES.UPDATE_APP_LICENSE_PRICE: {
       return state;
@@ -110,7 +136,9 @@ export function appReducer(state: InitialStateProps, action: TAction) {
       return state;
     }
     case TYPES.UPDATE_APP_TRIAL_INFO: {
-      return state;
+      const dayTrial = action.payload.value;
+
+      return { ...state, dayTrial };
     }
     case TYPES.UPDATE_APP_USAGE_TERMS_URL: {
       return state;

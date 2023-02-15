@@ -12,6 +12,7 @@ import "./InformLicensingTermsPage.scss";
 import { NewAppPageFooterButtons } from "../../components/NewAppPageFooterButtons/NewAppPageFooterButtons";
 import { useAppContext } from "../../manage-app-state/AppManageState";
 import { TYPES } from "../../manage-app-state/actionTypes";
+import { createSubscription } from "../../utils/api";
 
 interface InformLicensingTermsPageProps {
   onClickBack: () => void;
@@ -22,7 +23,7 @@ export function InformLicensingTermsPage({
   onClickBack,
   onClickContinue,
 }: InformLicensingTermsPageProps) {
-  const [{ appLicense, dayTrial }, dispatch] = useAppContext();
+  const [{ appERC, appLicense, dayTrial }, dispatch] = useAppContext();
 
   return (
     <div className="informing-licensing-terms-page-container">
@@ -107,7 +108,32 @@ export function InformLicensingTermsPage({
 
       <NewAppPageFooterButtons
         onClickBack={() => onClickBack()}
-        onClickContinue={() => onClickContinue()}
+        onClickContinue={() => {
+          if (appLicense === "non-perpetual" && dayTrial === "no") {
+            createSubscription({
+              body: {
+                length: 1,
+                subscriptionType: "yearly",
+              },
+              appERC,
+            });
+          }
+
+          if (appLicense === "non-perpetual" && dayTrial === "yes") {
+            createSubscription({
+              body: {
+                enable: true,
+                length: 30,
+                numberOfLength: 0,
+                subscriptionType: "daily",
+                subscriptionTypeSettings: {},
+              },
+              appERC,
+            });
+          }
+
+          onClickContinue();
+        }}
         showBackButton
       />
     </div>

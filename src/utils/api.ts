@@ -128,3 +128,22 @@ export async function createProductSpecification({
   );
   return await response.json();
 }
+
+export async function createSubscription({
+  body,
+  appERC,
+}: {
+  body: Object;
+  appERC: string;
+}) {
+  const response = await fetch(
+    `http://localhost:8080/o/headless-commerce-admin-catalog/v1.0/products/by-externalReferenceCode/${appERC}/subscriptionConfiguration
+    `,
+    {
+      body: JSON.stringify(body),
+      headers,
+      method: "PATCH",
+    }
+  );
+  return await response.json();
+}

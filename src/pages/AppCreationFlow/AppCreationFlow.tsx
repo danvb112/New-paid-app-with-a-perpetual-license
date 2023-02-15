@@ -17,6 +17,7 @@ import { ReviewAndSubmitAppPage } from "../ReviewAndSubmitAppPage/ReviewAndSubmi
 
 import "./AppCreationFlow.scss";
 import { DefineAppProfilePage } from "../DefineAppProfilePage/DefineAppProfilePage";
+import { useAppContext } from "../../manage-app-state/AppManageState";
 
 type SetAppFlowListStateProps = {
   checkedItems?: string[];
@@ -24,6 +25,7 @@ type SetAppFlowListStateProps = {
 };
 
 export function AppCreationFlow() {
+  const [{ priceModel }, _] = useAppContext();
   const [appFlowListItems, setAppFlowListItems] =
     useState(initialFLowListItems);
   const [currentFlow, setCurrentFlow] = useState("create");
@@ -227,7 +229,11 @@ export function AppCreationFlow() {
                 selectedItem: "licensing",
               });
 
-              setCurrentFlow("licensingPrice");
+              if (priceModel === "free") {
+                setCurrentFlow("support");
+              } else if (priceModel === "paid") {
+                setCurrentFlow("licensingPrice");
+              }
             }}
           />
         )}
@@ -283,7 +289,11 @@ export function AppCreationFlow() {
                 selectedItem: "licensing",
               });
 
-              setCurrentFlow("licensingPrice");
+              if (priceModel === "free") {
+                setCurrentFlow("licensing");
+              } else if (priceModel === "paid") {
+                setCurrentFlow("licensingPrice");
+              }
             }}
             onClickContinue={() => {
               setAppFlowListState({
