@@ -107,3 +107,23 @@ export function patchAppByExternalReferenceCode({
 		}
 	);
 }
+
+export async function createAppLicensePrice({
+  body,
+  appProductId,
+}: {
+  body: Object;
+  appProductId: number;
+}) {
+  const response = await fetch(
+    `http://localhost:8080/o/headless-commerce-admin-catalog/v1.0/products/${appProductId}/skus
+    `,
+    {
+      body: JSON.stringify(body),
+      headers,
+      method: "POST",
+    }
+  );
+  return await response.json();
+}
+

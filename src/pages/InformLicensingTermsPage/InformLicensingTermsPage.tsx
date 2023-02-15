@@ -12,6 +12,10 @@ import "./InformLicensingTermsPage.scss";
 import { NewAppPageFooterButtons } from "../../components/NewAppPageFooterButtons/NewAppPageFooterButtons";
 import { useAppContext } from "../../manage-app-state/AppManageState";
 import { TYPES } from "../../manage-app-state/actionTypes";
+import {
+  createProductSpecification,
+  createSpecification,
+} from "../../utils/api";
 
 interface InformLicensingTermsPageProps {
   onClickBack: () => void;
@@ -22,7 +26,8 @@ export function InformLicensingTermsPage({
   onClickBack,
   onClickContinue,
 }: InformLicensingTermsPageProps) {
-  const [{ appLicense, dayTrial }, dispatch] = useAppContext();
+  const [{ appId, appProductId, appLicense, dayTrial, priceModel }, dispatch] =
+    useAppContext();
 
   return (
     <div className="informing-licensing-terms-page-container">
@@ -54,6 +59,7 @@ export function InformLicensingTermsPage({
 
           <RadioCard
             description="License must be renewed annually."
+            disabled={priceModel === 'free'}
             selected={appLicense === "non-perpetual"}
             onChange={() => {
               dispatch({
@@ -107,7 +113,51 @@ export function InformLicensingTermsPage({
 
       <NewAppPageFooterButtons
         onClickBack={() => onClickBack()}
-        onClickContinue={() => onClickContinue()}
+        onClickContinue={() => {
+          const submitLicenseTermsPage = async () => {
+            if (appLicense) {
+              const dataSpecification = await createSpecification({
+                body: {
+                  key: "app-license",
+                  title: { en_US: "App License" },
+                },
+              });
+
+              createProductSpecification({
+                body: {
+                  productId: appProductId,
+                  specificationId: dataSpecification.id,
+                  specificationKey: dataSpecification.key,
+                  value: { en_US: appLicense },
+                },
+                appId,
+              });
+            }
+
+            if (dayTrial) {
+              const dataSpecification = await createSpecification({
+                body: {
+                  key: "free-trial",
+                  title: { en_US: "Free trial" },
+                },
+              });
+
+              createProductSpecification({
+                body: {
+                  productId: appProductId,
+                  specificationId: dataSpecification.id,
+                  specificationKey: dataSpecification.key,
+                  value: { en_US: dayTrial },
+                },
+                appId,
+              });
+            }
+          };
+
+          submitLicenseTermsPage();
+
+          onClickContinue();
+        }}
         showBackButton
       />
     </div>

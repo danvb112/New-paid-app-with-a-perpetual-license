@@ -17,7 +17,6 @@ import { ReviewAndSubmitAppPage } from "../ReviewAndSubmitAppPage/ReviewAndSubmi
 
 import "./AppCreationFlow.scss";
 import { DefineAppProfilePage } from "../DefineAppProfilePage/DefineAppProfilePage";
-
 import { useAppContext } from "../../manage-app-state/AppManageState";
 
 type SetAppFlowListStateProps = {
@@ -26,10 +25,10 @@ type SetAppFlowListStateProps = {
 };
 
 export function AppCreationFlow() {
+  const [{ priceModel }, _] = useAppContext();
   const [appFlowListItems, setAppFlowListItems] =
     useState(initialFLowListItems);
   const [currentFlow, setCurrentFlow] = useState("create");
-  const [{ priceModel }] = useAppContext();
 
   const setAppFlowListState = ({
     checkedItems,

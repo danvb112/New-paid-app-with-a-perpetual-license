@@ -1,9 +1,14 @@
 import ClayForm, { ClayInput } from "@clayui/form";
 import { FieldBase } from "../FieldBase";
+import { TYPES } from "../../manage-app-state/actionTypes";
 import "./LicensePriceCard.scss";
 import unitedStatesIcon from "../../assets/icons/united-states.svg";
 
 interface LicensePriceCard {
+  dispatch: React.Dispatch<{
+    payload?: any;
+    type: TYPES;
+  }>
   price: string;
   currency:
     | string
@@ -14,7 +19,7 @@ interface LicensePriceCard {
       };
 }
 
-export function LicensePriceCard({ price, currency }: LicensePriceCard) {
+export function LicensePriceCard({ dispatch, price, currency }: LicensePriceCard) {
   return (
     <div className="license-card-container">
       <ClayForm.Group>
@@ -30,13 +35,13 @@ export function LicensePriceCard({ price, currency }: LicensePriceCard) {
               <div className="license-card-input-title">
                 <span>From</span>
               </div>
-              <ClayInput placeholder="1" type="text" />
+              <ClayInput disabled placeholder="1" type="text" />
             </ClayInput.GroupItem>
             <ClayInput.GroupItem>
               <div className="license-card-input-title">
                 <span>To</span>
               </div>
-              <ClayInput placeholder="-" type="text" />
+              <ClayInput disabled placeholder="1" type="text" />
             </ClayInput.GroupItem>
           </ClayInput.Group>
         </div>
@@ -64,14 +69,26 @@ export function LicensePriceCard({ price, currency }: LicensePriceCard) {
               append
               className="license-card-price-currency-input"
             >
-              <ClayInput placeholder="$100" type="text" />
+              <ClayInput
+                placeholder="$100"
+                type="text"
+                onChange={({ target }) =>
+                  dispatch({
+                    payload: {
+                      value: target.value,
+                    },
+                    type: TYPES.UPDATE_APP_LICENSE_PRICE,
+                  })
+                }
+                value={price}
+              />
             </ClayInput.GroupItem>
 
             <ClayInput.GroupItem>
               <div className="license-card-input-title license-card-input-title-total">
                 <span>Total</span>
               </div>
-              <ClayInput placeholder="$100" type="text" />
+              <ClayInput placeholder="$100" type="text" value={price}/>
             </ClayInput.GroupItem>
           </ClayInput.Group>
         </div>

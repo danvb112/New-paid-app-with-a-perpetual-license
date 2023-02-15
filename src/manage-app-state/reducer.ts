@@ -1,7 +1,7 @@
 import { InitialStateProps } from "./AppManageState";
 import { TYPES } from "./actionTypes";
 import {
-  createApp,
+  createSubscription,
   createSpecification,
   createProductSpecification,
   patchAppByExternalReferenceCode,
@@ -18,9 +18,6 @@ export type TAction = {
 export function appReducer(state: InitialStateProps, action: TAction) {
   switch (action.type) {
     case TYPES.SUBMIT_APP: {
-      return state;
-    }
-    case TYPES.SUBMIT_APP_LICENSING: {
       return state;
     }
     case TYPES.SUBMIT_APP_PROFILE: {
@@ -63,10 +60,14 @@ export function appReducer(state: InitialStateProps, action: TAction) {
       return state;
     }
     case TYPES.UPDATE_APP_LICENSE: {
-      return state;
+      const appLicense = action.payload.value;
+
+      return { ...state, appLicense };
     }
     case TYPES.UPDATE_APP_LICENSE_PRICE: {
-      return state;
+      const appLicensePrice = action.payload.value;
+
+      return { ...state, appLicensePrice };
     }
     case TYPES.UPDATE_APP_LOGO: {
       const appLogo = action.payload.file;
@@ -109,7 +110,9 @@ export function appReducer(state: InitialStateProps, action: TAction) {
       return state;
     }
     case TYPES.UPDATE_APP_TRIAL_INFO: {
-      return state;
+      const dayTrial = action.payload.value;
+
+      return { ...state, dayTrial };
     }
     case TYPES.UPDATE_APP_USAGE_TERMS_URL: {
       return state;

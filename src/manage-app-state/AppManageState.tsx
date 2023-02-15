@@ -19,6 +19,7 @@ export interface InitialStateProps {
   appWorkflowStatusInfo: string;
   appLogo: UploadedFile;
   appLicense: string;
+  appLicensePrice: string;
   appName: string;
   appNotes: string;
   appType: string;
