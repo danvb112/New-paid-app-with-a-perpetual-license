@@ -17,6 +17,10 @@ import { filesize } from "filesize";
 import { uniqueId } from "lodash";
 import { TYPES } from "../../manage-app-state/actionTypes";
 import { useAppContext } from "../../manage-app-state/AppManageState";
+import {
+  createProductSpecification,
+  createSpecification,
+} from "../../utils/api";
 
 interface ProvideAppBuildPageProps {
   onClickBack: () => void;
@@ -198,9 +202,28 @@ export function ProvideAppBuildPage({
       <NewAppPageFooterButtons
         showBackButton
         onClickContinue={() => {
-          dispatch({
-            type: TYPES.SUBMIT_APP_BUILD,
-          });
+          const { appType, appId, appProductId } = state;
+
+          const submitAppBuild = async () => {
+            const dataSpecification = await createSpecification({
+              body: {
+                key: "type",
+                title: { en_US: "Type" },
+              },
+            });
+
+            createProductSpecification({
+              body: {
+                productId: appProductId,
+                specificationId: dataSpecification.id,
+                specificationKey: dataSpecification.key,
+                value: { en_US: appType },
+              },
+              appId,
+            });
+          };
+
+          submitAppBuild();
 
           onClickContinue();
         }}
