@@ -20,30 +20,6 @@ export function appReducer(state: InitialStateProps, action: TAction) {
     case TYPES.SUBMIT_APP: {
       return state;
     }
-    case TYPES.SUBMIT_APP_BUILD: {
-      const { appType, appId, appProductId } = state;
-
-      const submitAppBuild = async () => {
-        const dataSpecification = await createSpecification({
-          body: {
-            key: "type",
-            title: { en_US: "Type" },
-          },
-        });
-
-        createProductSpecification({
-          body: {
-            productId: appProductId,
-            specificationId: dataSpecification.id,
-            specificationKey: dataSpecification.key,
-            value: { en_US: appType },
-          },
-          appId,
-        });
-      };
-
-      submitAppBuild();
-    }
     case TYPES.SUBMIT_APP_LICENSING: {
       return state;
     }
