@@ -20,7 +20,9 @@ export interface InitialStateProps {
   appLogo: UploadedFile;
   appLicense: string;
   appName: string;
+  appNotes: string;
   appType: string;
+  appVersion: string;
   dayTrial: string;
   priceModel: string;
 }
