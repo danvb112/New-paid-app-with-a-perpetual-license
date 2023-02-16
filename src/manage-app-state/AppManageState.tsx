@@ -27,6 +27,7 @@ export interface InitialStateProps {
   appUsageTermsURL: string;
   appVersion: string;
   buildZIPFiles: UploadedFile[];
+  catalogId: number;
   dayTrial: string;
   priceModel: string;
   publisherWebsiteURL: string;

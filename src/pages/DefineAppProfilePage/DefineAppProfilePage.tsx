@@ -59,7 +59,7 @@ export function DefineAppProfilePage({
 	onClickBack,
 	onClickContinue,
 }: DefineAppProfilePageProps) {
-	const [{ appDescription, appLogo, appName }, dispatch] = useAppContext();
+	const [{ appDescription, appLogo, appName, catalogId }, dispatch] = useAppContext();
 
 	const handleLogoUpload = (files: FileList) => {
 		const file = files[0];
@@ -183,6 +183,7 @@ export function DefineAppProfilePage({
 					const createAppResponse = await createApp({
 						appDescription,
 						appName,
+						catalogId,
 					});
 
 					const product = await createAppResponse.json();
