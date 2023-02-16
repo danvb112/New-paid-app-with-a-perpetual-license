@@ -24,6 +24,7 @@ export interface InitialStateProps {
   appLicensePrice: string;
   appName: string;
   appNotes: string;
+  appStorefrontImages: UploadedFile[];
   appType: string;
   appUsageTermsURL: string;
   appVersion: string;
@@ -39,6 +40,7 @@ const initialState = {
   appBuild: "upload",
   appType: "saas",
   priceModel: "paid",
+  appStorefrontImages: [{}]
 } as InitialStateProps;
 
 interface AppContextProps extends Array<InitialStateProps | Function> {
