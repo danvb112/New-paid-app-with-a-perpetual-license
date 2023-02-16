@@ -9,7 +9,9 @@ import { NewAppPageFooterButtons } from '../../components/NewAppPageFooterButton
 import { Section } from '../../components/Section/Section';
 import { useAppContext } from '../../manage-app-state/AppManageState';
 import { TYPES } from '../../manage-app-state/actionTypes';
+import { createApp, createImage } from "../../utils/api";
 import './CustomizeAppStorefrontPage.scss';
+import { submitBase64EncodedFile } from '../../utils/util';
 
 const acceptFileTypes = {
 	'image/*': ['.png', '.svg', '.jpg'],
@@ -24,35 +26,13 @@ export function CustomizeAppStorefrontPage({
 	onClickBack,
 	onClickContinue,
 }: CustomizeAppStorefrontPageProps) {
-	const [_, dispatch] = useAppContext();
-
-	const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
-
-	const updateFile = (id: string, data: UploadedFile) => {
-		const newUploadedFiles = uploadedFiles.map((uploadedFile) => {
-			if (uploadedFile.id === id) {
-				return {
-					...uploadedFile,
-					...data,
-				};
-			}
-
-			return uploadedFile;
-		});
-
-		setUploadedFiles(newUploadedFiles);
-	};
-
-	const processUpload = (uploadedFile: UploadedFile) => {
-		const data = new FormData();
-
-		data.append('file', uploadedFile.file, uploadedFile.fileName);
-
-		// api.post().then().catch()...
-	};
+	const [{appERC, appStorefrontImages}, dispatch] = useAppContext();
 
 	const handleUpload = (files: File[]) => {
-		if (uploadedFiles.length < 5) {
+		if(files.length > 5 || appStorefrontImages.length > 5){
+			return;
+		}
+		if (appStorefrontImages.length + files.length < 6) {
 			const newUploadedFiles: UploadedFile[] = files.map((file) => ({
 				file,
 				id: uniqueId(),
@@ -64,19 +44,24 @@ export function CustomizeAppStorefrontPage({
 				error: false,
 			}));
 
-			setUploadedFiles([...uploadedFiles, ...newUploadedFiles]);
-
-			// await api.post();
-			//processUpload();
+			dispatch({
+				payload: {
+					files: [...appStorefrontImages, ...newUploadedFiles],
+				},
+				type: TYPES.UPLOAD_APP_STOREFRONT_IMAGES,
+			});
 		}
 	};
 
 	const handleDelete = (id: string) => {
-		// await api.delete()
+		const files = appStorefrontImages.filter((uploadedFile) => uploadedFile.id !== id);
 
-		setUploadedFiles(
-			uploadedFiles.filter((uploadedFile) => uploadedFile.id !== id)
-		);
+		dispatch({
+			payload: {
+				files
+			},
+			type: TYPES.UPLOAD_APP_STOREFRONT_IMAGES,
+		});
 	};
 
 	return (
@@ -97,10 +82,17 @@ export function CustomizeAppStorefrontPage({
 						Add up to 5 images
 					</span>
 
-					{!!uploadedFiles.length && (
+					{!!(Object.keys(appStorefrontImages[0]).length === 0) && (
 						<button
 							className='storefront-page-info-button'
-							onClick={() => setUploadedFiles([])}
+							onClick={() => {
+								dispatch({
+									payload: {
+										files: [],
+									},
+									type: TYPES.UPLOAD_APP_STOREFRONT_IMAGES,
+								});
+							}}
 						>
 							Remove all
 						</button>
@@ -110,7 +102,7 @@ export function CustomizeAppStorefrontPage({
 				<FileList
 					onDelete={handleDelete}
 					type='image'
-					uploadedFiles={uploadedFiles}
+					uploadedFiles={appStorefrontImages}
 				/>
 
 				<DropzoneUpload
@@ -128,8 +120,13 @@ export function CustomizeAppStorefrontPage({
 			<NewAppPageFooterButtons
 				onClickBack={() => onClickBack()}
 				onClickContinue={() => {
-					dispatch({
-						type: TYPES.SUBMIT_APP_STOREFRONT,
+					appStorefrontImages.forEach((image) => {
+						submitBase64EncodedFile(
+							appERC,
+							image.file,
+							createImage,
+							image.fileName,
+						);
 					});
 
 					onClickContinue();
