@@ -1,6 +1,5 @@
 import { InitialStateProps } from "./AppManageState";
 import { TYPES } from "./actionTypes";
-import { update } from "lodash";
 
 export type TAction = {
   payload?: any;
@@ -66,8 +65,10 @@ export function appReducer(state: InitialStateProps, action: TAction) {
 
       return { ...state, appLogo };
     }
-    case TYPES.UPLOAD_APP_LPKG: {
-      return state;
+    case TYPES.UPLOAD_BUILD_ZIP_FILES: {
+      const buildZIPFiles = action.payload.files;
+
+      return { ...state, buildZIPFiles };
     }
     case TYPES.UPDATE_APP_LXC_COMPATIBILITY: {
       const LXC_Compatibility = action.payload.value;
