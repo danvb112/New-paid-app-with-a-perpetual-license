@@ -26,9 +26,6 @@ export function appReducer(state: InitialStateProps, action: TAction) {
         appWorkflowStatusInfo,
       };
     }
-    case TYPES.SUBMIT_APP_STOREFRONT: {
-      return state;
-    }
     case TYPES.UPDATE_APP_BUILD: {
       const appBuild = action.payload.value;
 
@@ -96,7 +93,9 @@ export function appReducer(state: InitialStateProps, action: TAction) {
       return { ...state, publisherWebsiteURL };
     }
     case TYPES.UPLOAD_APP_STOREFRONT_IMAGES: {
-      return state;
+      const appStorefrontImages = action.payload.files;
+
+      return {...state, appStorefrontImages};
     }
     case TYPES.UPDATE_APP_SUPPORT_URL: {
       const supportURL= action.payload.value;
