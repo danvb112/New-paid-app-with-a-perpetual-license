@@ -52,18 +52,29 @@ export function ProvideAppBuildPage({
 			error: false,
 		}));
 
-		dispatch({
-			payload: {
-				files: newUploadedFiles,
-			},
-			type: TYPES.UPLOAD_BUILD_ZIP_FILES,
-		});
+		if (buildZIPFiles?.length) {
+			dispatch({
+				payload: {
+					files: [...buildZIPFiles, ...newUploadedFiles],
+				},
+				type: TYPES.UPLOAD_BUILD_ZIP_FILES,
+			});
+		} else {
+			dispatch({
+				payload: {
+					files: newUploadedFiles,
+				},
+				type: TYPES.UPLOAD_BUILD_ZIP_FILES,
+			});
+		}
 	};
 
-	const handleDelete = () => {
+	const handleDelete = (fileId: string) => {
+		const files = buildZIPFiles.filter((file) => file.id !== fileId);
+
 		dispatch({
 			payload: {
-				files: undefined,
+				files
 			},
 			type: TYPES.UPLOAD_BUILD_ZIP_FILES,
 		});
@@ -221,7 +232,7 @@ export function ProvideAppBuildPage({
 							appERC,
 							buildZIPFile.file,
 							createAttachment,
-							buildZIPFile.fileName,
+							buildZIPFile.fileName
 						);
 					});
 
