@@ -29,6 +29,7 @@ export function UploadLogo({
             />
 
             <input
+                accept="image/jpeg, image/png, image/gif"
                 type="file"
                 name="file"
                 id="file"
