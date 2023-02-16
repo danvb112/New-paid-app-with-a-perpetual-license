@@ -1,14 +1,5 @@
 import { InitialStateProps } from "./AppManageState";
 import { TYPES } from "./actionTypes";
-import {
-  createSubscription,
-  createSpecification,
-  createProductSpecification,
-  patchAppByExternalReferenceCode,
-  submitAttachment,
-  submitImage,
-} from "../utils/api";
-import { update } from "lodash";
 
 export type TAction = {
   payload?: any;
@@ -33,9 +24,6 @@ export function appReducer(state: InitialStateProps, action: TAction) {
       };
     }
     case TYPES.SUBMIT_APP_STOREFRONT: {
-      return state;
-    }
-    case TYPES.SUBMIT_APP_SUPPORT: {
       return state;
     }
     case TYPES.UPDATE_APP_BUILD: {
