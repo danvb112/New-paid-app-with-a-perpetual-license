@@ -1,234 +1,234 @@
-import { Header } from "../../components/Header/Header";
-import { RadioCard } from "../../components/RadioCard/RadioCard";
-import { Section } from "../../components/Section/Section";
+import { filesize } from 'filesize';
+import { uniqueId } from 'lodash';
 
-import cancelIcon from "../../assets/icons/cancel-icon.svg";
-import taskCheckedIcon from "../../assets/icons/task-checked-icon.svg";
-import cloudIcon from "../../assets/icons/cloud-fill.svg";
-import githubIcon from "../../assets/icons/github-icon.svg";
-import uploadIcon from "../../assets/icons/upload-fill.svg";
-
-import "./ProvideAppBuildPage.scss";
-import { useEffect, useState } from "react";
-import { NewAppPageFooterButtons } from "../../components/NewAppPageFooterButtons/NewAppPageFooterButtons";
-import { DropzoneUpload } from "../../components/DropzoneUpload/DropzoneUpload";
-import { FileList, UploadedFile } from "../../components/FileList/FileList";
-import { filesize } from "filesize";
-import { uniqueId } from "lodash";
-import { TYPES } from "../../manage-app-state/actionTypes";
-import { useAppContext } from "../../manage-app-state/AppManageState";
+import cancelIcon from '../../assets/icons/cancel-icon.svg';
+import cloudIcon from '../../assets/icons/cloud-fill.svg';
+import githubIcon from '../../assets/icons/github-icon.svg';
+import taskCheckedIcon from '../../assets/icons/task-checked-icon.svg';
+import uploadIcon from '../../assets/icons/upload-fill.svg';
+import { DropzoneUpload } from '../../components/DropzoneUpload/DropzoneUpload';
+import { FileList, UploadedFile } from '../../components/FileList/FileList';
+import { Header } from '../../components/Header/Header';
+import { NewAppPageFooterButtons } from '../../components/NewAppPageFooterButtons/NewAppPageFooterButtons';
+import { RadioCard } from '../../components/RadioCard/RadioCard';
+import { Section } from '../../components/Section/Section';
+import { useAppContext } from '../../manage-app-state/AppManageState';
+import { TYPES } from '../../manage-app-state/actionTypes';
 import {
-  createProductSpecification,
-  createSpecification,
-} from "../../utils/api";
+	createAttachment,
+	createProductSpecification,
+	createSpecification,
+} from '../../utils/api';
+import { submitBase64EncodedFile } from '../../utils/util';
+import './ProvideAppBuildPage.scss';
 
 interface ProvideAppBuildPageProps {
-  onClickBack: () => void;
-  onClickContinue: () => void;
+	onClickBack: () => void;
+	onClickContinue: () => void;
 }
 
 const acceptFileTypes = {
-  "application/zip": [".zip"],
-  "application/lpkg": [".lpkg"],
+	'application/zip': ['.zip'],
 };
 
 export function ProvideAppBuildPage({
-  onClickBack,
-  onClickContinue,
+	onClickBack,
+	onClickContinue,
 }: ProvideAppBuildPageProps) {
-  const [state, dispatch] = useAppContext();
-  const [selectedAppBuild, setSelectedAppBuild] =
-    useState("viaZipOrLpkgUpload");
+	const [
+		{ appBuild, appERC, appId, appProductId, appType, buildZIPFiles },
+		dispatch,
+	] = useAppContext();
 
-  const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
+	const handleUpload = (files: File[]) => {
+		const newUploadedFiles: UploadedFile[] = files.map((file) => ({
+			file,
+			id: uniqueId(),
+			fileName: file.name,
+			readableSize: filesize(file.size),
+			preview: URL.createObjectURL(file),
+			progress: 0,
+			uploaded: true,
+			error: false,
+		}));
 
-  const processUpload = (uploadedFile: UploadedFile) => {
-    const data = new FormData();
+		dispatch({
+			payload: {
+				files: newUploadedFiles,
+			},
+			type: TYPES.UPLOAD_BUILD_ZIP_FILES,
+		});
+	};
 
-    data.append("file", uploadedFile.file, uploadedFile.fileName);
+	const handleDelete = () => {
+		dispatch({
+			payload: {
+				files: undefined,
+			},
+			type: TYPES.UPLOAD_BUILD_ZIP_FILES,
+		});
+	};
 
-    // api.post().then().catch()...
-  };
+	return (
+		<div className='provide-app-build-page-container'>
+			<Header
+				description='Use one of the following methods to provide your app builds.'
+				title='Provide app build'
+			/>
 
-  const handleUpload = (files: File[]) => {
-    const newUploadedFiles: UploadedFile[] = files.map((file) => ({
-      file,
-      id: uniqueId(),
-      fileName: file.name,
-      readableSize: filesize(file.size),
-      preview: URL.createObjectURL(file),
-      progress: 0,
-      uploaded: true,
-      error: false,
-    }));
+			<Section
+				required
+				label='LXC SaaS Compatible?'
+				tooltip='More Info'
+				tooltipText='MoreInfo'
+			>
+				<div className='provide-app-build-page-saas-compatible-container'>
+					<RadioCard
+						description='Lorem ipsum dolor sit amet consectetur.'
+						title='Yes'
+						icon={taskCheckedIcon}
+						selected={appType === 'saas'}
+						onChange={() => {
+							dispatch({
+								payload: { value: 'saas' },
+								type: TYPES.UPDATE_APP_LXC_COMPATIBILITY,
+							});
+						}}
+						tooltip='More Info'
+					/>
 
-    setUploadedFiles([...uploadedFiles, ...newUploadedFiles]);
+					<RadioCard
+						description='Lorem ipsum dolor sit amet consectetur.'
+						title='No'
+						icon={cancelIcon}
+						selected={appType === 'osgi'}
+						onChange={() => {
+							dispatch({
+								payload: { value: 'osgi' },
+								type: TYPES.UPDATE_APP_LXC_COMPATIBILITY,
+							});
+						}}
+						tooltip='More Info'
+					/>
+				</div>
+			</Section>
 
-    newUploadedFiles.forEach(processUpload);
+			<Section
+				required
+				label='App Build'
+				tooltip='More Info'
+				tooltipText='MoreInfo'
+			>
+				<div className='provide-app-build-page-app-build-radio-container'>
+					<RadioCard
+						disabled
+						description='Use any build from any available Liferay Experience Cloud account (requires LXC account) '
+						title='Via Liferay Experience Cloud Integration'
+						icon={cloudIcon}
+						selected={appBuild === 'LXC'}
+						onChange={() => {
+							dispatch({
+								payload: { value: 'LXC' },
+								type: TYPES.UPDATE_APP_BUILD,
+							});
+						}}
+						tooltip='More Info'
+					/>
 
-    // await api.post();
-  };
+					<RadioCard
+						disabled
+						description='Use any build from your computer connecting with a Github provider'
+						title='Via GitHub Repo'
+						icon={githubIcon}
+						selected={appBuild === 'GitHub'}
+						onChange={() => {
+							dispatch({
+								payload: { value: 'GitHub' },
+								type: TYPES.UPDATE_APP_BUILD,
+							});
+						}}
+						tooltip='More Info'
+					/>
 
-  const handleDelete = (id: string) => {
-    // await api.delete()
+					<RadioCard
+						description='Use any local ZIP files to upload. Max file size is 500MB'
+						title='Via ZIP Upload'
+						icon={uploadIcon}
+						selected={appBuild === 'upload'}
+						onChange={() => {
+							dispatch({
+								payload: { value: 'upload' },
+								type: TYPES.UPDATE_APP_BUILD,
+							});
+						}}
+						tooltip='More Info'
+					/>
+				</div>
+			</Section>
 
-    setUploadedFiles(
-      uploadedFiles.filter((uploadedFile) => uploadedFile.id !== id)
-    );
-  };
+			<Section
+				description='Select a local file to upload'
+				label='Upload ZIP Files'
+				required
+				tooltip='MoreInfo'
+				tooltipText='MoreInfo'
+			>
+				<FileList
+					onDelete={handleDelete}
+					type='document'
+					uploadedFiles={buildZIPFiles ? buildZIPFiles : []}
+				/>
 
-  return (
-    <div className="provide-app-build-page-container">
-      <Header
-        description="Use one of the following methods to provide your app builds."
-        title="Provide app build"
-      />
+				<DropzoneUpload
+					buttonText='Select a file'
+					title='Drag and drop to upload or'
+					description='Only ZIP files are allowed. Max file size is 500MB '
+					maxFiles={1}
+					multiple={false}
+					maxSize={500000000}
+					onHandleUpload={handleUpload}
+					acceptFileTypes={acceptFileTypes}
+				/>
+			</Section>
 
-      <Section
-        required
-        label="LXC SaaS Compatible?"
-        tooltip="More Info"
-        tooltipText="MoreInfo"
-      >
-        <div className="provide-app-build-page-saas-compatible-container">
-          <RadioCard
-            description="Lorem ipsum dolor sit amet consectetur."
-            title="Yes"
-            icon={taskCheckedIcon}
-            selected={state.appType === "saas"}
-            onChange={() => {
-              dispatch({
-                payload: { value: "saas" },
-                type: TYPES.UPDATE_APP_LXC_COMPATIBILITY,
-              });
-            }}
-            tooltip="More Info"
-          />
+			<NewAppPageFooterButtons
+				disableContinueButton={!buildZIPFiles?.length}
+				onClickBack={() => onClickBack()}
+				onClickContinue={() => {
+					const submitAppBuildType = async () => {
+						const dataSpecification = await createSpecification({
+							body: {
+								key: 'type',
+								title: { en_US: 'Type' },
+							},
+						});
 
-          <RadioCard
-            description="Lorem ipsum dolor sit amet consectetur."
-            title="No"
-            icon={cancelIcon}
-            selected={state.appType === "osgi"}
-            onChange={() => {
-              dispatch({
-                payload: { value: "osgi" },
-                type: TYPES.UPDATE_APP_LXC_COMPATIBILITY,
-              });
-            }}
-            tooltip="More Info"
-          />
-        </div>
-      </Section>
+						createProductSpecification({
+							body: {
+								productId: appProductId,
+								specificationId: dataSpecification.id,
+								specificationKey: dataSpecification.key,
+								value: { en_US: appType },
+							},
+							appId,
+						});
+					};
 
-      <Section
-        required
-        label="App Build"
-        tooltip="More Info"
-        tooltipText="MoreInfo"
-      >
-        <div className="provide-app-build-page-app-build-radio-container">
-          <RadioCard
-            disabled
-            description="Use any build from any available Liferay Experience Cloud account (requires LXC account) "
-            title="Via Liferay Experience Cloud Integration"
-            icon={cloudIcon}
-            selected={state.appBuild === "LXC"}
-            onChange={() => {
-              dispatch({
-                payload: { value: "LXC" },
-                type: TYPES.UPDATE_APP_BUILD,
-              });
-            }}
-            tooltip="More Info"
-          />
+					submitAppBuildType();
 
-          <RadioCard
-            disabled
-            description="Use any build from your computer connecting with a Github provider"
-            title="Via GitHub Repo"
-            icon={githubIcon}
-            selected={state.appBuild === "GitHub"}
-            onChange={() => {
-              dispatch({
-                payload: { value: "GitHub" },
-                type: TYPES.UPDATE_APP_BUILD,
-              });
-            }}
-            tooltip="More Info"
-          />
+					buildZIPFiles.forEach((buildZIPFile) => {
+						submitBase64EncodedFile(
+							appERC,
+							buildZIPFile.file,
+							createAttachment,
+							buildZIPFile.fileName,
+						);
+					});
 
-          <RadioCard
-            description="Lorem ipsum dolor sit amet consectetur. Consectetur vulputate massa faucibus mattis a quam."
-            title="Via ZIP or LPKG Upload"
-            icon={uploadIcon}
-            selected={state.appBuild === "upload"}
-            onChange={() => {
-              dispatch({
-                payload: { value: "upload" },
-                type: TYPES.UPDATE_APP_BUILD,
-              });
-            }}
-            tooltip="More Info"
-          />
-        </div>
-      </Section>
-
-      <Section
-        description="Select a local file to upload"
-        label="Upload LPKG File"
-        required
-        tooltip="MoreInfo"
-        tooltipText="MoreInfo"
-      >
-        <FileList
-          onDelete={handleDelete}
-          type="document"
-          uploadedFiles={uploadedFiles}
-        />
-
-        <DropzoneUpload
-          buttonText="Select a file"
-          title="Drag and drop to upload or"
-          description="Only ZIP and LPKG files are allowed. Max file size is 500MB "
-          maxFiles={1}
-          multiple={false}
-          maxSize={500000000}
-          onHandleUpload={handleUpload}
-          acceptFileTypes={acceptFileTypes}
-        />
-      </Section>
-
-      <NewAppPageFooterButtons
-        showBackButton
-        onClickContinue={() => {
-          const { appType, appId, appProductId } = state;
-
-          const submitAppBuild = async () => {
-            const dataSpecification = await createSpecification({
-              body: {
-                key: "type",
-                title: { en_US: "Type" },
-              },
-            });
-
-            createProductSpecification({
-              body: {
-                productId: appProductId,
-                specificationId: dataSpecification.id,
-                specificationKey: dataSpecification.key,
-                value: { en_US: appType },
-              },
-              appId,
-            });
-          };
-
-          submitAppBuild();
-
-          onClickContinue();
-        }}
-        onClickBack={() => onClickBack()}
-      />
-    </div>
-  );
+					onClickContinue();
+				}}
+				showBackButton
+			/>
+		</div>
+	);
 }

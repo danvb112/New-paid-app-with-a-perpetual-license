@@ -15,7 +15,7 @@ export function createApp({
     {
       body: JSON.stringify({
         active: true,
-        catalogId: 43425,
+        catalogId: 43394,
         description: { en_US: appDescription },
         name: { en_US: appName },
         productType: "simple",
