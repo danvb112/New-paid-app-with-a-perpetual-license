@@ -1,29 +1,31 @@
 const headers = {
-  Authorization: "Basic " + btoa("test@liferay.com:test"),
-  "Content-Type": "application/json",
+	Authorization: 'Basic ' + btoa('test@liferay.com:test'),
+	'Content-Type': 'application/json',
 };
 
 export function createApp({
-  appDescription,
-  appName,
+	appDescription,
+	appName,
+	catalogId,
 }: {
-  appDescription: string;
-  appName: string;
+	appDescription: string;
+	appName: string;
+	catalogId: number;
 }) {
-  return fetch(
-    `http://localhost:8080/o/headless-commerce-admin-catalog/v1.0/products`,
-    {
-      body: JSON.stringify({
-        active: true,
-        catalogId: 43394,
-        description: { en_US: appDescription },
-        name: { en_US: appName },
-        productType: "simple",
-      }),
-      headers,
-      method: "POST",
-    }
-  );
+	return fetch(
+		'http://localhost:8080/o/headless-commerce-admin-catalog/v1.0/products',
+		{
+			body: JSON.stringify({
+				active: true,
+				catalogId,
+				description: { en_US: appDescription },
+				name: { en_US: appName },
+				productType: 'simple',
+			}),
+			headers,
+			method: 'POST',
+		}
+	);
 }
 
 export function createAttachment({
@@ -89,6 +91,15 @@ export async function createSpecification({ body }: { body: Object }) {
 	);
 
 	return await response.json();
+}
+
+export async function getCatalogs() {
+	const response = await fetch(
+		'http://localhost:8080/o/headless-commerce-admin-catalog/v1.0/catalogs',
+		{ headers, method: 'GET' }
+	);
+
+	return response.json();
 }
 
 export function patchAppByExternalReferenceCode({
