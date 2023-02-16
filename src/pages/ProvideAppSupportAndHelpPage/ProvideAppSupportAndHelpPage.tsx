@@ -5,6 +5,7 @@ import { Section } from '../../components/Section/Section';
 import { useAppContext } from '../../manage-app-state/AppManageState';
 import { TYPES } from '../../manage-app-state/actionTypes';
 import './ProvideAppSupportAndHelpPage.scss';
+import { createProductSpecification, createSpecification } from '../../utils/api';
 
 interface ProvideAppSupportAndHelpPageProps {
 	onClickBack: () => void;
@@ -18,13 +19,34 @@ export function ProvideAppSupportAndHelpPage({
 	const [
     {
       appDocumentationURL,
+      appId,
       appInstallationGuideURL,
+      appProductId,
       appUsageTermsURL,
       publisherWebsiteURL,
       supportURL,
     },
     dispatch,
   ] = useAppContext();
+  
+	async function submitSupportURLasync(key:string, title:string, value:string): Promise<void> {
+		const dataSpecification = await createSpecification({
+			body: {
+				key: key,
+				title: { en_US: title },
+			},
+		});
+		createProductSpecification({
+			body: {
+				productId: appProductId,
+				specificationId: dataSpecification.id,
+				specificationKey: dataSpecification.key,
+				value: { en_US: value },
+			},
+			appId,
+		});
+		return;
+	};
 	
 	return (
 		<div className='provide-app-support-and-help-page-container'>
@@ -117,10 +139,36 @@ export function ProvideAppSupportAndHelpPage({
 				showBackButton={true}
 				onClickBack={() => onClickBack()}
 				onClickContinue={() => {
-					dispatch({
-						type: TYPES.SUBMIT_APP_SUPPORT,
-					});
-
+					submitSupportURLasync("supportURL", "Support URL", supportURL);
+					
+                    if (publisherWebsiteURL) {
+                      submitSupportURLasync(
+                        "publisherWebsiteURL",
+                        "Publisher Web site URL",
+                        publisherWebsiteURL
+                      );
+                    }
+                    if (appUsageTermsURL) {
+                      submitSupportURLasync(
+                        "appUsageTermsURL",
+                        "App Usage Terms URL",
+                        appUsageTermsURL
+                      );
+                    }
+                    if (appDocumentationURL) {
+                      submitSupportURLasync(
+                        "appDocumentationURL",
+                        "App Documentation URL",
+                        appDocumentationURL
+                      );
+                    }
+                    if (appInstallationGuideURL) {
+                      submitSupportURLasync(
+                        "appInstallationGuideURL",
+                        "App Installation Guide URL",
+                        appInstallationGuideURL
+                      );
+                    }
 					onClickContinue();
 				}}
 			/>
