@@ -27,9 +27,6 @@ export function submitBase64EncodedFile(
 		() => {
 			let result = reader.result as string;
 
-			console.log('file', file);
-			console.log('result', result);
-
 			if (result?.includes('application/zip')) {
 				result = result?.substring(28);
 			} else if (
