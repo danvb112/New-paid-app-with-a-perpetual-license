@@ -28,6 +28,25 @@ export function createApp({
 	);
 }
 
+export async function createAppLicensePrice({
+	body,
+	appProductId,
+}: {
+	body: Object;
+	appProductId: number;
+}) {
+	const response = await fetch(
+		`http://localhost:8080/o/headless-commerce-admin-catalog/v1.0/products/${appProductId}/skus
+	  `,
+		{
+			body: JSON.stringify(body),
+			headers,
+			method: 'POST',
+		}
+	);
+	return await response.json();
+}
+
 export function createAttachment({
 	body,
 	externalReferenceCode,
@@ -100,6 +119,64 @@ export async function getCatalogs() {
 	);
 
 	return response.json();
+}
+
+export async function getProduct({ appERC }: { appERC: string }) {
+	const response = await fetch(
+		`http://localhost:8080/o/headless-commerce-admin-catalog/v1.0/products/by-externalReferenceCode/${appERC}
+		`,
+		{
+			headers,
+			method: 'GET',
+		}
+	);
+	return await response.json();
+}
+
+export async function getProductImages({
+	appProductId,
+}: {
+	appProductId: number;
+}) {
+	const response = await fetch(
+		`http://localhost:8080/o/headless-commerce-admin-catalog/v1.0/products/${appProductId}/images`,
+		{
+			headers,
+			method: 'GET',
+		}
+	);
+	return await response.json();
+}
+
+export async function getProductSKU({
+	appProductId,
+}: {
+	appProductId: number;
+}) {
+	const response = await fetch(
+		`http://localhost:8080/o/headless-commerce-admin-catalog/v1.0/products/${appProductId}/skus`,
+		{
+			headers,
+			method: 'GET',
+		}
+	);
+	return await response.json();
+}
+
+export async function getProductSpecifications({
+	appProductId,
+}: {
+	appProductId: number;
+}) {
+	const response = await fetch(
+		`http://localhost:8080/o/headless-commerce-admin-catalog/v1.0/products/${appProductId}/productSpecifications`,
+		{
+			headers,
+			method: 'GET',
+		}
+	);
+	
+	return await response.json();
 }
 
 export function patchAppByExternalReferenceCode({

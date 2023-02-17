@@ -119,6 +119,14 @@
                     display: flex;
                     width: 220px;
                     height: 128px;
+
+                    .preview-image {
+                        background-size: cover;
+                        background-position: 50% 50%;
+                        width: 220px;
+                        height: 128px;
+                        border-radius: 0.625rem;
+                    }
                 }
 
                 &-data {

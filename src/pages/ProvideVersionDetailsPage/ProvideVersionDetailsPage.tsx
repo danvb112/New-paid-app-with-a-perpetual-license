@@ -19,7 +19,7 @@ export function ProvideVersionDetailsPage({
   onClickBack,
   onClickContinue,
 }: ProvideVersionDetailsPageProps) {
-  const [state, dispatch] = useAppContext();
+  const [{ appNotes, appVersion, appId, appProductId }, dispatch] = useAppContext();
 
   return (
     <div className="provide-version-details-page-container">
@@ -45,6 +45,7 @@ export function ProvideVersionDetailsPage({
           placeholder="0.0.0"
           required
           tooltip="version"
+          value={appVersion}
         />
 
         <Input
@@ -62,14 +63,14 @@ export function ProvideVersionDetailsPage({
           placeholder={"Enter app description"}
           required
           tooltip="notes"
+          value={appNotes}
         />
       </Section>
 
       <NewAppPageFooterButtons
+        disableContinueButton={!appVersion || !appNotes}
         onClickBack={() => onClickBack()}
         onClickContinue={() => {
-          const { appNotes, appVersion, appId, appProductId } = state;
-
           const submitVersionDatails = async () => {
             const dataSpecification = await createSpecification({
               body: {

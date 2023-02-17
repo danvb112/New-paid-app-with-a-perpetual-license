@@ -1,5 +1,3 @@
-import ClayButton from '@clayui/button';
-
 import emptyImage from '../../assets/icons/emptyImage.svg';
 
 import './UploadLogo.scss';
