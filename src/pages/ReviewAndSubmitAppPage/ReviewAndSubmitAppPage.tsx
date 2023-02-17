@@ -34,7 +34,7 @@ export function ReviewAndSubmitAppPage({
 	onClickBack,
 	onClickContinue,
 }: ReviewAndSubmitAppPageProps) {
-	const [{ appERC, appLogo, appStorefrontImages, buildZIPFiles, priceModel, appProductId }, dispatch] =
+	const [{ appERC, appLogo, appLicensePrice, appStorefrontImages, buildZIPFiles, priceModel, appProductId }, dispatch] =
 		useAppContext();
 	const [checked, setChecked] = useState(false);
 	const [name, setName] = useState('');
@@ -42,7 +42,7 @@ export function ReviewAndSubmitAppPage({
 	const [version, setVersion] = useState('');
 	const [notes, setNotes] = useState('');
 	const [appLicense, setAppLicense] = useState('');
-	const [price, setPrice] = useState('');
+	// const [price, setPrice] = useState('');
 	const [cardInfos, setCardInfos] = useState<
 		{ icon: string; link: string; title: string }[]
 	>([]);
@@ -59,7 +59,7 @@ export function ReviewAndSubmitAppPage({
 				appProductId,
 			});
 
-			setPrice(skuResponse.items[0]?.price);
+			// setPrice(skuResponse.items[0]?.price);
 
 			const productSpecificationsResponse =
 				await getProductSpecifications({
@@ -169,7 +169,7 @@ export function ReviewAndSubmitAppPage({
                   <div
                     className='upload-logo-icon'
                     style={{
-                      backgroundImage: `url(${appLogo.preview || emptyImage})`,
+                      backgroundImage: `url(${appLogo?.preview || emptyImage})`,
                       backgroundRepeat: 'no-repeat',
                       backgroundSize: 'cover',
                       backgroundPosition: "50% 50%",
@@ -240,7 +240,7 @@ export function ReviewAndSubmitAppPage({
 									enableEdit={!readonly}
 									files={appStorefrontImages}
 									icon={item.icon}
-									price={price}
+									price={appLicensePrice}
 									required
 									sectionName={item.section}
 									storefront={item.section === 'Storefront'}

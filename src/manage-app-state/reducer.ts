@@ -11,9 +11,6 @@ export function appReducer(state: InitialStateProps, action: TAction) {
 		case TYPES.SUBMIT_APP: {
 			return state;
 		}
-		case TYPES.SUBMIT_APP_LICENSING: {
-			return state;
-		}
 		case TYPES.SUBMIT_APP_PROFILE: {
 			const { appId, appProductId, appERC, appWorkflowStatusInfo } =
 				action.payload.value;
@@ -52,10 +49,14 @@ export function appReducer(state: InitialStateProps, action: TAction) {
 			return { ...state, appInstallationGuideURL };
 		}
 		case TYPES.UPDATE_APP_LICENSE: {
-			return state;
+			const appLicense = action.payload.value;
+
+      		return { ...state, appLicense };
 		}
 		case TYPES.UPDATE_APP_LICENSE_PRICE: {
-			return state;
+			const appLicensePrice = action.payload.value;
+
+      		return { ...state, appLicensePrice };
 		}
 		case TYPES.UPDATE_APP_LOGO: {
 			const appLogo = action.payload.file;
@@ -111,7 +112,9 @@ export function appReducer(state: InitialStateProps, action: TAction) {
 			return state;
 		}
 		case TYPES.UPDATE_APP_TRIAL_INFO: {
-			return state;
+			const dayTrial = action.payload.value;
+
+      		return { ...state, dayTrial };
 		}
 		case TYPES.UPDATE_APP_USAGE_TERMS_URL: {
 			const appUsageTermsURL = action.payload.value;

@@ -26,10 +26,10 @@ type SetAppFlowListStateProps = {
 };
 
 export function AppCreationFlow() {
+  const [{ priceModel }] = useAppContext();
   const [appFlowListItems, setAppFlowListItems] =
     useState(initialFLowListItems);
   const [currentFlow, setCurrentFlow] = useState("create");
-  const [{ priceModel }] = useAppContext();
 
   const setAppFlowListState = ({
     checkedItems,
@@ -355,10 +355,10 @@ export function AppCreationFlow() {
                   "licensing",
                   "support",
                 ],
-                selectedItem: "licensing",
+                selectedItem: "support",
               });
 
-              setCurrentFlow("licensingPrice");
+              setCurrentFlow("support");
             }}
             onClickContinue={() => {
               setAppFlowListState({
