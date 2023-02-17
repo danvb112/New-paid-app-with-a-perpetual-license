@@ -1,6 +1,5 @@
 import { filesize } from 'filesize';
 import { uniqueId } from 'lodash';
-import { useState } from 'react';
 
 import { DropzoneUpload } from '../../components/DropzoneUpload/DropzoneUpload';
 import { FileList, UploadedFile } from '../../components/FileList/FileList';
@@ -9,7 +8,7 @@ import { NewAppPageFooterButtons } from '../../components/NewAppPageFooterButton
 import { Section } from '../../components/Section/Section';
 import { useAppContext } from '../../manage-app-state/AppManageState';
 import { TYPES } from '../../manage-app-state/actionTypes';
-import { createApp, createImage } from "../../utils/api";
+import { createImage } from '../../utils/api';
 import './CustomizeAppStorefrontPage.scss';
 import { submitBase64EncodedFile } from '../../utils/util';
 
@@ -26,13 +25,14 @@ export function CustomizeAppStorefrontPage({
 	onClickBack,
 	onClickContinue,
 }: CustomizeAppStorefrontPageProps) {
-	const [{appERC, appStorefrontImages}, dispatch] = useAppContext();
+	const [{ appERC, appStorefrontImages }, dispatch] = useAppContext();
 
 	const handleUpload = (files: File[]) => {
-		if(files.length > 5 || appStorefrontImages.length > 5){
+		if (files.length > 5 || appStorefrontImages?.length > 5) {
 			return;
 		}
-		if (appStorefrontImages.length + files.length < 6) {
+
+		if ((appStorefrontImages?.length || 0) + files.length < 6) {
 			const newUploadedFiles: UploadedFile[] = files.map((file) => ({
 				file,
 				id: uniqueId(),
@@ -44,21 +44,32 @@ export function CustomizeAppStorefrontPage({
 				error: false,
 			}));
 
-			dispatch({
-				payload: {
-					files: [...appStorefrontImages, ...newUploadedFiles],
-				},
-				type: TYPES.UPLOAD_APP_STOREFRONT_IMAGES,
-			});
+			if (appStorefrontImages?.length) {
+				dispatch({
+					payload: {
+						files: [...appStorefrontImages, ...newUploadedFiles],
+					},
+					type: TYPES.UPLOAD_APP_STOREFRONT_IMAGES,
+				});
+			} else {
+				dispatch({
+					payload: {
+						files: newUploadedFiles,
+					},
+					type: TYPES.UPLOAD_APP_STOREFRONT_IMAGES,
+				});
+			}
 		}
 	};
 
 	const handleDelete = (id: string) => {
-		const files = appStorefrontImages.filter((uploadedFile) => uploadedFile.id !== id);
+		const files = appStorefrontImages.filter(
+			(uploadedFile) => uploadedFile.id !== id
+		);
 
 		dispatch({
 			payload: {
-				files
+				files,
 			},
 			type: TYPES.UPLOAD_APP_STOREFRONT_IMAGES,
 		});
@@ -82,7 +93,7 @@ export function CustomizeAppStorefrontPage({
 						Add up to 5 images
 					</span>
 
-					{!!(Object.keys(appStorefrontImages[0]).length === 0) && (
+					{appStorefrontImages?.length > 0 && (
 						<button
 							className='storefront-page-info-button'
 							onClick={() => {
@@ -99,11 +110,13 @@ export function CustomizeAppStorefrontPage({
 					)}
 				</div>
 
-				<FileList
-					onDelete={handleDelete}
-					type='image'
-					uploadedFiles={appStorefrontImages}
-				/>
+				{appStorefrontImages?.length > 0 && (
+					<FileList
+						onDelete={handleDelete}
+						type='image'
+						uploadedFiles={appStorefrontImages}
+					/>
+				)}
 
 				<DropzoneUpload
 					acceptFileTypes={acceptFileTypes}
@@ -120,12 +133,12 @@ export function CustomizeAppStorefrontPage({
 			<NewAppPageFooterButtons
 				onClickBack={() => onClickBack()}
 				onClickContinue={() => {
-					appStorefrontImages.forEach((image) => {
+					appStorefrontImages?.forEach((image) => {
 						submitBase64EncodedFile(
 							appERC,
 							image.file,
 							createImage,
-							image.fileName,
+							image.fileName
 						);
 					});
 
