@@ -66,7 +66,6 @@ export const initialReviewAndSubmitAppPageItems: ReviewAndSubmitAppPageUtilProps
       fileName: "a-co-libraries-01.lpkg",
     },
     {
-      description: "The app is offered in the Marketplace with no charge.",
       icon: brightnessEmptyIcon,
       section: "Pricing",
       title: "Free",

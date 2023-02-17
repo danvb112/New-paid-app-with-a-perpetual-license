@@ -33,11 +33,12 @@ interface CardSectionProps {
   cardView?: boolean;
   cardLink?: boolean;
   cardTags?: { icon: string; title: string; tags: string[] }[];
+  price?: string;
   required?: boolean;
   sectionName?: string;
   storefront?: boolean;
   tags?: string[];
-  version?: string;
+  version?: string | null;
   localized?: boolean;
 }
 
@@ -55,6 +56,7 @@ export function CardSection({
   cardView,
   cardLink,
   cardTags,
+  price,
   required,
   sectionName,
   storefront,
@@ -62,7 +64,7 @@ export function CardSection({
   version,
   localized,
 }: CardSectionProps) {
-  const price = {
+  const priceData = {
     currency: {
       icon: unitedStatesIcon,
       name: "USA",
@@ -70,9 +72,7 @@ export function CardSection({
     quantity: {
       from: "1",
       to: "1",
-    },
-    value: "$1,000",
-  };
+    }  };
   const [{ priceModel }] = useAppContext();
   return (
     <div className="card-section-body-section">
@@ -140,9 +140,9 @@ export function CardSection({
           children={
             sectionName == "Licensing" && priceModel !== "free" ? (
               <LicensePriceChildren
-                currency={price.currency}
-                quantity={price.quantity}
-                value={price.value}
+                currency={priceData.currency}
+                quantity={priceData.quantity}
+                value={price}
               />
             ) : (
               ""
