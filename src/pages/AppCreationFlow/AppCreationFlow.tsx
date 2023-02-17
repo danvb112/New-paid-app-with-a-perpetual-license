@@ -19,6 +19,7 @@ import "./AppCreationFlow.scss";
 import { DefineAppProfilePage } from "../DefineAppProfilePage/DefineAppProfilePage";
 
 import { useAppContext } from "../../manage-app-state/AppManageState";
+import { useNavigate } from "react-router-dom";
 
 type SetAppFlowListStateProps = {
   checkedItems?: string[];
@@ -29,6 +30,7 @@ export function AppCreationFlow() {
   const [{ priceModel }] = useAppContext();
   const [appFlowListItems, setAppFlowListItems] =
     useState(initialFLowListItems);
+    const navigate = useNavigate();
   const [currentFlow, setCurrentFlow] = useState("create");
 
   const setAppFlowListState = ({
@@ -375,6 +377,8 @@ export function AppCreationFlow() {
                 ],
                 selectedItem: "",
               });
+
+              navigate('/');
             }}
           />
         )}
