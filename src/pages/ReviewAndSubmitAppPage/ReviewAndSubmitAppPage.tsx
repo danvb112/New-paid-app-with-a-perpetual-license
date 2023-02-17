@@ -1,5 +1,17 @@
 import { useEffect, useState } from "react";
 
+import documentationIcon from "../../assets/icons/documentation-icon.svg";
+import phoneIcon from "../../assets/icons/phone-icon.svg";
+import identifiersIcon from "../../assets/icons/identifiers-icon.svg";
+import browsingHistoryIcon from "../../assets/icons/browsing-history-icon.svg";
+import financialIcon from "../../assets/icons/financial-icon.svg";
+import contactIcon from "../../assets/icons/person-fill.svg";
+import guideIcon from "../../assets/icons/guide-icon.svg";
+import userDataIcon from "../../assets/icons/user-data-icon.svg";
+import globeIcon from "../../assets/icons/globe-icon.svg";
+import diagnosticsIcon from "../../assets/icons/diagnostics-icon.svg";
+import usageTermsIcon from "../../assets/icons/usage-terms-icon.svg";
+
 import aCoLibraries from "../../assets/images/a&co-libraries.svg";
 import { Header } from "../../components/Header/Header";
 import { NewAppPageFooterButtons } from "../../components/NewAppPageFooterButtons/NewAppPageFooterButtons";
@@ -42,7 +54,8 @@ export function ReviewAndSubmitAppPage({
   const [notes, setNotes] = useState("");
   const [appLicense, setAppLicense] = useState("");
   const [logo, setLogo] = useState("");
-  const [price, setPrice] = useState('');
+  const [price, setPrice] = useState("");
+  const cardInfos: { icon: string; link: string; title: string }[] = [];
 
   useEffect(() => {
     const getData = async () => {
@@ -76,9 +89,10 @@ export function ReviewAndSubmitAppPage({
       productSpecificationsResponse.items.map(
         (specification: {
           specificationKey: string;
+          title: { [key: string]: string };
           value: { [key: string]: string };
         }) => {
-          const { specificationKey, value } = specification;
+          const { specificationKey, title, value } = specification;
           const localizedValue = value["en_US"];
 
           if (specificationKey === "version") {
@@ -87,6 +101,36 @@ export function ReviewAndSubmitAppPage({
             setNotes(localizedValue);
           } else if (specificationKey === "app-license") {
             setAppLicense(localizedValue);
+          } else if (specificationKey === "supporturl") {
+            cardInfos.push({
+              icon: phoneIcon,
+              title: 'Support URL',
+              link: localizedValue,
+            });
+          } else if (specificationKey === "publisherwebsiteurl") {
+            cardInfos.push({
+              icon: globeIcon,
+              title: 'Publisher website URL',
+              link: localizedValue,
+            });
+          } else if (specificationKey === "appusagetermsurl") {
+            cardInfos.push({
+              icon: usageTermsIcon,
+              title: 'App usage terms (EULA) URL',
+              link: localizedValue,
+            });
+          } else if (specificationKey === "appdocumentationurl") {
+            cardInfos.push({
+              icon: documentationIcon,
+              title: 'App documentation URL',
+              link: localizedValue,
+            });
+          } else if (specificationKey === "appinstallationguideurl") {
+            cardInfos.push({
+              icon: guideIcon,
+              title: 'App installation guide URL',
+              link: localizedValue,
+            });
           }
         }
       );
@@ -119,9 +163,12 @@ export function ReviewAndSubmitAppPage({
               <div className="review-and-submit-app-page-card-header-left-content">
                 <div className="review-and-submit-app-page-card-header-icon-container">
                   {/* <object type="image/svg+xml" data={logo}> */}
-                    <img style={{
-                        backgroundImage: `url(${logo})`,
-                    }} alt="Document Icon" />
+                  <img
+                    style={{
+                      backgroundImage: `url(${logo})`,
+                    }}
+                    alt="Document Icon"
+                  />
                   {/* </object> */}
                 </div>
 
@@ -172,7 +219,7 @@ export function ReviewAndSubmitAppPage({
                 <CardSection
                   build={item.section === "Build"}
                   cardDescription={cardDescription()}
-                  cardInfo={item.cardInfos}
+                  cardInfos={cardInfos}
                   cardLink={item.section === "Support & Help"}
                   cardTags={item.cardTags}
                   cardTitle={cardTitle()}

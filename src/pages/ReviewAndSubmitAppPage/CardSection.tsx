@@ -21,7 +21,7 @@ import { useAppContext } from "../../manage-app-state/AppManageState";
 
 interface CardSectionProps {
   build?: boolean;
-  cardInfo?: { title: string; link: string; icon: string }[];
+  cardInfos?: { title: string; link: string; icon: string }[];
   cardTitle?: string;
   enableEdit?: boolean;
   files?: File[];
@@ -44,7 +44,7 @@ interface CardSectionProps {
 
 export function CardSection({
   build,
-  cardInfo,
+  cardInfos,
   cardTitle,
   cardDescription,
   enableEdit = true,
@@ -142,7 +142,7 @@ export function CardSection({
               <LicensePriceChildren
                 currency={priceData.currency}
                 quantity={priceData.quantity}
-                value={price}
+                value={price as string}
               />
             ) : (
               ""
@@ -205,7 +205,7 @@ export function CardSection({
       )}
 
       {cardLink &&
-        cardInfo?.map(({ icon, link, title }) => {
+        cardInfos?.map(({ icon, link, title }) => {
           return (
             <CardLink
               icon={icon}
