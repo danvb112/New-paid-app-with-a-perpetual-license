@@ -226,7 +226,7 @@ export function ReviewAndSubmitAppPage({
 							return (
 								<CardSection
 									build={item.section === 'Build'}
-                  buildZIPTitles={buildZIPTitles}
+                  					buildZIPTitles={buildZIPTitles}
 									cardDescription={cardDescription()}
 									cardInfos={cardInfos}
 									cardLink={item.section === 'Support & Help'}
