@@ -131,6 +131,7 @@ export function CustomizeAppStorefrontPage({
 			</Section>
 
 			<NewAppPageFooterButtons
+				disableContinueButton={!appStorefrontImages || appStorefrontImages.length === 0}
 				onClickBack={() => onClickBack()}
 				onClickContinue={() => {
 					appStorefrontImages?.forEach((image) => {

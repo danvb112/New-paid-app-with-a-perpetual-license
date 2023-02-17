@@ -2,19 +2,12 @@ import ClayForm, { ClayInput } from "@clayui/form";
 import { FieldBase } from "../FieldBase";
 import "./LicensePriceCard.scss";
 import unitedStatesIcon from "../../assets/icons/united-states.svg";
+import { useAppContext } from "../../manage-app-state/AppManageState";
+import { TYPES } from "../../manage-app-state/actionTypes";
 
-interface LicensePriceCard {
-  price: string;
-  currency:
-    | string
-    | string
-    | {
-        symbol: string;
-        name: string;
-      };
-}
+export function LicensePriceCard() {
+  const [{appLicensePrice}, dispatch] = useAppContext();
 
-export function LicensePriceCard({ price, currency }: LicensePriceCard) {
   return (
     <div className="license-card-container">
       <ClayForm.Group>
@@ -30,13 +23,13 @@ export function LicensePriceCard({ price, currency }: LicensePriceCard) {
               <div className="license-card-input-title">
                 <span>From</span>
               </div>
-              <ClayInput placeholder="1" type="text" />
+              <ClayInput disabled placeholder="1" type="text" />
             </ClayInput.GroupItem>
             <ClayInput.GroupItem>
               <div className="license-card-input-title">
                 <span>To</span>
               </div>
-              <ClayInput placeholder="-" type="text" />
+              <ClayInput disabled placeholder="1" type="text" />
             </ClayInput.GroupItem>
           </ClayInput.Group>
         </div>
@@ -64,14 +57,26 @@ export function LicensePriceCard({ price, currency }: LicensePriceCard) {
               append
               className="license-card-price-currency-input"
             >
-              <ClayInput placeholder="$100" type="text" />
+              <ClayInput
+                placeholder="$100"
+                type="text"
+                onChange={({ target }) =>
+                  dispatch({
+                    payload: {
+                      value: target.value,
+                    },
+                    type: TYPES.UPDATE_APP_LICENSE_PRICE,
+                  })
+                }
+                value={appLicensePrice}
+              />
             </ClayInput.GroupItem>
 
             <ClayInput.GroupItem>
               <div className="license-card-input-title license-card-input-title-total">
                 <span>Total</span>
               </div>
-              <ClayInput placeholder="$100" type="text" />
+              <ClayInput placeholder="$100" type="text" value={appLicensePrice} />
             </ClayInput.GroupItem>
           </ClayInput.Group>
         </div>

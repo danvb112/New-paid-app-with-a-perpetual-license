@@ -96,8 +96,27 @@ export async function createProductSpecification({
 			method: 'POST',
 		}
 	);
+
 	return await response.json();
 }
+
+export async function createProductSubscriptionConfiguration({
+	body,
+	externalReferenceCode,
+}: {
+	body: Object;
+	externalReferenceCode: string;
+}) {
+	const response = await fetch(
+		`http://localhost:8080/o/headless-commerce-admin-catalog/v1.0/products/by-externalReferenceCode/${externalReferenceCode}/subscriptionConfiguration`,
+		{
+			body: JSON.stringify(body),
+			headers,
+			method: 'PATCH',
+		})
+
+	return await response.json();
+};
 
 export async function createSpecification({ body }: { body: Object }) {
 	const response = await fetch(
@@ -175,7 +194,7 @@ export async function getProductSpecifications({
 			method: 'GET',
 		}
 	);
-	
+
 	return await response.json();
 }
 

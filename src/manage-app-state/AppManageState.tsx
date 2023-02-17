@@ -21,6 +21,7 @@ export interface InitialStateProps {
   appWorkflowStatusInfo: string;
   appLogo: UploadedFile;
   appLicense: string;
+  appLicensePrice: string;
   appName: string;
   appNotes: string;
   appStorefrontImages: UploadedFile[];
@@ -37,7 +38,9 @@ export interface InitialStateProps {
 
 const initialState = {
   appBuild: "upload",
+  appLicense: "perpetual",
   appType: "saas",
+  dayTrial: "no",
   priceModel: "paid",
 } as InitialStateProps;
 

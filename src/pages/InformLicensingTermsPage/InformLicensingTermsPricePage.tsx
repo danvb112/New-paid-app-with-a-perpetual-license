@@ -3,8 +3,8 @@ import { LicensePriceCard } from '../../components/LicensePriceCard/LicensePrice
 import { NewAppPageFooterButtons } from '../../components/NewAppPageFooterButtons/NewAppPageFooterButtons';
 import { Section } from '../../components/Section/Section';
 import { useAppContext } from '../../manage-app-state/AppManageState';
-import { TYPES } from '../../manage-app-state/actionTypes';
 import './InformLicensingTermsPage.scss';
+import { createAppLicensePrice } from '../../utils/api';
 
 interface InformLicensingTermsPricePageProps {
 	onClickBack: () => void;
@@ -15,7 +15,8 @@ export function InformLicensingTermsPricePage({
 	onClickBack,
 	onClickContinue,
 }: InformLicensingTermsPricePageProps) {
-	const [_, dispatch] = useAppContext();
+	const [{ appLicense, appLicensePrice, appProductId, appId }, _] =
+		useAppContext();
 
 	return (
 		<div className='informing-licensing-terms-page-container'>
@@ -30,14 +31,19 @@ export function InformLicensingTermsPricePage({
 				tooltip='More Info'
 				tooltipText='More Info'
 			>
-				<LicensePriceCard price={''} currency={''} />
+				<LicensePriceCard />
 			</Section>
 
 			<NewAppPageFooterButtons
+				disableContinueButton={!appLicensePrice}
 				onClickBack={() => onClickBack()}
 				onClickContinue={() => {
-					dispatch({
-						type: TYPES.SUBMIT_APP_LICENSING,
+					createAppLicensePrice({
+						body: {
+							sku: 'default',
+							price: parseFloat(appLicensePrice),
+						},
+						appProductId,
 					});
 
 					onClickContinue();
