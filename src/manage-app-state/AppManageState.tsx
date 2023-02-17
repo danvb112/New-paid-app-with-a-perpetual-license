@@ -39,7 +39,6 @@ const initialState = {
   appBuild: "upload",
   appType: "saas",
   priceModel: "paid",
-  appStorefrontImages: [{}]
 } as InitialStateProps;
 
 interface AppContextProps extends Array<InitialStateProps | Function> {
