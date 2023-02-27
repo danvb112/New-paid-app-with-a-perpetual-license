@@ -9,14 +9,18 @@ type Categories = {
   checked: boolean;
 };
 
+type Specification = {
+  id: number; value: string
+}
+
 export interface InitialStateProps {
   appBuild: string;
   appCategories: Categories[];
   appDescription: string;
-  appDocumentationURL: string;
+  appDocumentationURL: Specification;
   appERC: string;
   appId: string;
-  appInstallationGuideURL: string;
+  appInstallationGuideURL: Specification;
   appProductId: number;
   appWorkflowStatusInfo: string;
   appLogo: UploadedFile;
@@ -25,21 +29,21 @@ export interface InitialStateProps {
   appName: string;
   appNotes: string;
   appStorefrontImages: UploadedFile[];
-  appType: string;
-  appUsageTermsURL: string;
+  appType: Specification;
+  appUsageTermsURL: Specification;
   appVersion: string;
   buildZIPFiles: UploadedFile[];
   catalogId: number;
   dayTrial: string;
   priceModel: string;
-  publisherWebsiteURL: string;
-  supportURL: string;
+  publisherWebsiteURL: Specification;
+  supportURL: Specification;
 }
 
 const initialState = {
   appBuild: "upload",
   appLicense: "perpetual",
-  appType: "saas",
+  appType: { value: "saas" },
   dayTrial: "no",
   priceModel: "paid",
 } as InitialStateProps;

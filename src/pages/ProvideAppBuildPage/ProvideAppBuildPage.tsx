@@ -18,6 +18,7 @@ import {
 	createAttachment,
 	createProductSpecification,
 	createSpecification,
+	updateProductSpecification
 } from '../../utils/api';
 import { submitBase64EncodedFile } from '../../utils/util';
 import './ProvideAppBuildPage.scss';
@@ -98,10 +99,10 @@ export function ProvideAppBuildPage({
 						description='Lorem ipsum dolor sit amet consectetur.'
 						title='Yes'
 						icon={taskCheckedIcon}
-						selected={appType === 'saas'}
+						selected={appType.value === 'saas'}
 						onChange={() => {
 							dispatch({
-								payload: { value: 'saas' },
+								payload: { id: appType.id, value: 'saas' },
 								type: TYPES.UPDATE_APP_LXC_COMPATIBILITY,
 							});
 						}}
@@ -112,10 +113,10 @@ export function ProvideAppBuildPage({
 						description='Lorem ipsum dolor sit amet consectetur.'
 						title='No'
 						icon={cancelIcon}
-						selected={appType === 'osgi'}
+						selected={appType.value === 'osgi'}
 						onChange={() => {
 							dispatch({
-								payload: { value: 'osgi' },
+								payload: { id: appType.id, value: 'osgi' },
 								type: TYPES.UPDATE_APP_LXC_COMPATIBILITY,
 							});
 						}}
@@ -214,15 +215,30 @@ export function ProvideAppBuildPage({
 							},
 						});
 
-						createProductSpecification({
-							body: {
-								productId: appProductId,
-								specificationId: dataSpecification.id,
-								specificationKey: dataSpecification.key,
-								value: { en_US: appType },
-							},
-							appId,
-						});
+						if (appType.id) {
+							updateProductSpecification({
+								body: {
+									specificationKey: dataSpecification.key,
+									value: { en_US: appType.value },
+								},
+								id: appType.id,
+							});
+						} else {
+							const { id } = await createProductSpecification({
+								body: {
+									productId: appProductId,
+									specificationId: dataSpecification.id,
+									specificationKey: dataSpecification.key,
+									value: { en_US: appType.value },
+								},
+								appId,
+							});
+
+							dispatch({
+								payload: { id, value: appType.value },
+								type: TYPES.UPDATE_APP_LXC_COMPATIBILITY,
+							});
+						}
 					};
 
 					submitAppBuildType();
